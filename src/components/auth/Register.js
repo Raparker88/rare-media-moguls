@@ -16,12 +16,14 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
-                "displayName": displayName.current.value,
+                "display_name": displayName.current.value,
                 "email": email.current.value,
-                "password": password.current.value
+                "password": password.current.value,
+                "timestamp": Date.now(),
+                "admin": true,
+                "type": "author"
             }
 
             return fetch("http://127.0.0.1:8000/register", {
@@ -76,7 +78,7 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Choose a Display Name </label>
-                    <input ref={displayName} name="display" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <input ref={displayName} name="display" className="form-control" placeholder="Create a display name.." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
