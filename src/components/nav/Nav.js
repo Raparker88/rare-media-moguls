@@ -17,6 +17,9 @@ export const Nav = () => {
             <li className="nav__item">
                 <Link className="nav__link" to="/">Posts</Link>
             </li>
+            <li className="nav__item">
+                <Link className="nav__link" to="/new_post">Create Post</Link>
+            </li>
             {
                 (localStorage.getItem("rare_user_id") !== null)
                 ?

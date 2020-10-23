@@ -9,7 +9,6 @@ export const PostProvider = (props) => {
     const getPosts = () => {
         return fetch("http://localhost:8000/posts")
             .then(res => res.json())
-            .then(res => res.sort(compare))
             .then(setPosts)
     }
 

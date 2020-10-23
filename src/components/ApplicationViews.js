@@ -3,6 +3,9 @@ import { Route } from "react-router-dom"
 import { PostProvider } from "./posts/PostProvider"
 import { CategoryProvider } from "./categories/CategoryProvider"
 import { PostForm } from "./posts/PostForm"
+import { CategoriesList } from "./categories/CategoriesList"
+import { CategoryForm } from "./categories/CategoryForm"
+
 
 export const ApplicationViews = () => {
     return <>
@@ -12,11 +15,20 @@ export const ApplicationViews = () => {
         }}>
             <PostProvider>
                 <CategoryProvider>
-                    <Route exact path="/" render={
+                    <Route exact path="/new_post" render={
                         props => <PostForm {...props} />
                     } />
                 </CategoryProvider>
             </PostProvider>
         </main>
+        <CategoryProvider>
+            <Route exact path="/categories/create" render ={
+                props => <CategoryForm {...props} />
+            } />
+
+            <Route exact path="/categories" render={
+                props => <CategoriesList {...props} />
+            } />
+        </CategoryProvider>
     </>
 }
