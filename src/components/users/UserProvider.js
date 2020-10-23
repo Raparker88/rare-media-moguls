@@ -1,14 +1,7 @@
 import React, { useState } from "react"
 
-/*
-    The context is imported and used by individual components
-    that need data
-*/
 export const UserContext = React.createContext()
 
-/*
- This component establishes what data can be used.
- */
 export const UserProvider = (props) => {
     const [users, setUsers] = useState([])
 
@@ -29,12 +22,6 @@ export const UserProvider = (props) => {
             .then(getUsers)
     }
 
-    /*
-        You return a context provider which has the
-        `customers` state, the `addCustomer` function,
-        and the `getCustomer` function as keys. This
-        allows any child elements to access them.
-    */
     return (
         <UserContext.Provider value={{
             users, addUser, getUsers
