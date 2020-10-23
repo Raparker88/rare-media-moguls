@@ -25,11 +25,11 @@ export const PostProvider = (props) => {
     }
 
     return (
-        <CropContext.Provider value={{
+        <PostContext.Provider value={{
             posts, addPost
         }}>
             {props.children}
-        </CropContext.Provider>
+        </PostContext.Provider>
     )
 
 }
