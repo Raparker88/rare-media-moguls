@@ -29,6 +29,8 @@ export const PostForm = (props) => {
                 publication_date: Date.now()
             }
             addPost(newPostObject)
+                .then(() => getLastPost())
+                .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
         }else{
             window.alert("please fill in all fields")
         }
@@ -81,8 +83,7 @@ export const PostForm = (props) => {
                 onClick={evt => {
                     evt.preventDefault()
                     constructNewPost()
-                    getLastPost()
-                        .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
+                        
                 }}
                 className="btn post_submit_btn">
                 Save Post
