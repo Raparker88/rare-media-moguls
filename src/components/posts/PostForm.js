@@ -4,7 +4,7 @@ import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
 
-    const { addPost } = useContext(PostContext)
+    const { addPost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
 
     const [post, setPost] = useState({})
@@ -81,6 +81,8 @@ export const PostForm = (props) => {
                 onClick={evt => {
                     evt.preventDefault()
                     constructNewPost()
+                    getLastPost()
+                        .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
                 }}
                 className="btn post_submit_btn">
                 Save Post
