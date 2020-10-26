@@ -1,12 +1,12 @@
 import React, { useRef } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import "./Auth.css"
-
 
 export const Login = (props) => {
     const email = useRef()
     const password = useRef()
     const invalidDialog = useRef()
+    // const history = useHistory(null)
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8000/users?email=${email.current.value}`)
@@ -22,14 +22,15 @@ export const Login = (props) => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-
         existingUserCheck()
             .then(exists => {
                 console.log(exists)
                 if (exists && exists.password === password.current.value) {
                     localStorage.setItem("rare_user_id", exists.id)
                     props.history.push("/home")
-                } else if (!exists || exists.password !== password.current.value) {
+                } else if (exists && exists.password !== password.current.value) {
+                    invalidDialog.current.showModal()
+                } else if (!exists) {
                     invalidDialog.current.showModal()
                 }            
             })
@@ -43,7 +44,7 @@ export const Login = (props) => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
+                    <h1>Rare</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
