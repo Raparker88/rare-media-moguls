@@ -6,7 +6,6 @@ export const Login = (props) => {
     const email = useRef(null)
     const password = useRef(null)
     const invalidDialog = useRef(null)
-    // const history = useHistory(null)
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8000/users?email=${email.current.value}`)
@@ -14,7 +13,10 @@ export const Login = (props) => {
                 console.log(res)
                 return res.json()
             })
-            .then(user => user.length ? user[0] : false)
+            .then(user => {
+                console.log(user)
+                return user !== undefined ? user : false
+            })
     }
 
     const handleLogin = (e) => {
