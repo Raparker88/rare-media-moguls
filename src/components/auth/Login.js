@@ -15,7 +15,7 @@ export const Login = (props) => {
             })
             .then(user => {
                 console.log(user)
-                return user !== undefined ? user : false
+                return user.id !== 0 ? user : false
             })
     }
 
