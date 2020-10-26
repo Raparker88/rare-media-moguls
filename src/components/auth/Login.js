@@ -7,7 +7,6 @@ export const Login = (props) => {
     const email = useRef()
     const password = useRef()
     const invalidDialog = useRef()
-    const history = useHistory()
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8000/users?email=${email.current.value}`)
@@ -23,7 +22,6 @@ export const Login = (props) => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        // props.history.push("/main")
 
         existingUserCheck()
             .then(exists => {
@@ -31,11 +29,9 @@ export const Login = (props) => {
                 if (exists && exists.password === password.current.value) {
                     localStorage.setItem("rare_user_id", exists.id)
                     props.history.push("/home")
-                } else if (exists && exists.password !== password.current.value) {
+                } else if (!exists || exists.password !== password.current.value) {
                     invalidDialog.current.showModal()
-                } else if (!exists) {
-                    invalidDialog.current.showModal()
-                }              
+                }            
             })
     }
 
