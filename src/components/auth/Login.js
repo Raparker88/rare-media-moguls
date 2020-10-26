@@ -2,34 +2,31 @@ import React, { useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
+export const Login = (props) => {
+    const email = useRef(null)
+    const password = useRef(null)
+    const invalidDialog = useRef(null)
 
-export const Login = () => {
-    const email = useRef()
-    const password = useRef()
-    const invalidDialog = useRef()
-    const history = useHistory()
+    const existingUserCheck = () => {
+        return fetch(`http://localhost:8000/users?email=${email.current.value}`)
+            .then(res => {
+                return res.json()
+            })
+            .then(user => {
+                return user.id !== 0 ? user : false
+            })
+    }
 
     const handleLogin = (e) => {
         e.preventDefault()
-
-        return fetch("http://127.0.0.1:8000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username: email.current.value,
-                password: password.current.value
-            })
-        })
-            .then(res => res.json())
-            .then(res => {
-                if ("valid" in res && res.valid) {
-                    localStorage.setItem("rare_user_id", res.token )
-                    history.push("/")
-                }
-                else {
+        existingUserCheck()
+            .then(exists => {
+                if (exists && exists.password === password.current.value) {
+                    localStorage.setItem("rare_user_id", exists.id)
+                    props.history.push("/home")
+                } else if (exists && exists.password !== password.current.value) {
+                    invalidDialog.current.showModal()
+                } else {
                     invalidDialog.current.showModal()
                 }
             })
@@ -43,7 +40,7 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
+                    <h1>Rare</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
