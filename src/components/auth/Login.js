@@ -3,10 +3,9 @@ import { Link } from "react-router-dom"
 import "./Auth.css"
 
 export const Login = (props) => {
-    const email = useRef()
-    const password = useRef()
-    const invalidDialog = useRef()
-    // const history = useHistory(null)
+    const email = useRef(null)
+    const password = useRef(null)
+    const invalidDialog = useRef(null)
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8000/users?email=${email.current.value}`)
@@ -16,7 +15,7 @@ export const Login = (props) => {
             })
             .then(user => {
                 console.log(user)
-                return user !== undefined ? user : false
+                return user.id !== 0 ? user : false
             })
     }
 
