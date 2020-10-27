@@ -12,7 +12,7 @@ export const UserDropdown = ({ toggleOpen }) => {
                 <Link
                 title="Create A New Post"
                 className="link nav__link dropdown-link"
-                to="/form"
+                to="/new_post"
                 onClick={() => {
                     toggleOpen();
                 }}>
