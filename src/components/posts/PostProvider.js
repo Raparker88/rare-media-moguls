@@ -33,11 +33,16 @@ export const PostProvider = (props) => {
         .then(getPosts) 
     }
 
-   
+    const deletePost = postId => {
+        return fetch(`http://localhost:8000/posts${postId}`, {
+            method: "DELETE"
+        })
+            .then(getPosts)
+    }
 
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPosts, getPostById, getLastPost
+            posts, addPost, getPosts, getPostById, getLastPost, deletePost
         }}>
             {props.children}
         </PostContext.Provider>
