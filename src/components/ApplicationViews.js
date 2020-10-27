@@ -5,11 +5,14 @@ import "./Rare.css";
 import { PostProvider } from "./posts/PostProvider";
 import { CategoryProvider } from "./categories/CategoryProvider";
 import { PostForm } from "./posts/PostForm";
-import { CategoriesList } from "./categories/CategoriesList";
 import { CategoryButtonList } from "./categories/CategoryButtonList";
 import { CategoryForm } from "./categories/CategoryForm";
 import { TagProvider } from "./tags/TagProvider";
-import { PostDetails } from "./posts/PostDetail";
+import { CategoriesList } from "./categories/CategoriesList"
+import { TagsList } from "./tags/TagsList"
+import { PostDetails } from "./posts/PostDetail"
+
+
 
 export const ApplicationViews = (props) => {
 
@@ -90,6 +93,12 @@ export const ApplicationViews = (props) => {
                     <CategoriesList {...props} />}
                 />
             </CategoryProvider>
+
+            <TagProvider>
+                <Route exact path="/tags" render={props =>
+                    <TagsList {...props} />}
+                />
+            </TagProvider>
         </main>
     </>
     );
