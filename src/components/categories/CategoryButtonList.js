@@ -4,7 +4,7 @@ import { CategoryButton } from "./CategoryButton"
 import "./Category.css"
 export const CategoryButtonList = (props) => {
 //useContext
-    const { categories, setCategory, getCategories } = useContext(CategoryContext)
+    const { categories, getCategories } = useContext(CategoryContext)
 //useEffect
     useEffect(()=>{
         getCategories()
@@ -22,7 +22,7 @@ export const CategoryButtonList = (props) => {
                     return <CategoryButton {...props}
                     key={c.id}
                     category={c}
-                    setCategory={setCategory}
+                    setCategory={props.setCategory}
                     />
                     })
                 }

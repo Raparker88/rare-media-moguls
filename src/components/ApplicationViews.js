@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav } from "./nav/Nav";
 import { Route } from "react-router-dom";
 import "./Rare.css";
@@ -12,6 +12,8 @@ import { TagProvider } from "./tags/TagProvider";
 import { PostDetails } from "./posts/PostDetail";
 
 export const ApplicationViews = (props) => {
+    const [category, setCategory] = useState({})
+
   return (
     <>
       <main
@@ -54,10 +56,17 @@ export const ApplicationViews = (props) => {
             render={(props) => (
               <>
                 <div className="main-wrap">
-                  <div className="left-main"></div>
-                  <div className="right-main">
-                    <CategoryButtonList {...props} />
-                  </div>
+                    <div className="top-spacer"></div>
+                    <div className="mid-section">
+                        <div className="left-main"></div>
+                        <div className="divider"></div>
+                        <div className="right-main">
+                            <CategoryButtonList
+                            setCategory={setCategory}
+                            {...props} />
+                        </div>
+                    </div>
+                    <div className="bottom-spacer"></div>
                 </div>
               </>
             )}
