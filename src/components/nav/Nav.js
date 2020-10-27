@@ -32,21 +32,19 @@ export const Nav = (props) => {
         <div className="nav">
             <div className="nav__inner">
                 <div className="spacer__nav--left"></div>
-
                 <div className="link nav__link logo-wrapper left">
                     <div className="top-space"></div>
                     <div className="middle-wrap">
-                    <img className="nav__logo"
-                    onClick={()=>{
-                    props.history.push("/")}}
-                    src={Logo} />
-                    <div className="right-middle"></div>
+                        <img className="nav__logo"
+                        to="/"
+                        onClick={()=>{
+                        props.history.push("/")}}
+                        src={Logo} />
+                        <div className="right-middle"></div>
                     </div>
                     <div className="bottom-space"></div>
                 </div>
-
                 <div className="spacer__nav--middle"></div>
-
                 <div className="link nav__link user-nav-wrapper right">
                     <div className="top-space"></div>
                     <div className="link nav__link wrapper__nav--right">
@@ -61,8 +59,7 @@ export const Nav = (props) => {
                         ?
                         <div className="user-menu-btn"
                         onClick={toggleOpen}>
-                            <div className={`arrow ${isOpen ? "upArrow" : "downArrow"}`}>
-                            </div>
+                            <div className={`arrow ${isOpen ? "upArrow" : "downArrow"}`}></div>
                         </div>
                         :
                         <Link className="link nav__link get-started"
@@ -73,18 +70,14 @@ export const Nav = (props) => {
                     </div>
                     <div className="bottom-space"></div>
                 </div>
-
                 <div className={`dropdown ${isOpen ? "dropdown--open" : "dropdown--collapsed" }`}>
                     <UserDropdown
                     toggleOpen={toggleOpen}
                     {...props}/>
                 </div>
+
                 <div className="spacer__nav--right"></div>
             </div>
-
-
-
-
         </div>
         </>
     )

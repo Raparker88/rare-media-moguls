@@ -2,6 +2,12 @@ import React from "react"
 import { Nav } from "./nav/Nav"
 import { Route } from "react-router-dom"
 import "./Rare.css"
+import { PostProvider } from "./posts/PostProvider"
+import { CategoryProvider } from "./categories/CategoryProvider"
+import { PostForm } from "./posts/PostForm"
+import { CategoriesList } from "./categories/CategoriesList"
+import { CategoryForm } from "./categories/CategoryForm"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -15,6 +21,22 @@ export const ApplicationViews = (props) => {
                     <Nav {...props} />
                 </nav>
             }/>
+                <PostProvider>
+                    <CategoryProvider>
+                        <Route exact path="/new_post" render={
+                            props => <PostForm {...props} />
+                        } />
+                    </CategoryProvider>
+                </PostProvider>
+                <CategoryProvider>
+                    <Route exact path="/categories/create" render ={
+                        props => <CategoryForm {...props} />
+                    } />
+
+                    <Route exact path="/categories" render={
+                        props => <CategoriesList {...props} />
+                    } />
+                </CategoryProvider>
         </main>
     </>
     )
