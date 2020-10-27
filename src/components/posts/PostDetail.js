@@ -70,6 +70,7 @@ export const PostDetails = (props) => {
                         props.history.push(`/new_comment/${post.id}`)
                     }}>Add Comment</button>
             </div>
+            
         </>
     )
 }
