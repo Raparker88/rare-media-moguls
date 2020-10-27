@@ -1,0 +1,44 @@
+.cat-btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    border-radius: .35rem;
+    border: 1px solid rgba(0, 0, 0, 0.747);
+    padding: .15rem .35rem;
+    margin: .35rem;
+    cursor: pointer;
+}
+
+.cat-btn-name {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+.list-wrapper,
+.cat-btn-list-title {
+    margin-left: 2rem;
+    padding: 0 0;
+    max-width: 70%;
+    max-height: 40%;
+}
+
+.cat-btn-list-title {
+    font-size: 14px;
+    font-weight: 800;
+    padding-left: .45rem;
+}
+
+.cat-btn--list {
+    display: flex;
+    flex-basis: 20%;
+    flex-flow: row wrap;
+}
+
+.selected {
+    color: white;
+    background-color: black;
+}
