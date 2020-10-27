@@ -37,3 +37,8 @@
     flex-basis: 20%;
     flex-flow: row wrap;
 }
+
+.selected {
+    color: white;
+    background-color: black;
+}

@@ -4,18 +4,18 @@ export const TagContext = React.createContext()
 export const TagProvider = (props) => {
     const [tags, setTags] = useState([])
 
-    const get_all_tags = () => {
+    const getTags = () => {
         return fetch("http://localhost:8000/tags")
             .then(res => res.json())
             .then(setTags)
     }
 
-    const get_single_tag = (tag_id) => {
+    const getTagById = (tag_id) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`)
             .then(res => res.json())
     }
 
-    const create_tag = tag => {
+    const createTag = tag => {
         return fetch("http://localhost:8000/tags", {
             method: "POST",
             headers: {
@@ -25,11 +25,11 @@ export const TagProvider = (props) => {
         })
         .then(res => res.json())
         .then(newTag => {
-            get_all_tags()
+            getTags()
             return newTag.id })
     }
 
-    const update_tag = (tag_id, tag) => {
+    const updateTag = (tag_id, tag) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`, {
             method: "PUT",
             headers: {
@@ -37,28 +37,28 @@ export const TagProvider = (props) => {
             },
             body: JSON.stringify(tag)
         })
-            .then(get_all_tags)
+            .then(getTags)
     }
 
-    const delete_tag = (tag_id) => {
+    const deleteTag = (tag_id) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`, {
             method: "DELETE"
         })
-            .then(get_all_tags)
+            .then(getTags)
     }
 
 useEffect(()=>{
-    get_all_tags()
+    getTags()
 }, [])
 
     return (
         <TagContext.Provider value={{
             tags,
-            create_tag,
-            get_all_tags,
-            delete_tag,
-            update_tag,
-            get_single_tag,
+            createTag,
+            getTags,
+            getTagById,
+            deleteTag,
+            updateTag,
         }}>
             {props.children}
         </TagContext.Provider>

@@ -1,14 +1,37 @@
 import React, { useState, useContext, useEffect } from "react"
 import { CategoryContext } from "./CategoryProvider"
+import { PostContext } from "../posts/PostProvider"
 import { CategoryButton } from "./CategoryButton"
 import "./Category.css"
 export const CategoryButtonList = (props) => {
 //useContext
     const { categories, getCategories } = useContext(CategoryContext)
+
+//useState
+    const [selectedCategoryId, setSelectedCategoryId] = useState(0)
 //useEffect
-    useEffect(()=>{
+    useEffect(()=> {
         getCategories()
     },[])
+
+//Will use this to trigger filtered post list.
+// useEffect(()=>{
+//         if(selectedCategoryId > 0){
+// filterbycategory
+//         }
+//         else{
+// showallposts
+//         }
+//     }, [selectedCategoryId])
+
+    const toggleSelected = (e) => {
+        if(selectedCategoryId !== e.id){
+            setSelectedCategoryId(e.id)
+        }
+        else{
+            setSelectedCategoryId(0)
+        }
+    }
 
     return (
         <>
@@ -22,7 +45,9 @@ export const CategoryButtonList = (props) => {
                     return <CategoryButton {...props}
                     key={c.id}
                     category={c}
-                    setCategory={props.setCategory}
+                    selectedCategoryId={selectedCategoryId}
+                    setSelectedCategoryId={setSelectedCategoryId}
+                    toggleSelected={toggleSelected}
                     />
                     })
                 }
