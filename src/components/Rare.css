@@ -11,3 +11,25 @@
     top: 0;
     bottom: 0;
 }
+
+.right-main,
+.left-main {
+    display: flex;
+    flex-basis: 50%;
+    max-width: 50%;
+}
+
+.main-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.right-main {
+    display: flex;
+    flex-flow: column nowrap;
+    align-self: center;
+    justify-self: center;
+    transform: translateY(25%)
+}
