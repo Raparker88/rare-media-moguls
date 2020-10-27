@@ -1,36 +1,42 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
-import { Nav } from "./nav/Nav"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import "./Rare.css"
 
 export const Rare = () => (
     <>
         <Route render={() => {
             if (localStorage.getItem("rare_user_id")) {
-                return <>
-                    <Nav />
-                    <ApplicationViews />
-                </>
-            } else {
+
+                return (
+                    <>
+                    <Route render={props =>
+                        <ApplicationViews
+                        {...props}  />} />
+                    </>
+                )
+            }
+            else {
                 return <Redirect to="/login" />
             }
         }} />
 
-        <Route path="/login" render={() => {
+        <Route path="/login" render={(props) => {
             if (localStorage.getItem("rare_user_id")) {
                 return <Redirect to="/" />
             } else {
-                return <Login />
+                return <Login {...props} />
             }
         }} />
 
-        <Route path="/register" render={() => {
+        <Route path="/register" render={(props) => {
             if (localStorage.getItem("rare_user_id")) {
                 return <Redirect to="/" />
-            } else {
-                return <Register />
+            }
+            else {
+                return <Register {...props}/>
             }
         }} />
     </>
