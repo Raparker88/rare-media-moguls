@@ -12,6 +12,16 @@ export const PostProvider = (props) => {
             .then(setPosts)
     }
 
+    const getPostById = (id) => {
+        return fetch(`http://localhost:8000/posts/${id}`)
+            .then(res => res.json())
+    }
+
+    const getLastPost = () => {
+        return fetch(`http://localhost:8000/latest_post`)
+            .then(res => res.json())
+    }
+
     const addPost = post => {
         return fetch("http://localhost:8000/posts", {
             method: "POST",
@@ -23,9 +33,11 @@ export const PostProvider = (props) => {
         .then(getPosts) 
     }
 
+   
+
     return (
         <PostContext.Provider value={{
-            posts, addPost
+            posts, addPost, getPostById, getLastPost
         }}>
             {props.children}
         </PostContext.Provider>
