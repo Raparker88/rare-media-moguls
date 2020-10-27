@@ -25,7 +25,7 @@ export const TagProvider = (props) => {
         })
         .then(res => res.json())
         .then(newTag => {
-            get_all_tags()
+            getTags()
             return newTag.id })
     }
 
@@ -37,14 +37,14 @@ export const TagProvider = (props) => {
             },
             body: JSON.stringify(tag)
         })
-            .then(get_all_tags)
+            .then(getTags)
     }
 
     const deleteTag = (tag_id) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`, {
             method: "DELETE"
         })
-            .then(get_all_tags)
+            .then(getTags)
     }
 
 useEffect(()=>{
