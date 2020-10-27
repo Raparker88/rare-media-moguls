@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 
 export const PostContext = React.createContext()
@@ -30,7 +30,7 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post)
         })
-        .then(getPosts) 
+            .then(getPosts)
     }
 
     const deletePost = postId => {
@@ -40,11 +40,21 @@ export const PostProvider = (props) => {
             .then(getPosts)
     }
 
-   
+    const updatePost = post => {
+        return fetch(`http://localhost:8000/posts/${post.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(post)
+        })
+            .then(getPosts)
+    }
+
 
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, getLastPost, deletePost
+            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts
         }}>
             {props.children}
         </PostContext.Provider>

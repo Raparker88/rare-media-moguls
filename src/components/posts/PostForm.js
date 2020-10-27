@@ -4,10 +4,12 @@ import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
 
-    const { addPost, getLastPost } = useContext(PostContext)
+    const { posts, getPosts, addPost, updatePost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
 
     const [post, setPost] = useState({})
+
+    const editMode = props.match.params.hasOwnProperty("postId")
 
     const handleControlledInputChange = (eve) => {
         const newPost = Object.assign({}, post)
@@ -15,12 +17,37 @@ export const PostForm = (props) => {
         setPost(newPost)
     }
 
+    const getPostInEditMode = () => {
+        if(editMode) {
+            const postId = parseInt(props.match.params.postId)
+            const selectedPost = posts.find(p => p.id === postId) || {}
+            setPost(selectedPost)
+        }
+    }
+
     useEffect(() => {
+        getPosts()
         getCategories()
     }, [])
 
+    useEffect(() => {
+        getPostInEditMode()
+    }, [posts])
+
     const constructNewPost = () => {
         if(post.title && post.category_id && post.content){
+            if(editMode) {
+                  updatePost({
+                      id: post.id,
+                      title: post.title,
+                      content: post.content,
+                      category_id: parseInt(post.category_id),
+                      user_id: parseInt(localStorage.getItem("rare_user_id")),
+                      publication_date: post.publication_date
+                  }).then(() => {
+                      props.history.push(`/posts/${post.id}`)
+                  })
+            } else{
             const newPostObject = {
                 title: post.title,
                 content: post.content,
@@ -31,15 +58,15 @@ export const PostForm = (props) => {
             addPost(newPostObject)
                 .then(() => getLastPost())
                 .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
-        }else{
+        }}else{
             window.alert("please fill in all fields")
-        }
+        } 
 
     }
     return (
 
         <form className="form new_post_form" id="postForm">
-            <h2 className="postForm_title">Create a New Post</h2>
+            <h2 className="postForm_title">{editMode ? "Update Post" : "Create a New Post"}</h2>
             <fieldset>
                 <div className="form-div">
                     <label htmlFor="title">Post Title: </label>
