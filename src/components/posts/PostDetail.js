@@ -58,7 +58,7 @@ export const PostDetails = (props) => {
                 <h3>{post.user.display_name}</h3>
                 <h4>{handleDate(post.publication_date)}</h4>
             </div>
-            <div clasName="postContent">
+            <div className="postContent">
                 <p>{post.content}</p>
             </div>
             {editDeleteButtons()}
