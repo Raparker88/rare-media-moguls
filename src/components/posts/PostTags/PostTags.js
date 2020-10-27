@@ -3,13 +3,18 @@ import { PostTagContext } from "./PostTagProvider"
 import { CurrentPostTags } from "./CurrentPostTags"
 import { EditPostTags } from "./EditPostTags"
 
-export const PostTags = ({post}) => {
+export const PostTags = ({postId}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const [isEditing, setIsEditing] = useState(false)
-    const postId = post.id
 
     useEffect(() => {
         getPostTagsByPost(postId)
+    }, []);
+
+    useEffect(() => {
+        // It seems like it isn't getting the postId before the PostTags component renders?
+        // How in the world does that happen
+        console.warn(`postId: ${postId}`)
     }, []);
 
     const toggleEdit = () => {
