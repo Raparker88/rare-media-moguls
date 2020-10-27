@@ -12,22 +12,23 @@ export const PostTags = ({post}) => {
         getPostTagsByPost(postId)
     }, []);
 
-    const currentTags = (postId) => {
-        getPostTagsByPost(postId)
-    }
-
-    const singleTag = currentTags(postId).map((tag) => <CurrentPostTags tag={tag}/>)
-
     const toggleEdit = () => {
         setIsEditing(!isEditing)
-        getPostTagsByPost(postId)
+        console.warn(postTags)
     }
 
     return (
         <div className="post-tags-container">
             <h3 className="post-tags-header">TAGGED AS</h3>
             <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button>
-            {isEditing ? <EditPostTags /> : singleTag /*currentTags(postId)*/  /*<CurrentPostTags postId={postId}/> */ }
+            {isEditing ? 
+                <EditPostTags />
+                : (
+                    postTags.map(tag => {
+                    return <CurrentPostTags tag={tag} />
+                    })
+                ) 
+            }
         </div>
     )
 }
