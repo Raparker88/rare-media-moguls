@@ -1,15 +1,9 @@
 import React, {useContext, useState} from "react"
-import { PostContext } from "../PostProvider"
 
 export const PostTagContext = React.createContext()
 
 export const PostTagProvider = (props) => {
     const [postTags, setPostTags] = useState([])
-    const post = useContext(PostContext)
-
-    const testPost = () => {
-        console.warn(post)
-    }
 
     const getAllPostTags = () => {
         return fetch("http://localhost:8000/post_tags")
@@ -21,6 +15,7 @@ export const PostTagProvider = (props) => {
         return fetch(`http://localhost:8000/post_tags?post_id=${postId}`)
             .then(res => res.json())
             .then(setPostTags)
+            .then(console.warn(postTags))
     }
 
     const addPostTag = postTag => {
@@ -46,7 +41,7 @@ export const PostTagProvider = (props) => {
     }
 
     return (
-        <PostTagContext.Provider value={{postTags, testPost, addPostTag, removePostTag, getAllPostTags, getPostTagsByPost}}>
+        <PostTagContext.Provider value={{postTags, addPostTag, removePostTag, getAllPostTags, getPostTagsByPost}}>
             {props.children}
         </PostTagContext.Provider>
     )
