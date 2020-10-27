@@ -30,7 +30,7 @@ export const PostDetails = (props) => {
             <div className="postContent">
                 <p>{post.content}</p>
             </div>
-            <PostTags />
+            <PostTags post={post} />
         </div>
     )
 }
