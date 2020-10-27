@@ -29,7 +29,7 @@ export const PostDetails = (props) => {
                     <button
                         className="btn postEditBtn"
                         onClick={() => {
-                            props.history.push(`/post/edit/${post.id}`)
+                            props.history.push(`/new_post/${post.id}`)
                         }}>Edit Post</button>
                     <button
                         className="btn postDeleteBtn"
