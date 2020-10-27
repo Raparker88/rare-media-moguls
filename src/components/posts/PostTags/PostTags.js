@@ -14,7 +14,7 @@ export const PostTags = ({postId}) => {
     useEffect(() => {
         // It seems like it isn't getting the postId before the PostTags component renders?
         // How in the world does that happen
-        console.warn(`postId: ${postId}`)
+        console.warn(`postId: ${postId}, post tags: ${postTags}`)
     }, []);
 
     const toggleEdit = () => {
