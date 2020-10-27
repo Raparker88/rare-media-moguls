@@ -4,45 +4,61 @@ import React, {useState} from "react"
 export const CommentContext = React.createContext()
 
 export const CommentProvider = (props) => {
-    const [posts, setPosts] = useState([])
+    const [comments, setComments] = useState([])
 
-    const getPosts = () => {
-        return fetch("http://localhost:8000/posts")
+    const getComments = () => {
+        return fetch("http://localhost:8000/comments")
             .then(res => res.json())
-            .then(setPosts)
+            .then(setComments)
     }
 
-    const getPostById = (id) => {
-        return fetch(`http://localhost:8000/posts/${id}`)
+    const getCommentById = (id) => {
+        return fetch(`http://localhost:8000/comments/${id}`)
             .then(res => res.json())
     }
 
-    const addPost = post => {
-        return fetch("http://localhost:8000/posts", {
+    const getCommentsByPostId = (postId) => {
+        return fetch(`http://localhost:8000/comments?post_id=${postId}`)
+            .then(res => res.json())
+    }
+
+    const addComment = comment => {
+        return fetch("http://localhost:8000/comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(post)
+            body: JSON.stringify(comment)
         })
-        .then(getPosts) 
+        .then(getComments) 
     }
 
-    const deletePost = postId => {
-        return fetch(`http://localhost:8000/posts${postId}`, {
+    const deleteComment = id => {
+        return fetch(`http://localhost:8000/comments/${id}`, {
             method: "DELETE"
         })
-            .then(getPosts)
+            .then(getComments)
+    }
+
+    const updateComment = (comment_id, comment) => {
+        return fetch(`http://localhost:8000/tags/${comment_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(comment)
+        })
+            .then(getComments)
     }
 
    
 
     return (
-        <PostContext.Provider value={{
-            posts, addPost, getPostById, getLastPost, deletePost
+        <CommentContext.Provider value={{
+            comments, getComments, getCommentById, addComment, deleteComment, getCommentsByPostId, updateComment
         }}>
             {props.children}
-        </PostContext.Provider>
+        </CommentContext.Provider>
     )
 
 }
