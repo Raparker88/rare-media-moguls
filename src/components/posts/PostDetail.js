@@ -43,26 +43,33 @@ export const PostDetails = (props) => {
 
     return (
         <>
-        <dialog className="dialog dialog--deletePost" ref={deletePostDialog}>
+            <dialog className="dialog dialog--deletePost" ref={deletePostDialog}>
                 <div>Are you sure you want to delete this post?</div>
                 <button className="button--closeDialog btn" onClick={e => deletePostDialog.current.close()}>Close</button>
-                <button className="button--deleteDialog btn" 
+                <button className="button--deleteDialog btn"
                     onClick={e => {
                         deletePost(post.id)
                         props.history.push("/")
                     }}>Delete Post</button>
             </dialog>
-        <div className="postDetailContainer">
-            <h2 className="postTitle">{post.title}</h2>
-            <div className="author_date_container">
-                <h3>{post.user.display_name}</h3>
-                <h4>{handleDate(post.publication_date)}</h4>
+            <div className="postDetailContainer">
+                <h2 className="postTitle">{post.title}</h2>
+                <div className="author_date_container">
+                    <h3>{post.user.display_name}</h3>
+                    <h4>{handleDate(post.publication_date)}</h4>
+                </div>
+                <div clasName="postContent">
+                    <p>{post.content}</p>
+                </div>
+                {editDeleteButtons()}
             </div>
-            <div clasName="postContent">
-                <p>{post.content}</p>
+            <div className="commentButtonContainer">
+                <button
+                    className="btn postEditBtn"
+                    onClick={() => {
+                        props.history.push(`/new_comment/${post.id}`)
+                    }}>Add Comment</button>
             </div>
-            {editDeleteButtons()}
-        </div>
         </>
     )
 }
