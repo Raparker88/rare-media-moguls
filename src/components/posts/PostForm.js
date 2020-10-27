@@ -4,7 +4,7 @@ import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
 
-    const { posts, addPost, updatePost } = useContext(PostContext)
+    const { posts, addPost, updatePost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
 
     const [post, setPost] = useState({})
@@ -44,7 +44,7 @@ export const PostForm = (props) => {
                       user_id: parseInt(localStorage.getItem("rare_user_id")),
                       publication_date: post.publication_date
                   }).then(() => {
-                      props.history.push(`/posts/postId`)
+                      props.history.push(`/posts/${post.id}`)
                   })
             } else{
             const newPostObject = {
@@ -55,8 +55,9 @@ export const PostForm = (props) => {
                 publication_date: Date.now()
             }
             addPost(newPostObject)
-        }
-        }else{
+                .then(() => getLastPost())
+                .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
+        }}else{
             window.alert("please fill in all fields")
         } 
 
@@ -108,6 +109,7 @@ export const PostForm = (props) => {
                 onClick={evt => {
                     evt.preventDefault()
                     constructNewPost()
+                        
                 }}
                 className="btn post_submit_btn">
                 Save Post
