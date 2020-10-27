@@ -19,7 +19,7 @@ export const PostTags = ({postId}) => {
 
     const toggleEdit = () => {
         setIsEditing(!isEditing)
-        console.warn(postTags)
+        console.warn(`postId: ${postId}, post tags: ${postTags}`)
     }
 
     return (
