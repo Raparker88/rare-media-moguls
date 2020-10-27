@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { Tag } from "./Tag"
-import { TagContext } from "./TagsProvider"
+import { TagContext } from "./TagProvider"
 
 export const TagsList = (props) => {
     const {tags, getTags} = useContext(TagContext)
