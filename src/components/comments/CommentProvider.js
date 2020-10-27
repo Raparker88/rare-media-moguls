@@ -1,9 +1,9 @@
 import React, {useState} from "react"
 
 
-export const PostContext = React.createContext()
+export const CommentContext = React.createContext()
 
-export const PostProvider = (props) => {
+export const CommentProvider = (props) => {
     const [posts, setPosts] = useState([])
 
     const getPosts = () => {
@@ -14,11 +14,6 @@ export const PostProvider = (props) => {
 
     const getPostById = (id) => {
         return fetch(`http://localhost:8000/posts/${id}`)
-            .then(res => res.json())
-    }
-
-    const getLastPost = () => {
-        return fetch(`http://localhost:8000/latest_post`)
             .then(res => res.json())
     }
 
@@ -34,7 +29,7 @@ export const PostProvider = (props) => {
     }
 
     const deletePost = postId => {
-        return fetch(`http://localhost:8000/posts/${postId}`, {
+        return fetch(`http://localhost:8000/posts${postId}`, {
             method: "DELETE"
         })
             .then(getPosts)

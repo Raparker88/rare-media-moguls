@@ -7,6 +7,8 @@ import { CategoryProvider } from "./categories/CategoryProvider"
 import { PostForm } from "./posts/PostForm"
 import { CategoriesList } from "./categories/CategoriesList"
 import { CategoryForm } from "./categories/CategoryForm"
+import { TagProvider } from "./tags/TagsProvider"
+import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
 
@@ -14,16 +16,16 @@ import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
 
 export const ApplicationViews = (props) => {
     return (
-    <>
-        <main className="main-container" style={{
-            margin: "0 0",
-            lineHeight: "1.75rem"
-        }}>
-            <Route path = "/" render = {props =>
-                <nav className="cont--nav">
-                    <Nav {...props} />
-                </nav>
-            }/>
+        <>
+            <main className="main-container" style={{
+                margin: "0 0",
+                lineHeight: "1.75rem"
+            }}>
+                <Route path="/" render={props =>
+                    <nav className="cont--nav">
+                        <Nav {...props} />
+                    </nav>
+                } />
                 <PostProvider>
                     <CategoryProvider>
                         <Route exact path="/new_post" render={
@@ -33,7 +35,7 @@ export const ApplicationViews = (props) => {
                 </PostProvider>
 
                 <CategoryProvider>
-                    <Route exact path="/categories/create" render ={
+                    <Route exact path="/categories/create" render={
                         props => <CategoryForm {...props} />
                     } />
 
@@ -50,17 +52,22 @@ export const ApplicationViews = (props) => {
                 </PostProvider>
             </PostTagProvider>
 
-            
-            <CategoryProvider>
-                <Route exact path="/categories/create" render={
-                    props => <CategoryForm {...props} />
-                } />
+                <CategoryProvider>
+                    <Route exact path="/categories/create" render={
+                        props => <CategoryForm {...props} />
+                    } />
 
-                <Route exact path="/categories" render={
-                    props => <CategoriesList {...props} />
-                } />
-            </CategoryProvider>
-        </main>
-    </>
+                    <Route exact path="/categories" render={
+                        props => <CategoriesList {...props} />
+                    } />
+                </CategoryProvider>
+
+                <TagProvider>
+                        <Route exact path="/tags" render={
+                            props => <TagsList {...props} />
+                        } />
+                </TagProvider>
+            </main>
+        </>
     )
 }
