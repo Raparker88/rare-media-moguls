@@ -7,7 +7,7 @@ import { CategoryProvider } from "./categories/CategoryProvider"
 import { PostForm } from "./posts/PostForm"
 import { CategoriesList } from "./categories/CategoriesList"
 import { CategoryForm } from "./categories/CategoryForm"
-import { TagProvider } from "./tags/TagsProvider"
+import { TagProvider } from "./tags/TagProvider"
 import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 
