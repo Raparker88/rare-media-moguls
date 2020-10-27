@@ -5,7 +5,7 @@ export const CategoriesList = (props) => {
         <>
         <button onClick={() => props.history.push("/categories/create")}>
                 Add New Category
-            </button>
+        </button>
         </>
     )
 }
