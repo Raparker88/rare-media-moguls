@@ -1,46 +1,85 @@
-import React from "react"
-import { Link, useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, NavLink } from "react-router-dom"
 import "./Nav.css"
-import Logo from "./rare.jpeg"
+import Logo from "./rare_logo_diamond_transparent.png"
+import { UserDropdown } from "./UserDropdown"
 
-export const Nav = () => {
-    const history = useHistory()
-    const handleLogout = () => {
-        localStorage.clear()
+export const Nav = (props) => {
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    const toggleOpen = () => {
+        if (isOpen) {
+            setIsOpen(false)
+        }
+        else {
+            setIsOpen(true)
+        }
     }
 
+    useEffect(()=>{
+        if(localStorage.getItem("rare_user_id") !== null){
+            setLoggedIn(true)
+        }
+        else{
+            setLoggedIn(false)
+        }
+    }, [])
+
     return (
-        <ul className="nav">
-            <li className="link nav__link">
-                <img className="nav__logo" src={Logo} />
-            </li>
-            <li className="nav__item">
-                <Link className="nav__link" to="/posts">Posts</Link>
-            </li>
-            <li className="nav__item">
-                <Link className="nav__link" to="/new_post">Create Post</Link>
-            </li>
-            {
-                (localStorage.getItem("rare_user_id") !== null)
-                ?
-                <Link className="link nav__link logout"
-                    to="/"
-                    onClick={()=>{
-                    handleLogout()
-                    }}>
-                    Logout
-                </Link>
-                :
-                    <>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                    </>
-            }
-        </ul>
+        <>
+        <div className="nav">
+            <div className="nav__inner">
+                <div className="spacer__nav--left"></div>
+                <div className="link nav__link logo-wrapper left">
+                    <div className="top-space"></div>
+                    <div className="middle-wrap">
+                        <img className="nav__logo"
+                        to="/"
+                        onClick={()=>{
+                        props.history.push("/")}}
+                        src={Logo} />
+                        <div className="right-middle"></div>
+                    </div>
+                    <div className="bottom-space"></div>
+                </div>
+                <div className="spacer__nav--middle"></div>
+                <div className="link nav__link user-nav-wrapper right">
+                    <div className="top-space"></div>
+                    <div className="link nav__link wrapper__nav--right">
+                        <div className="nav__link-wrapper post-wrapper">
+                            <Link
+                            className="link nav__link posts-link"
+                            to="/">
+                                posts
+                            </Link>
+                        </div>
+                        {loggedIn
+                        ?
+                        <div className="user-menu-btn"
+                        onClick={toggleOpen}>
+                            <div className={`arrow ${isOpen ? "upArrow" : "downArrow"}`}></div>
+                        </div>
+                        :
+                        <Link className="link nav__link get-started"
+                        to="/login">
+                            get started
+                        </Link>
+                        }
+                    </div>
+                    <div className="bottom-space"></div>
+                </div>
+                <div className={`dropdown ${isOpen ? "dropdown--open" : "dropdown--collapsed" }`}>
+                    <UserDropdown
+                    toggleOpen={toggleOpen}
+                    {...props}/>
+                </div>
+
+                <div className="spacer__nav--right"></div>
+            </div>
+        </div>
+        </>
     )
 }
 

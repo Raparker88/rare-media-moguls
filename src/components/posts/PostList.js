@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 
@@ -10,7 +10,6 @@ export const PostList = (props) => {
     useEffect(() => {
         getPosts()
     },[])
-
 
     return (
         <>
@@ -24,8 +23,9 @@ export const PostList = (props) => {
                     <Link to={{pathname:`/posts/${p.id}`}}>
                     <p>{p.title}</p>
                     </Link>
-                    {/* <p>{p.user.display_name}</p>
-                    <p>{p.category.type}</p> */}
+                    <p>{p.user.display_name}</p>
+                    <p>Posted in {p.category.category}</p>
+                    <p>{new Date(p.publication_date).toDateString()}</p>
                 </div>
             }) : null
         }
