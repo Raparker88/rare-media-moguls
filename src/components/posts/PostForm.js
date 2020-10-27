@@ -4,7 +4,7 @@ import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
 
-    const { posts, addPost, updatePost, getLastPost } = useContext(PostContext)
+    const { posts, getPosts, addPost, updatePost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
 
     const [post, setPost] = useState({})
@@ -26,6 +26,7 @@ export const PostForm = (props) => {
     }
 
     useEffect(() => {
+        getPosts()
         getCategories()
     }, [])
 
