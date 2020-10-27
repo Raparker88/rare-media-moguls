@@ -15,7 +15,7 @@ export const Nav = () => {
                 <img className="nav__logo" src={Logo} />
             </li>
             <li className="nav__item">
-                <Link className="nav__link" to="/">Posts</Link>
+                <Link className="nav__link" to="/posts">Posts</Link>
             </li>
             <li className="nav__item">
                 <Link className="nav__link" to="/new_post">Create Post</Link>

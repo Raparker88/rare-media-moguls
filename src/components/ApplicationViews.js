@@ -4,6 +4,7 @@ import { PostProvider } from "./posts/PostProvider"
 import { CategoryProvider } from "./categories/CategoryProvider"
 import { PostForm } from "./posts/PostForm"
 import { CategoriesList } from "./categories/CategoriesList"
+import { PostList } from "./posts/PostList"
 import { CategoryForm } from "./categories/CategoryForm"
 
 
@@ -17,6 +18,9 @@ export const ApplicationViews = () => {
                 <CategoryProvider>
                     <Route exact path="/new_post" render={
                         props => <PostForm {...props} />
+                    } />
+                    <Route exact path="/posts" render={
+                        props => <PostList {...props} />
                     } />
                 </CategoryProvider>
             </PostProvider>
