@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PostContext } from "./PostProvider"
-import { PostTags } from "./PostTags"
+import { PostTags } from "./PostTags/PostTags"
 
 
 export const PostDetails = (props) => {
