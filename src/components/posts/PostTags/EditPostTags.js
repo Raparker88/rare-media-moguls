@@ -22,7 +22,7 @@ export const EditPostTags = (props) => {
         if (postTagIds.indexOf(tagId) > -1) {
             setChecked(true)
         }
-    }, [postTagIds]); 
+    }, []); 
 
     const postTagDelete = () => {
         postTags.forEach((postTag) => {
