@@ -1,25 +1,21 @@
 import React, { useContext, useState, useEffect } from "react"
 import { PostTagContext } from "./PostTagProvider"
+import { TagContext } from "../../tags/TagProvider"
 import { CurrentPostTags } from "./CurrentPostTags"
 import { EditPostTags } from "./EditPostTags"
 
 export const PostTags = ({postId}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
+    const { tags, getTags } = useContext(TagContext)
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
         getPostTagsByPost(postId)
-    }, []);
-
-    useEffect(() => {
-        // It seems like it isn't getting the postId before the PostTags component renders?
-        // How in the world does that happen
-        console.warn(`postId: ${postId}, post tags: ${postTags}`)
-    }, []);
+    }, [postId]);
 
     const toggleEdit = () => {
         setIsEditing(!isEditing)
-        console.warn(`postId: ${postId}, post tags: ${postTags}`)
+        isEditing ? getTags() : getPostTagsByPost(postId)
     }
 
     return (
@@ -27,10 +23,14 @@ export const PostTags = ({postId}) => {
             <h3 className="post-tags-header">TAGGED AS</h3>
             <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button>
             {isEditing ? 
-                <EditPostTags />
-                : (
+                    (
+                    tags.map(tag => {
+                    return <EditPostTags tag={tag} key={tag.id} />
+                    })
+                ) 
+                :   (
                     postTags.map(tag => {
-                    return <CurrentPostTags tag={tag} />
+                    return <CurrentPostTags tag={tag} key={tag.id} />
                     })
                 ) 
             }

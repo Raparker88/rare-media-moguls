@@ -1,0 +1,15 @@
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.tag-input:focus {
+    outline: none;
+}
+
+.tag-input {
+    border-color: rgba(211, 211, 211, 0.685);
+}
