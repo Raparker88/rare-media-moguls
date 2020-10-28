@@ -15,7 +15,7 @@ export const CategoriesList = (props) => {
                 <button className="btn add-cat-btn" onClick={() => props.history.push("/categories/create")}>
                     Add New Category
                 </button>
-
+                
                 <div className="list cat-list-cont">
                     {categories.map(c => {
                         return <Category
