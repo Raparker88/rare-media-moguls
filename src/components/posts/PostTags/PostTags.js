@@ -8,6 +8,7 @@ export const PostTags = ({postId}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const { tags, getTags } = useContext(TagContext)
     const [isEditing, setIsEditing] = useState(false)
+    const postTagIds = postTags.map(tag => tag.tag_id)
 
     useEffect(() => {
         getPostTagsByPost(postId)
@@ -25,7 +26,7 @@ export const PostTags = ({postId}) => {
             {isEditing ? 
                     (
                     tags.map(tag => {
-                    return <EditPostTags tag={tag} key={tag.id} />
+                    return <EditPostTags tag={tag} postTagIds={postTagIds} key={tag.id} />
                     })
                 ) 
                 :   (
