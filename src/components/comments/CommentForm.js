@@ -62,8 +62,15 @@ export const CommentForm = (props) => {
                     constructNewComment()
                         
                 }}
-                className="btn post_submit_btn">
+                className="btn comment_submit_btn">
                 Save 
+            </button>
+            <button 
+                onClick={evt => {
+                    props.history.push(`/posts/${parseInt(props.match.params.postId)}`)
+                }}
+                className="btn cancel_btn">
+                Back To Post 
             </button>
 
         </form>
