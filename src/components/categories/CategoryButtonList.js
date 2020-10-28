@@ -6,7 +6,7 @@ import "./Category.css"
 export const CategoryButtonList = (props) => {
 
     const { categories, getCategories } = useContext(CategoryContext)
-    const { posts, getPosts, getPostsByCategoryId } = useContext(PostContext)
+    const { getPosts, getPostsByCategoryId } = useContext(PostContext)
 
     const [selectedCategoryId, setSelectedCategoryId] = useState(0)
 
