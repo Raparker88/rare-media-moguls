@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { PostContext } from "./PostProvider"
+import { PostTags } from "./PostTags/PostTags"
 
 
 export const PostDetails = (props) => {
@@ -69,6 +70,9 @@ export const PostDetails = (props) => {
                     onClick={() => {
                         props.history.push(`/new_comment/${post.id}`)
                     }}>Add Comment</button>
+            </div>
+            <div>
+                <PostTags postId={post.id} />
             </div>
             
         </>
