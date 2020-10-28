@@ -12,17 +12,19 @@ export const CategoriesList = (props) => {
     return (
         <>
             <section className="categories">
-            <button onClick={() => props.history.push("/categories/create")}>
-                Add New Category
-            </button>
+                <button className="btn add-cat-btn" onClick={() => props.history.push("/categories/create")}>
+                    Add New Category
+                </button>
 
-            {categories.map(c => {
-                return <Category
-                key={c.id}
-                category={c}
-                {...props} />
-                }).reverse()
-            }
+                <div className="list cat-list-cont">
+                    {categories.map(c => {
+                        return <Category
+                        key={c.id}
+                        category={c}
+                        {...props} />
+                        }).reverse()
+                    }
+                </div>
             </section>
         </>
     )

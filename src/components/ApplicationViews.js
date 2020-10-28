@@ -30,12 +30,7 @@ export const ApplicationViews = (props) => {
 
                 <PostProvider>
                     <CategoryProvider>
-                        <Route exact path="/new_post" render={
-                            props => <PostForm {...props} />
-                        } />
-                        <Route exact path="/posts/edit/:postId(\d+)" render={
-                            props => <PostForm {...props} />
-                        } />
+
                     </CategoryProvider>
                 </PostProvider>
 
@@ -51,17 +46,25 @@ export const ApplicationViews = (props) => {
                 <CategoryProvider>
                     <PostProvider>
                         <>
+                            <Route exact path="/new_post" render={
+                                props => <PostForm {...props} />
+                            } />
+                            <Route exact path="/posts/edit/:postId(\d+)" render={
+                                props => <PostForm {...props} />
+                            } />
                             <Route exact path="/" render={(props) => (
                                 <>
-                                    <PostList {...props}></PostList>
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
-                                            <div className="left-main"></div>
+                                            <div className="left-main">
+                                                <PostList
+                                                {...props}/>
+                                            </div>
                                             <div className="divider"></div>
                                             <div className="right-main">
                                                 <CategoryButtonList
-                                                    {...props} />
+                                                {...props} />
                                     </div>
                                         </div>
                                         <div className="bottom-spacer"></div>
@@ -71,6 +74,7 @@ export const ApplicationViews = (props) => {
                         </>
                     </PostProvider>
                 </CategoryProvider>
+
                 <CommentProvider>
                     <Route path="/new_comment/:postId(\d+)" render={(props) =>
                             <CommentForm {...props} />}
