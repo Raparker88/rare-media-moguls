@@ -15,14 +15,10 @@ export const CategoryButtonList = (props) => {
     },[])
 
     useEffect(()=>{
-        const filteredPosts = posts.filter(p => p.category_id === selectedCategoryId)
-
         if(selectedCategoryId > 0){
-            console.log(filteredPosts)
             getPostsByCategoryId(selectedCategoryId)
         }
         else{
-            console.log(posts, props)
             getPosts()
         }
     }, [selectedCategoryId])
