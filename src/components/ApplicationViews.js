@@ -29,13 +29,6 @@ export const ApplicationViews = (props) => {
                         <Nav {...props} />
                     </nav>)} />
             
-            <PostProvider>
-                <CategoryProvider>
-                    <Route exact path="/new_post" render={(props) =>
-                        <PostForm {...props} />}
-                    />
-                </CategoryProvider>
-            </PostProvider>
 
             <TagProvider>
                 <PostTagProvider>
