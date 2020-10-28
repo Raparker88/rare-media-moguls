@@ -48,4 +48,7 @@ Monica Kay:
 Austin Phy:
 Conner Blakeney:
 Samantha Maas:
-
+    •new category form
+    •edit a post
+    •view all tags
+    •view comments for each post
