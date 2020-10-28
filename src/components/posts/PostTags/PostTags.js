@@ -26,12 +26,12 @@ export const PostTags = ({postId}) => {
             {isEditing ? 
                     (
                     tags.map(tag => {
-                    return <EditPostTags tag={tag} postTagIds={postTagIds} key={tag.id} />
+                    return <EditPostTags tag={tag} postTagIds={postTagIds} postId={postId} postTags={postTags} key={tag.id} />
                     })
                 ) 
                 :   (
-                    postTags.map(tag => {
-                    return <CurrentPostTags tag={tag} key={tag.id} />
+                    postTags.map(singlePostTag => {
+                    return <CurrentPostTags singlePostTag={singlePostTag} key={singlePostTag.id} />
                     })
                 ) 
             }

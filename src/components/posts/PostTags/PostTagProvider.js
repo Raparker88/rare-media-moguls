@@ -28,15 +28,13 @@ export const PostTagProvider = (props) => {
         .then(getPostTagsByPost(postTag)) 
     }
 
-    const removePostTag = postTag => {
-        return fetch("http://localhost:8000/post_tags", {
+    const removePostTag = (postTagId) => {
+        return fetch(`http://localhost:8000/post_tags/${postTagId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(postTag)
-        })
-        .then(getPostTagsByPost(postTag)) 
+        }) 
     }
 
     return (

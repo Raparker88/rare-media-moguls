@@ -1,10 +1,10 @@
 import React from "react"
 
-export const CurrentPostTags = ({tag}) => {
+export const CurrentPostTags = ({singlePostTag}) => {
 
     return (
         <div className="current-post-tag">
-            <h4>#{tag.tag.tag}</h4>
+            <h4>#{singlePostTag.tag.tag}</h4>
         </div>
     )
 }
