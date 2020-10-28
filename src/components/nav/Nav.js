@@ -8,6 +8,7 @@ export const Nav = (props) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
+    const [currentUserId, setCurrentUserId] = useState(null)
 
     const toggleOpen = () => {
         if (isOpen) {
@@ -19,8 +20,9 @@ export const Nav = (props) => {
     }
 
     useEffect(()=>{
-        if(localStorage.getItem("rare_user_id") !== null){
+        if(localStorage.getItem("rare_user_id")!== null){
             setLoggedIn(true)
+            setCurrentUserId(localStorage.getItem("rare_user_id"))
         }
         else{
             setLoggedIn(false)
@@ -73,6 +75,7 @@ export const Nav = (props) => {
                 <div className={`dropdown ${isOpen ? "dropdown--open" : "dropdown--collapsed" }`}>
                     <UserDropdown
                     toggleOpen={toggleOpen}
+                    currentUserId={currentUserId}
                     {...props}/>
                 </div>
 
