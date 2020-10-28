@@ -73,7 +73,6 @@ export const PostDetails = (props) => {
             </div>
             <div>
                 <PostTags postId={post.id} />
-                {editDeleteButtons()}
             </div>
             
         </>
