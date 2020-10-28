@@ -40,14 +40,24 @@ Thanks to everyone on the Media-Moguls team at NSS!
 Here is a list of team members and their contributions:
 
 Rebecca Parker:
+
     •new post form
     •post detail page
     •delete a post
     •create a comment
+    
 Monica Kay:
+
 Austin Phy:
+
+    •log-in user auth
+    •display read-only posts if not authed
+    •add and remove tags from posts
+
 Conner Blakeney:
+
 Samantha Maas:
+
     •new category form
     •edit a post
     •view all tags
