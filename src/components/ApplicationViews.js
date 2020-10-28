@@ -12,6 +12,7 @@ import { TagProvider } from "./tags/TagProvider";
 import { CategoriesList } from "./categories/CategoriesList"
 import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
+import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
 import { CommentForm } from "./comments/CommentForm"
 import { CommentProvider } from "./comments/CommentProvider";
 import { UserPostList } from "./posts/UserPostList"
@@ -21,11 +22,23 @@ export const ApplicationViews = (props) => {
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
 
-                <PostProvider>
-                <Route path="/" render={(props) => (
+            <Route path="/" render={(props) => (
                     <nav className="cont--nav">
                         <Nav {...props} />
                     </nav>)} />
+
+
+            <TagProvider>
+                <PostTagProvider>
+                    <PostProvider>
+                        <Route path="/posts/:postId(\d+)" render={
+                            props => <PostDetails {...props} />
+                        } />
+                    </PostProvider>
+                </PostTagProvider>
+            </TagProvider>
+
+                <PostProvider>
                     <CategoryProvider>
                         <Route exact path="/new_post" render={
                             props => <PostForm {...props} />
@@ -50,11 +63,13 @@ export const ApplicationViews = (props) => {
                         <>
                             <Route exact path="/" render={(props) => (
                                 <>
-                                    <PostList {...props}></PostList>
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
-                                            <div className="left-main"></div>
+                                            <div className="left-main">
+                                                <PostList {...props}></PostList>
+
+                                            </div>
                                             <div className="divider"></div>
                                             <div className="right-main">
                                                 <CategoryButtonList
@@ -87,19 +102,6 @@ export const ApplicationViews = (props) => {
                         />
 
                 </CommentProvider>
-
-
-                    <PostProvider>
-                        <Route path="/posts/:postId(\d+)" render={(props) =>
-                            <PostDetails {...props} />}
-                        />
-                    </PostProvider>
-
-                    <CategoryProvider>
-                        <Route exact path="/categories/create" render={props =>
-                            <CategoryForm {...props} />}
-                        />
-                    </CategoryProvider>
 
 
                         <TagProvider>
