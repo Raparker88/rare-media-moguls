@@ -40,6 +40,12 @@ export const PostProvider = (props) => {
             .then(getPosts)
     }
 
+    const getPostsByCategoryId = category_id => {
+        return fetch(`http://localhost:8000/posts?category_id=${category_id}`)
+            .then(res => res.json())
+            .then(setPosts);
+    };
+
     const updatePost = post => {
         return fetch(`http://localhost:8000/posts/${post.id}`, {
             method: "PUT",
@@ -54,7 +60,7 @@ export const PostProvider = (props) => {
 
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts
+            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts, getPostsByCategoryId
         }}>
             {props.children}
         </PostContext.Provider>
