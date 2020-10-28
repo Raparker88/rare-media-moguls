@@ -70,6 +70,13 @@ export const PostDetails = (props) => {
                         props.history.push(`/new_comment/${post.id}`)
                     }}>Add Comment</button>
             </div>
+            <div className="viewCommentsButtonContainer">
+                <button
+                    className="btn postEditBtn"
+                    onClick={() => {
+                        props.history.push(`/comments/${post.id}`)
+                    }}>View Comments</button>
+            </div>
             
         </>
     )

@@ -12,6 +12,8 @@ import { TagProvider } from "./tags/TagProvider";
 import { CategoriesList } from "./categories/CategoriesList"
 import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
+import { CommentProvider } from "./comments/CommentProvider";
+import { CommentsListByPost } from "./comments/CommentsList";
 
 
 
@@ -83,17 +85,17 @@ export const ApplicationViews = (props) => {
                         />
                     </CategoryProvider>
 
-                        <PostProvider>
-                            <Route path="/posts/:postId(\d+)" render={(props) =>
-                                <PostDetails {...props} />}
-                            />
-                        </PostProvider>
-
                         <TagProvider>
                             <Route exact path="/tags" render={props =>
                                 <TagsList {...props} />}
                             />
                         </TagProvider>
+
+                        <CommentProvider>
+                            <Route exact path="/comments/:postId(\d+)" render={props =>
+                                <CommentsListByPost {...props} />}
+                            />
+                        </CommentProvider>
             </main>
         </>
     )};
