@@ -12,7 +12,7 @@ export const PostTags = ({postId}) => {
 
     useEffect(() => {
         getPostTagsByPost(postId)
-    }, [postId]);
+    }, [postId, postTagIds]);
 
     const toggleEdit = () => {
         setIsEditing(!isEditing)

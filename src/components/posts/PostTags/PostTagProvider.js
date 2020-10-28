@@ -17,7 +17,7 @@ export const PostTagProvider = (props) => {
             .then(setPostTags)
     }
 
-    const addPostTag = postTag => {
+    const addPostTag = (postTag) => {
         return fetch("http://localhost:8000/post_tags", {
             method: "POST",
             headers: {
@@ -25,7 +25,6 @@ export const PostTagProvider = (props) => {
             },
             body: JSON.stringify(postTag)
         })
-        .then(getPostTagsByPost(postTag)) 
     }
 
     const removePostTag = (postTagId) => {

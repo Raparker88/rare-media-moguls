@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from "react"
 import { PostTagContext } from "./PostTagProvider"
 
 export const EditPostTags = (props) => {
-    const { addPostTag, removePostTag } = useContext(PostTagContext)
+    const { addPostTag, removePostTag, getPostTagsByPost } = useContext(PostTagContext)
     const [checked, setChecked] = useState(false);
     const tagId = props.tag.id
     const tagName = props.tag.tag
