@@ -28,12 +28,6 @@ export const ApplicationViews = (props) => {
                         <Nav {...props} />
                     </nav>)} />
 
-                <PostProvider>
-                    <CategoryProvider>
-
-                    </CategoryProvider>
-                </PostProvider>
-
                 <CategoryProvider>
                     <Route exact path="/categories/create" render={(props) =>
                         <CategoryForm {...props} />}
@@ -41,9 +35,7 @@ export const ApplicationViews = (props) => {
                     <Route exact path="/categories" render={(props) =>
                         <CategoriesList {...props} />}
                     />
-                </CategoryProvider>
 
-                <CategoryProvider>
                     <PostProvider>
                         <>
                             <Route exact path="/new_post" render={
@@ -65,7 +57,7 @@ export const ApplicationViews = (props) => {
                                             <div className="right-main">
                                                 <CategoryButtonList
                                                 {...props} />
-                                    </div>
+                                            </div>
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>
@@ -74,26 +66,23 @@ export const ApplicationViews = (props) => {
                         </>
                     </PostProvider>
                 </CategoryProvider>
-
+                
                 <CommentProvider>
                     <Route path="/new_comment/:postId(\d+)" render={(props) =>
                             <CommentForm {...props} />}
                         />
-
                 </CommentProvider>
+                <PostProvider>
+                    <Route path="/posts/:postId(\d+)" render={(props) =>
+                        <PostDetails {...props} />}
+                    />
+                </PostProvider>
 
-
-                    <PostProvider>
-                        <Route path="/posts/:postId(\d+)" render={(props) =>
-                            <PostDetails {...props} />}
-                        />
-                    </PostProvider>
-
-                        <TagProvider>
-                            <Route exact path="/tags" render={props =>
-                                <TagsList {...props} />}
-                            />
-                        </TagProvider>
+                <TagProvider>
+                    <Route exact path="/tags" render={props =>
+                        <TagsList {...props} />}
+                    />
+                </TagProvider>
             </main>
         </>
     )};
