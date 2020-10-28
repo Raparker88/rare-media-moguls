@@ -4,24 +4,21 @@ import { PostContext } from "../posts/PostProvider"
 import { CategoryButton } from "./CategoryButton"
 import "./Category.css"
 export const CategoryButtonList = (props) => {
-//useContext
+
     const { categories, getCategories } = useContext(CategoryContext)
     const { posts, getPosts, getPostsByCategoryId } = useContext(PostContext)
 
-//useState
     const [selectedCategoryId, setSelectedCategoryId] = useState(0)
-//useEffect
+
     useEffect(()=> {
         getCategories()
     },[])
 
-//Will use this to trigger filtered post list.
     useEffect(()=>{
         const filteredPosts = posts.filter(p => p.category_id === selectedCategoryId)
 
         if(selectedCategoryId > 0){
             console.log(filteredPosts)
-            // props.history.push(`http://localhost:8000/posts?category_id=${selectedCategoryId}`)
             getPostsByCategoryId(selectedCategoryId)
         }
         else{
