@@ -29,13 +29,6 @@ export const ApplicationViews = (props) => {
                         <Nav {...props} />
                     </nav>)} />
             
-            <PostProvider>
-                <CategoryProvider>
-                    <Route exact path="/new_post" render={(props) =>
-                        <PostForm {...props} />}
-                    />
-                </CategoryProvider>
-            </PostProvider>
 
             <TagProvider>
                 <PostTagProvider>
@@ -72,11 +65,13 @@ export const ApplicationViews = (props) => {
                         <>
                             <Route exact path="/" render={(props) => (
                                 <>
-                                    <PostList {...props}></PostList>
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
-                                            <div className="left-main"></div>
+                                            <div className="left-main">
+                                                <PostList {...props}></PostList>
+
+                                            </div>
                                             <div className="divider"></div>
                                             <div className="right-main">
                                                 <CategoryButtonList
@@ -97,11 +92,6 @@ export const ApplicationViews = (props) => {
 
                 </CommentProvider>
 
-                    <CategoryProvider>
-                        <Route exact path="/categories/create" render={props =>
-                            <CategoryForm {...props} />}
-                        />
-                    </CategoryProvider>
 
                         <TagProvider>
                             <Route exact path="/tags" render={props =>
