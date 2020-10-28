@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { PostContext } from "./PostProvider"
+import { PostTags } from "./PostTags/PostTags"
 
 
 export const PostDetails = (props) => {
@@ -58,7 +59,7 @@ export const PostDetails = (props) => {
                     <h3>{post.user.display_name}</h3>
                     <h4>{handleDate(post.publication_date)}</h4>
                 </div>
-                <div clasName="postContent">
+                <div className="postContent">
                     <p>{post.content}</p>
                 </div>
                 {editDeleteButtons()}
@@ -77,7 +78,9 @@ export const PostDetails = (props) => {
                         props.history.push(`/comments/${post.id}`)
                     }}>View Comments</button>
             </div>
-            
+            <div>
+                <PostTags postId={post.id} />
+            </div>
         </>
     )
 }
