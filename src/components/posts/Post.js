@@ -4,7 +4,8 @@ export const Post = (props) => {
     return (
         <div className="post-item">
             <div className="post-title-cont">
-                <span className="post-title" onClick={props.history.push(`/posts/${props.post.id}`)}>
+                <span className="post-title" onClick={()=>{
+                    props.history.push(`/posts/${props.post.id}`)}}>
                     {props.post.title}
                 </span>
             </div>

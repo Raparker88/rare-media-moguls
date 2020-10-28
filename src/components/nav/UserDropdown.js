@@ -10,7 +10,7 @@ export const UserDropdown = (props) => {
     const { getPostsByUser } = useContext(PostContext)
 
     const [currentUserId, setCurrentUserId] = useState(0)
-    
+
     useEffect(()=>{
         const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
         setCurrentUserId(currentUserId)
@@ -33,8 +33,7 @@ export const UserDropdown = (props) => {
                 className="link nav__link dropdown-link"
                 onClick={() => {
                     props.toggleOpen()
-                    getPostsByUser(currentUserId)
-                    .then(props.history.push(`/posts/user/${currentUserId}`))
+                    props.history.push(`/posts/user/${currentUserId}`)
                 }}>
                     my posts
                 </span>

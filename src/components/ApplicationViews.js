@@ -21,11 +21,13 @@ export const ApplicationViews = (props) => {
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
+            <PostProvider>
+                <Route path="/" render={(props) => (
 
-            <Route path="/" render={(props) => (
-                    <nav className="cont--nav">
-                        <Nav {...props} />
-                    </nav>)} />
+                <nav className="cont--nav">
+                    <Nav {...props} />
+                </nav>)} />
+            </PostProvider>
 
 
             <TagProvider>
@@ -39,6 +41,7 @@ export const ApplicationViews = (props) => {
             </TagProvider>
 
                 <PostProvider>
+
                     <CategoryProvider>
                         <Route exact path="/new_post" render={
                             props => <PostForm {...props} />
@@ -81,7 +84,7 @@ export const ApplicationViews = (props) => {
                                 </>
                             )} />
 
-                            <Route path="/posts/user/:userId(\d+)" render={(props) => (
+                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
                                 <>
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
