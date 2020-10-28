@@ -14,8 +14,7 @@ import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { CommentForm } from "./comments/CommentForm"
 import { CommentProvider } from "./comments/CommentProvider";
-
-
+import { UserPostList } from "./posts/UserPostList"
 
 export const ApplicationViews = (props) => {
 
@@ -23,12 +22,11 @@ export const ApplicationViews = (props) => {
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
 
+                <PostProvider>
                 <Route path="/" render={(props) => (
                     <nav className="cont--nav">
                         <Nav {...props} />
                     </nav>)} />
-
-                <PostProvider>
                     <CategoryProvider>
                         <Route exact path="/new_post" render={
                             props => <PostForm {...props} />
@@ -63,6 +61,18 @@ export const ApplicationViews = (props) => {
                                                 <CategoryButtonList
                                                     {...props} />
                                     </div>
+                                        </div>
+                                        <div className="bottom-spacer"></div>
+                                    </div>
+                                </>
+                            )} />
+
+                            <Route exact path="/posts?user_id=:userId(\d+)" render={(props) => (
+                                <>
+                                    <div className="main-wrap">
+                                        <div className="top-spacer"></div>
+                                        <div className="mid-section">
+                                            <UserPostList {...props}/>
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>

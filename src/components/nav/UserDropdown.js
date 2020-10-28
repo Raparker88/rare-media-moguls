@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { PostContext } from "../posts/PostProvider"
 import "./Nav.css";
 
 export const UserDropdown = (props) => {
+    const { getPostsByUser } = useContext(PostContext)
+
     const handleLogout = () => {
         localStorage.clear();
     };
@@ -24,7 +27,9 @@ export const UserDropdown = (props) => {
                 className="link nav__link dropdown-link"
                 to={{pathname: `/posts?user_id=${props.currentUserId}`}}
                 onClick={() => {
-                    props.toggleOpen();
+                    console.log(props.currentUserId)
+                    props.toggleOpen()
+                    getPostsByUser()
                 }}>
                     my posts
                 </Link>

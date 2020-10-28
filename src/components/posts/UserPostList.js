@@ -1,0 +1,28 @@
+import React, { useContext, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { PostContext } from "./PostProvider"
+
+export const UserPostList = (props) => {
+    const { posts } = useContext(PostContext)
+    
+    return (
+        <>
+        <h2>Posts</h2>
+        <Link to={{pathname:`new_post`}}>
+        create post
+        </Link>
+        {
+            posts !== [] ? posts.map(p => {
+                return <div key={p.id}>
+                    <Link to={{pathname:`/posts/${p.id}`}}>
+                    <p>{p.title}</p>
+                    </Link>
+                    <p>{p.user.display_name}</p>
+                    <p>Posted in {p.category.category}</p>
+                    <p>{new Date(p.publication_date).toDateString()}</p>
+                </div>
+            }) : null
+        }
+        </>
+    )
+}
