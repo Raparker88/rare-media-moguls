@@ -17,7 +17,6 @@ import { CommentProvider } from "./comments/CommentProvider";
 import { UserPostList } from "./posts/UserPostList"
 
 export const ApplicationViews = (props) => {
-
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
@@ -67,12 +66,13 @@ export const ApplicationViews = (props) => {
                                 </>
                             )} />
 
-                            <Route exact path="/posts?user_id=:userId(\d+)" render={(props) => (
+                            <Route path="/posts/user/:userId(\d+)" render={(props) => (
                                 <>
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
-                                            <UserPostList {...props}/>
+                                            <UserPostList
+                                            {...props}/>
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>

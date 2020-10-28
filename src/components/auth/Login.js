@@ -28,7 +28,7 @@ export const Login = (props) => {
                     invalidDialog.current.showModal()
                 } else {
                     invalidDialog.current.showModal()
-                }            
+                }
             })
     }
 

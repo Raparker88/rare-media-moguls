@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostContext } from "../posts/PostProvider"
 import "./Nav.css";
 
 export const UserDropdown = (props) => {
-    const { getPostsByUser } = useContext(PostContext)
-
     const handleLogout = () => {
         localStorage.clear();
     };
+    const { getPostsByUser } = useContext(PostContext)
+
+    const [currentUserId, setCurrentUserId] = useState(0)
+    
+    useEffect(()=>{
+        const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+        setCurrentUserId(currentUserId)
+    }, [])
 
     return (
         <>
@@ -22,17 +28,16 @@ export const UserDropdown = (props) => {
                 }}>
                     create post
                 </Link>
-                <Link
+                <span
                 title="Review Your Posts"
                 className="link nav__link dropdown-link"
-                to={{pathname: `/posts?user_id=${props.currentUserId}`}}
                 onClick={() => {
-                    console.log(props.currentUserId)
                     props.toggleOpen()
-                    getPostsByUser()
+                    getPostsByUser(currentUserId)
+                    .then(props.history.push(`/posts/user/${currentUserId}`))
                 }}>
                     my posts
-                </Link>
+                </span>
                 <Link
                 title="Manage Categories"
                 className="link nav__link dropdown-link"
