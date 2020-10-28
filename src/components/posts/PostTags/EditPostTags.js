@@ -12,10 +12,6 @@ export const EditPostTags = (props) => {
     const newPostTag = {
         "post_id": postId,
         "tag_id": tagId,
-        "tag": {
-            "id": tagId,
-            "tag": tagName
-        }
     }
 
     useEffect(() => {
