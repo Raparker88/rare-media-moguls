@@ -14,10 +14,9 @@ import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
-import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
+import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { CommentForm } from "./comments/CommentForm"
 import { UserPostList } from "./posts/UserPostList"
-import { PostTagProvider } from "./PostTags/PostTagProvider"
 
 export const ApplicationViews = (props) => {
     return (
@@ -41,18 +40,6 @@ export const ApplicationViews = (props) => {
                     </PostProvider>
                 </PostTagProvider>
             </TagProvider>
-
-                <PostProvider>
-
-                    <CategoryProvider>
-                        <Route exact path="/new_post" render={
-                            props => <PostForm {...props} />
-                        } />
-                        <Route exact path="/posts/edit/:postId(\d+)" render={
-                            props => <PostForm {...props} />
-                        } />
-                    </CategoryProvider>
-                </PostProvider>
 
                 <CategoryProvider>
                     <Route exact path="/categories/create" render={(props) =>

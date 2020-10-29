@@ -193,13 +193,3 @@ code {
 	width: 60px;
 }
 
-/* Icons */
-
-.icon-create:before {
-	content: "🌟";
-}
-
-.icon-send:before {
-	content: "🔓";
-}
-

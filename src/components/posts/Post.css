@@ -33,8 +33,10 @@
     font-weight: 1500 !important;
 }
 .postDetailContainer {
-    width: 45em;
-    margin: auto;
+    /* width: 35em; */
+    flex-basis: 50%;
+    border-right: 1px solid  rgba(197, 197, 197, 0.568);
+
 }
 .dot-dot-dot{
     display: flex;
@@ -63,16 +65,6 @@
 .post-buttons{
     display: flex;
     flex-flow: row nowrap
-}
-.close-btn{
-    /* height: 17px;
-    width: 17px;
-    background-color: black;
-    cursor: pointer;
-    display: flex;
-    align-self: center;
-    justify-self: center;
-    margin-right: 2rem; */
 }
 
 .lowerhalf {
@@ -133,5 +125,41 @@
     text-align: center;
     margin: .5rem;
     font-size: 30px !important;
-    font-weight: 800 !importnat;
+    font-weight: 800 !important;
+}
+.postTagContainer {
+    text-align: center;
+    flex-basis: 30%;
+    margin-right: auto;
+}
+
+.postFlex {
+    display: flex;
+    margin-top: 20px;
+    flex-basis: auto;
+
+}
+.post-tags-container {
+    width: 10em;
+}
+
+.flexLeftSpace {
+    flex-basis: 20%;
+}
+
+.edit-post-tags-bttn {
+    background-color: white;
+    color: black;
+    border: black 1px solid;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.edit-post-tags-bttn:hover {
+    background-color: rgb(141, 106, 17);
+    border: none;
+    color: white;
 }

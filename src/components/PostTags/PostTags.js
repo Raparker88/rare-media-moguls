@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react"
 import { PostTagContext } from "./PostTagProvider"
-import { TagContext } from "../../tags/TagProvider"
+import { TagContext } from "../tags/TagProvider"
 import { CurrentPostTags } from "./CurrentPostTags"
 import { EditPostTags } from "./EditPostTags"
-import { TagContext } from "../tags/TagProvider"
 export const PostTags = ({postId}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const { tags, getTags } = useContext(TagContext)
@@ -12,7 +11,12 @@ export const PostTags = ({postId}) => {
 
     useEffect(() => {
         getPostTagsByPost(postId)
-    }, [postId, postTagIds]);
+
+    }, [postId, tags]);
+
+    useEffect(() => {
+        getTags()
+    },[])
 
     const toggleEdit = () => {
         setIsEditing(!isEditing)
