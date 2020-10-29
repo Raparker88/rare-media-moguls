@@ -28,15 +28,15 @@ export const UserDropdown = (props) => {
                 }}>
                     create post
                 </Link>
-                <span
+                <Link
                 title="Review Your Posts"
                 className="link nav__link dropdown-link"
+                to={`/posts/user/${currentUserId}`}
                 onClick={() => {
                     props.toggleOpen()
-                    props.history.push(`/posts/user/${currentUserId}`)
                 }}>
                     my posts
-                </span>
+                </Link>
                 <Link
                 title="Manage Categories"
                 className="link nav__link dropdown-link"
