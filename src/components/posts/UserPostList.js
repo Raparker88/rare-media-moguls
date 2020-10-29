@@ -12,8 +12,7 @@ export const UserPostList = (props) => {
 
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
-    const [areYouSure, setAreYouSure] = useState(false)
-
+    const [areYouSure, setAreYouSure] = useState(0)
 
     useEffect(()=>{
         getPostsByUser(currentUserId)

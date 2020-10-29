@@ -52,8 +52,10 @@ export const Post = (props) => {
                             props.setAreYouSure(false)}}>
                             nvm
                         </button>
-                        <button className="btn del-sure" onClick={()=>
-                            {props.deletePost(props.selectedPostId).then(()=>{props.history.push(`/posts/user/${props.currentUserId}`)})}}>
+                        <button className="btn del-sure"
+                        // onClick={()=>
+                        //     {props.deletePost(props.selectedPostId).then(()=>{props.history.push(`/posts/user/${props.currentUserId}`)})}}
+                            >
                             yes
                             </button>
                         </>
