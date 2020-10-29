@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 
-
 export const PostContext = React.createContext()
 
 export const PostProvider = (props) => {
@@ -55,12 +54,18 @@ export const PostProvider = (props) => {
             body: JSON.stringify(post)
         })
             .then(getPosts)
+
     }
 
+    const getPostsByUser = (id) => {
+        return fetch(`http://localhost:8000/posts?user_id=${id}`)
+            .then(res => res.json())
+            // .then(setPosts)
+    }
 
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts, getPostsByCategoryId
+            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser
         }}>
             {props.children}
         </PostContext.Provider>

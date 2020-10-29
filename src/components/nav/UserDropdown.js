@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { PostContext } from "../posts/PostProvider"
 import "./Nav.css";
 
-export const UserDropdown = ({ toggleOpen }) => {
+export const UserDropdown = (props) => {
     const handleLogout = () => {
         localStorage.clear();
     };
+    const { getPostsByUser } = useContext(PostContext)
+
+    const [currentUserId, setCurrentUserId] = useState(0)
+
+    useEffect(()=>{
+        const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+        setCurrentUserId(currentUserId)
+    }, [])
+
     return (
         <>
             <div className="dropdown-wrapper">
@@ -14,16 +24,16 @@ export const UserDropdown = ({ toggleOpen }) => {
                 className="link nav__link dropdown-link"
                 to="/new_post"
                 onClick={() => {
-                    toggleOpen();
+                    props.toggleOpen();
                 }}>
                     create post
                 </Link>
                 <Link
                 title="Review Your Posts"
                 className="link nav__link dropdown-link"
-                to="/user_posts"
+                to={`/posts/user/${currentUserId}`}
                 onClick={() => {
-                    toggleOpen();
+                    props.toggleOpen()
                 }}>
                     my posts
                 </Link>
@@ -32,7 +42,7 @@ export const UserDropdown = ({ toggleOpen }) => {
                 className="link nav__link dropdown-link"
                 to="/categories"
                 onClick={() => {
-                    toggleOpen();
+                    props.toggleOpen();
                 }}>
                     category management
                 </Link>
@@ -41,7 +51,7 @@ export const UserDropdown = ({ toggleOpen }) => {
                 className="link nav__link dropdown-link"
                 to="/tags"
                 onClick={() => {
-                    toggleOpen();
+                    props.toggleOpen();
                 }}>
                     tag management
                 </Link>

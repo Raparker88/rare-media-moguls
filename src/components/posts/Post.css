@@ -6,6 +6,10 @@
 
 .mainPostContainer {
     margin-left: 10em;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-content: center;
 }
 
 .postLink {
@@ -21,12 +25,70 @@
     width: 45em;
     margin: auto;
 }
-
+.post-title,
+.are-u-sure {
+    cursor: pointer;
+    font-size: 25px;
+    text-align: left;
+    font-weight: 1500 !important;
+}
 .postDetailContainer {
     /* width: 35em; */
     flex-basis: 50%;
     border-right: 1px solid  rgba(197, 197, 197, 0.568);
-    
+
+}
+.dot-dot-dot{
+    display: flex;
+    align-self: center;
+    cursor: pointer;
+}
+.dot-w {
+    height: 7px;
+    width: 7px;
+    margin: 3px;
+    border-radius: 25rem;
+    background-color: white;
+}
+.lowerhalf-right {
+    width: 30%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-self: center;
+    justify-content: flex-end;
+}
+.lowerhalf-left{
+    width: 70%;
+    display: flex;
+    align-self: center;
+}
+.post-buttons{
+    display: flex;
+    flex-flow: row nowrap
+}
+
+.lowerhalf {
+    width: 100%;
+    display: flex;
+    margin-top: .25rem;
+
+}
+.dot {
+    height: 7px;
+    width: 7px;
+    margin: 3px;
+    border-radius: 25rem;
+    background-color: black;
+}
+.dot-div {
+    height: 5px;
+    width: 5px;
+    margin: 0px 20px;
+    border-radius: 25rem;
+    background-color: black;
+    display: flex;
+    align-self: center;
+
 }
 
 .author_date_container {
@@ -37,6 +99,34 @@
     margin-right: 15px;
 }
 
+.posted-in {
+    display: flex;
+}
+
+.post-item {
+    border: 1px solid black;
+    margin: .5rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column;
+}
+
+.cat-on-post{
+    font-weight: 1000 !important;
+    font-family: "Comfortaa";
+    margin-left: .35rem;
+}
+
+.newPostbtn {
+    margin: .5rem;
+}
+
+.my-posts-heading {
+    text-align: center;
+    margin: .5rem;
+    font-size: 30px !important;
+    font-weight: 800 !important;
+}
 .postTagContainer {
     text-align: center;
     flex-basis: 30%;
@@ -47,7 +137,7 @@
     display: flex;
     margin-top: 20px;
     flex-basis: auto;
-    
+
 }
 .post-tags-container {
     width: 10em;
@@ -65,7 +155,7 @@
     cursor: pointer;
     padding: 10px;
     font-size: 16px;
-    border-radius: 6px; 
+    border-radius: 6px;
 }
 
 .edit-post-tags-bttn:hover {

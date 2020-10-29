@@ -14,22 +14,21 @@ import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
-import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
+import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { CommentForm } from "./comments/CommentForm"
-
-
-
+import { UserPostList } from "./posts/UserPostList"
 
 export const ApplicationViews = (props) => {
-
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
+            <PostProvider>
+                <Route path="/" render={(props) => (
 
-            <Route path="/" render={(props) => (
-                    <nav className="cont--nav">
-                        <Nav {...props} />
-                    </nav>)} />
+                <nav className="cont--nav">
+                    <Nav {...props} />
+                </nav>)} />
+            </PostProvider>
 
 
             <TagProvider>
@@ -70,6 +69,19 @@ export const ApplicationViews = (props) => {
                                                 <CategoryButtonList
                                                     {...props} />
                                             </div>
+                                        </div>
+                                        <div className="bottom-spacer"></div>
+                                    </div>
+                                </>
+                            )} />
+
+                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
+                                <>
+                                    <div className="main-wrap">
+                                        <div className="top-spacer"></div>
+                                        <div className="mid-section">
+                                            <UserPostList
+                                            {...props}/>
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>
