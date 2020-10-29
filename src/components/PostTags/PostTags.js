@@ -3,7 +3,7 @@ import { PostTagContext } from "./PostTagProvider"
 import { TagContext } from "../../tags/TagProvider"
 import { CurrentPostTags } from "./CurrentPostTags"
 import { EditPostTags } from "./EditPostTags"
-
+import { TagContext } from "../tags/TagProvider"
 export const PostTags = ({postId}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const { tags, getTags } = useContext(TagContext)
@@ -23,17 +23,17 @@ export const PostTags = ({postId}) => {
         <div className="post-tags-container">
             <h3 className="post-tags-header">TAGGED AS</h3>
             <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button>
-            {isEditing ? 
+            {isEditing ?
                     (
                     tags.map(tag => {
                     return <EditPostTags tag={tag} postTagIds={postTagIds} postId={postId} postTags={postTags} key={tag.id} />
                     })
-                ) 
+                )
                 :   (
                     postTags.map(singlePostTag => {
                     return <CurrentPostTags singlePostTag={singlePostTag} key={singlePostTag.id} />
                     })
-                ) 
+                )
             }
         </div>
     )

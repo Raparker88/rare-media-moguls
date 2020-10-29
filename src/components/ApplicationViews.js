@@ -17,6 +17,7 @@ import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./posts/PostTags/PostTagProvider"
 import { CommentForm } from "./comments/CommentForm"
 import { UserPostList } from "./posts/UserPostList"
+import { PostTagProvider } from "./PostTags/PostTagProvider"
 
 export const ApplicationViews = (props) => {
     return (
