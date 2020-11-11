@@ -1,11 +1,15 @@
 import React, { useContext, useState, useEffect, useRef } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
+import { TagContext } from "../tags/TagProvider"
+import { TagBoxes } from "../tags/TagCheckbox"
 
 export const PostForm = (props) => {
 
     const { posts, getPosts, addPost, updatePost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
+    const { tags, getTags } = useContext(TagContext)
+    const [ selectedTags, setTags ] = useState([])
 
     const [post, setPost] = useState({})
 
@@ -28,6 +32,7 @@ export const PostForm = (props) => {
     useEffect(() => {
         getPosts()
         getCategories()
+        getTags()
     }, [])
 
     useEffect(() => {
@@ -106,6 +111,11 @@ export const PostForm = (props) => {
                     </textarea>
                 </div>
             </fieldset>
+
+            <div className="tag-container">
+                {tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags}/>)}
+            </div>
+            
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
