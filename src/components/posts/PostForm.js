@@ -100,7 +100,7 @@ export const PostForm = (props) => {
                             proptype=""
                             value={post.category_id}
                             onChange={handleControlledInputChange}>
-                            <option value="0">{post.category_id}</option>
+                            <option value="0">Choose a category...</option>
                             {categories.map(c => (
                                 <option key={c.id} value={c.id}>
                                     {c.label}
