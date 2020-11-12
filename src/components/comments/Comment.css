@@ -1,6 +1,16 @@
 .new_comment_form {
     width: 45em;
     margin: auto;
+    margin-bottom: 20px;
+}
+
+.comment-content-input {
+    min-height: 100px;
+    margin-top: 10px;
+}
+
+.comment_submit_btn {
+    margin-top: 10px;
 }
 
 .commentContainer {

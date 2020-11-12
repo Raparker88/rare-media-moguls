@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { PostContext } from "../posts/PostProvider"
 import { Comment } from "./Comment"
 import { CommentContext } from "./CommentProvider"
+import { CommentForm } from './CommentForm'
 import "./Comment.css"
 
 export const CommentsListByPost = (props) => {
@@ -42,6 +43,7 @@ export const CommentsListByPost = (props) => {
                 }}>Back to Post</button>
 
             <h2>{post.title}</h2>
+            <CommentForm getCommentsForPost={getCommentsForPost} postId={postId}/>
             <div className="comments">
                 {
                     postComments.map(comment => {
