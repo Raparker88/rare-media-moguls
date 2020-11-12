@@ -13,19 +13,14 @@ git checkout mp-create-post
 ```
 npm start
 ```
-3. Open a new Terminal tab (⌘T) and navigate to the server directory.
-```
-..
-server
-```
-4. Initialize virtual environment, and run the server.
+3. Initialize virtual environment, and run the server.
 ```
 pipenv shell
-watchgod request_handler.main
+python manage.py server
 ```
-5. Test app functionality.
+4. Test app functionality.
 > When user clicks on `New Post`, they should be redirected to a the PostForm page
 > When user enters information into the form fields and clicks `Save`, the post database should be updated with new post object and user should be redirected to the PostDetails page to view the post they just created.
-6. View code file.
+5. View code file.
 > Confirm file modifications are present as indicated above.
 > Confirm no unused code or extraneous comments exist.
