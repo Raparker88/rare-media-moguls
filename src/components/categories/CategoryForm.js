@@ -1,32 +1,54 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useState, useEffect} from "react"
 import { CategoryContext } from "./CategoryProvider"
 import "./Category.css"
 
 export const CategoryForm = (props) => {
-    const {addCategory} = useContext(CategoryContext)
+    const {addCategory, updateCategory, getCategories, categories} = useContext(CategoryContext)
 
     const [currentCategory, setCategory] = useState({
         label: ""
     })
 
+    const editMode = props.match.params.hasOwnProperty("categoryId")
+
     const handleControlledInputChange = (event) => {
         const newCategory = Object.assign({}, currentCategory)
-        newCategory[event.target.name] = event.target.value
+        newCategory[event.target.label] = event.target.value
         setCategory(newCategory)
     }
 
-    const constructNewCategory = () => {
-        const category ={
-            label: currentCategory.label
+    const getCategoryEdit = () => {
+        if(editMode) {
+            const categoryId = parseInt(props.match.params.categoryId)
+            const selectedCategory = categories.find(c => c.id === categoryId) || {}
+            setCategory(selectedCategory)
         }
+    }
+
+    useEffect(() => {
+        getCategories()
+    }, [])
+
+    useEffect(() => {
+        getCategoryEdit()
+    }, [categories])
+
+    const constructNewCategory = () => {
+        if (editMode) {
+            updateCategory({
+                label: currentCategory.label
+            })
+                .then(() => props.history.push("/categories"))
+        } else {
+        const category = {label: currentCategory.label}
         addCategory(category)
         .then(()=> props.history.push("/categories"))
-    }
+    }}
 
     return (
         <form className="form categoryForm">
             <h2 className="categoryForm_title">
-                Add New Category
+            {editMode ? "Update Category" : "Add New Category"}
             </h2>
             <fieldset>
                 <div className="form-group">
@@ -41,7 +63,6 @@ export const CategoryForm = (props) => {
             <button type="submit" className="btn saveCategoryButton" onClick= {evt => {
                 evt.preventDefault()
                 constructNewCategory()
-            }}>Save</button>
+            }}>{editMode ? "Save Update" : "Save New Category"}</button>
         </form>
-    )
-}
+    )}
