@@ -61,13 +61,12 @@ export const ApplicationViews = (props) => {
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
                                             <div className="left-main">
-                                                <PostList {...props}></PostList>
+                                                {/* <PostList {...props}></PostList> */}
 
                                             </div>
                                             <div className="divider"></div>
                                             <div className="right-main">
-                                                <CategoryButtonList
-                                                    {...props} />
+                                                <CategoryButtonList {...props} />
                                             </div>
                                         </div>
                                         <div className="bottom-spacer"></div>

@@ -25,10 +25,10 @@ export const Post = (props) => {
             </div>
             <div className="lowerhalf">
                 <div className="lowerhalf-left">
-                    <div>{props.post.user.display_name}</div>
+                    <div>{props.post.rareuser.username}</div>
                     <div className="posted-in">
                     <div>Posted in </div>
-                        <div className="cat-on-post">{props.post.category.category}</div>
+                        <div className="cat-on-post">{props.post.category.label}</div>
                     </div>
                     <div className="dot-div"></div>
                     <div>{new Date(props.post.publication_date).toDateString({})}</div>
