@@ -1,11 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export const TagBoxes = (props) => {
     const [checked, setChecked] = useState(false)
     
     const tag = props.tag
     const selectedTags = props.selectedTags
+    const postTags = props.postTags
    
+    useEffect(() => {
+        let postTag = postTags.find(pt => pt.tag_id === tag.id)
+        if(postTag){
+            setChecked(true)
+        }
+    }, [props.postTags])
 
     const checkboxHandler = () => {
         if (checked) {

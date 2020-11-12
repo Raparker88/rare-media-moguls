@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
+import { PostTagContext } from "../PostTags/PostTagProvider"
 import { TagContext } from "../tags/TagProvider"
 import { TagBoxes } from "../tags/TagCheckbox"
 
@@ -9,6 +10,7 @@ export const PostForm = (props) => {
     const { posts, getPosts, addPost, updatePost, getLastPost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
     const { tags, getTags } = useContext(TagContext)
+    const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const [ selectedTags, setTags ] = useState([])
 
     const [post, setPost] = useState({})
@@ -26,6 +28,7 @@ export const PostForm = (props) => {
             const postId = parseInt(props.match.params.postId)
             const selectedPost = posts.find(p => p.id === postId) || {}
             setPost(selectedPost)
+            getPostTagsByPost()
         }
     }
 
@@ -113,7 +116,7 @@ export const PostForm = (props) => {
             </fieldset>
 
             <div className="tag-container">
-                {tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags}/>)}
+                {tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags}/>)}
             </div>
             
             <button type="submit"
