@@ -57,7 +57,6 @@ export const UserPostList = (props) => {
                                 deletePost={deletePost}
                                 setAreYouSure={setAreYouSure}
                                 areYouSure={areYouSure}
-                                // currentUserId={currentUserId}
                                 {...props} />
                         })
                     : null
