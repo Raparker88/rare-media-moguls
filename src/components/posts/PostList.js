@@ -25,13 +25,13 @@ export const PostList = (props) => {
                 posts !== [] ? posts.map(p => {
                     return <div key={p.id}>
                         <div className="post-author">
-                            <p>{p.user.display_name}</p>
+                            <p>{p.rareuser.full_name}</p>
                             <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
                         </div>
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <b>{p.category.category}</b></p>
+                        <p>Posted in <b>{p.category.label}</b></p>
                     </div>
                 }) : null
             }

@@ -6,7 +6,6 @@ import { PostProvider } from "./posts/PostProvider";
 import { CategoryProvider } from "./categories/CategoryProvider";
 import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList";
-import { CategoryButtonList } from "./categories/CategoryButtonList";
 import { CategoryForm } from "./categories/CategoryForm";
 import { TagProvider } from "./tags/TagProvider";
 import { CategoriesList } from "./categories/CategoriesList"
@@ -61,12 +60,7 @@ export const ApplicationViews = (props) => {
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
                                             <div className="left-main">
-                                                {/* <PostList {...props}></PostList> */}
-
-                                            </div>
-                                            <div className="divider"></div>
-                                            <div className="right-main">
-                                                <CategoryButtonList {...props} />
+                                                <PostList {...props}></PostList>
                                             </div>
                                         </div>
                                         <div className="bottom-spacer"></div>
@@ -74,8 +68,7 @@ export const ApplicationViews = (props) => {
                                 </>
                             )} />
 
-                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
-                                <>
+                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (                              
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
@@ -83,8 +76,7 @@ export const ApplicationViews = (props) => {
                                             {...props}/>
                                         </div>
                                         <div className="bottom-spacer"></div>
-                                    </div>
-                                </>
+                                    </div>                               
                             )} />
                         </>
                     </PostProvider>
