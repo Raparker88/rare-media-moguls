@@ -24,6 +24,7 @@ export const CommentEditForm = (props) => {
                 created_on: props.comment.created_on,
             }
             updateComment(props.comment.id,  newCommentObject)
+                .then(props.getCommentsForPost)
         }else{
             window.alert("please fill in all fields")
         }
@@ -53,8 +54,6 @@ export const CommentEditForm = (props) => {
             </form>
                 <button className="button--deleteDialog btn"
                     onClick={e => {
-                        updateComment(props.comment.id, editedComment)
-                            .then(props.getCommentsForPost)
                         constructNewComment()
                         props.editCommentDialog.current.close()
                     }}>Save</button>
