@@ -11,7 +11,7 @@ export const PostForm = (props) => {
     const { categories, getCategories } = useContext(CategoryContext)
     const { tags, getTags } = useContext(TagContext)
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
-    const [ selectedTags, setTags ] = useState([])
+    const [selectedTags, setTags] = useState([])
     const [post, setPost] = useState({})
 
 
@@ -24,13 +24,13 @@ export const PostForm = (props) => {
     }
 
     const getPostInEditMode = () => {
-        if(editMode) {
+        if (editMode) {
             const postId = parseInt(props.match.params.postId)
             const selectedPost = posts.find(p => p.id === postId) || {}
             setPost(selectedPost)
-           if(selectedPost.id > 0) {
-            getPostTagsByPost(selectedPost.id)
-           }
+            if (selectedPost.id > 0) {
+                getPostTagsByPost(selectedPost.id)
+            }
         }
     }
 
@@ -45,37 +45,37 @@ export const PostForm = (props) => {
     }, [posts])
 
     const constructNewPost = () => {
-        if(post.title && post.category_id && post.content){
-            if(editMode) {
-                  updatePost({
-                      id: post.id,
-                      title: post.title,
-                      content: post.content,
-                      category_id: parseInt(post.category_id),
-                      publication_date: post.publication_date,
-                      image_url: "",
-                      selected_tags: []
-                  }).then(() => {
-                      props.history.push(`/posts/${post.id}`)
-                  })
-            } else{
-            const newPostObject = {
-                title: post.title,
-                content: post.content,
-                category_id: parseInt(post.category_id),
-                publication_date: new Date(Date.now()).toISOString().split('T')[0],
-                image_url: "",
-                selected_tags: selectedTags
-
-            }
-            addPost(newPostObject)
-                .then(resId => {
-                    props.history.push(`/posts/${resId}`)
+        if (post.title && post.category_id && post.content) {
+            if (editMode) {
+                updatePost({
+                    id: post.id,
+                    title: post.title,
+                    content: post.content,
+                    category_id: parseInt(post.category_id),
+                    publication_date: post.publication_date,
+                    image_url: "",
+                    selected_tags: []
+                }).then(() => {
+                    props.history.push(`/posts/${post.id}`)
                 })
+            } else {
+                const newPostObject = {
+                    title: post.title,
+                    content: post.content,
+                    category_id: parseInt(post.category_id),
+                    publication_date: new Date(Date.now()).toISOString().split('T')[0],
+                    image_url: "",
+                    selected_tags: selectedTags
+
+                }
+                addPost(newPostObject)
+                    .then(resId => {
+                        props.history.push(`/posts/${resId}`)
+                    })
             }
-        }else{
+        } else {
             window.alert("please fill in all fields")
-        } 
+        }
 
     }
     return (
@@ -96,18 +96,17 @@ export const PostForm = (props) => {
             <fieldset>
                 <div className="form-div">
                     <label htmlFor="category_id">Post Category: </label>
-                    <select name="category_id" className="form-control" id="post"
-                        proptype=""
-                        value={post.category_id}
-                        onChange={handleControlledInputChange}>
-
-                        <option value="0">Select a category</option>
-                        {categories.map(c => (
-                            <option key={c.id} value={c.id}>
-                                {c.label}
-                            </option>
-                        ))}
-                    </select>
+                        <select name="category_id" className="form-control" id="post"
+                            proptype=""
+                            value={post.category_id}
+                            onChange={handleControlledInputChange}>
+                            <option value="0">{post.category_id}</option>
+                            {categories.map(c => (
+                                <option key={c.id} value={c.id}>
+                                    {c.label}
+                                </option>
+                            ))}
+                        </select>
                 </div>
             </fieldset>
             <fieldset>
@@ -123,22 +122,22 @@ export const PostForm = (props) => {
             </fieldset>
 
             <div className="tag-container">
-            {
-                tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags} post={post} editMode={editMode} {...props} />)
-            }
-                
+                {
+                    tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags} post={post} editMode={editMode} {...props} />)
+                }
+
             </div>
-            
+
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
                     constructNewPost()
-                        
+
                 }}
                 className="btn post_submit_btn">
                 Save Post
             </button>
 
-        </form>
+        </form >
     )
 }
