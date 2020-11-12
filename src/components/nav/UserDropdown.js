@@ -12,7 +12,7 @@ export const UserDropdown = (props) => {
     const [currentUserId, setCurrentUserId] = useState(0)
 
     useEffect(()=>{
-        const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+        const currentUserId = localStorage.getItem('rare_token')
         setCurrentUserId(currentUserId)
     }, [])
 
