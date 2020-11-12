@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react"
+import React, { useContext, useState } from "react"
 import { CommentContext } from "./CommentProvider"
 import "./Comment.css"
 
@@ -52,8 +52,8 @@ export const CommentForm = (props) => {
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
+                    setComment({})
                     constructNewComment()
-                        
                 }}
                 className="btn comment_submit_btn">
                 Save Comment
