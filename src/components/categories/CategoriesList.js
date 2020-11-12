@@ -20,7 +20,7 @@ export const CategoriesList = (props) => {
                     {categories.map(c => {
                         return <Category
                         key={c.id}
-                        category={c}
+                        category={c.label}
                         {...props} />
                         }).reverse()
                     }
