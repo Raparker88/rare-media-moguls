@@ -1,80 +1,61 @@
-import React, { useContext, useState, useEffect, useRef } from "react"
+import React, { useContext, useState } from "react"
 import { TagContext } from "./TagProvider"
 
-import "./Tag.css"
 
 export const TagForm = (props) => {
-//REFS
-    const tagName = useRef(null)
-//CONTEXT
-    const { createTag, getTags, tags } = useContext(TagContext)
-//EFFECT
-    useEffect(()=>{
-        if(!props.isHidden){
-            tagName.current.focus()
-        }
-    }, [props.isHidden])
+    const { createTag } = useContext(TagContext)
 
-    useEffect(()=>{
-        setTagNameValue("")
-        props.setIsHidden(true)
-        tagName.current.blur()
-    }, [tags])
-
-//STATE
-    const [tagNameValue, setTagNameValue] = useState("")
     const [tag, setTag] = useState({})
-//HANDLE
 
-    const handleTagNameKeyPress = (e) => {
-        if(e.key === "Enter"){
-            constructNewTag()
-        }
-        else {
-            return
-        }
-    }
-
-    const handleControlledInputChange = (e) => {
+    const handleControlledInputChange = (eve) => {
         const newTag = Object.assign({}, tag)
-        newTag[e.target.name] = e.target.value
+        newTag[eve.target.name] = eve.target.value
         setTag(newTag)
     }
 
     const constructNewTag = () => {
-        if( tagName.current.value === ""){
-            alert("Add a title to your reminder.")
-        }
-        else {
-            {createTag({
-                tag: tag.tagName
+        if(tag.label){
+            
+            const newTagObject = {
+               label: tag.label
+            }
+            createTag(newTagObject)
+            .then(()=> {
+                const newTag = {}
+                setTag(newTag)
             })
-            .then(getTags)}
-        }
-    }
+                
+        }else{
+            window.alert("please provide a tag label")
+        } 
 
-    const handleBlur = () => {
-        if (tagName.current.value === "") {
-            props.setIsHidden(true)
-        }
-        else {
-            props.setIsHidden(false)
-        }
-    }
-
-    const tagNameChange = (e)=>{
-        setTagNameValue(e.target.value)
     }
 
     return (
-        <>
-        <input ref={tagName} value={tagNameValue} placeholder="add a new tag..." name="tagName" className={`tag-input ${props.isHidden ? "hide" : "show"}`} onChange={(e)=> {
-            tagNameChange(e)
-            handleControlledInputChange(e)}}
-            onBlur={()=>{handleBlur()}}
-            onKeyPress={(e) => {
-                handleTagNameKeyPress(e)
-                }}/>
-        </>
+
+        <form className="form new_tag_form" id="tagForm">
+            <h2 className="tagForm_label">Create a New Tag</h2>
+            <fieldset>
+                <div className="form-div">
+                    <input type="text" name="label" required className="form-control" id="label"
+                        proptype="varchar"
+                        placeholder="tag"
+                        defaultValue={tag.label}
+                        onChange={handleControlledInputChange}>
+                    </input>
+                </div>
+            </fieldset>
+            <button type="submit"
+                onClick={evt => {
+                    evt.preventDefault()
+                    constructNewTag()
+                        
+                }}
+                className="btn post_submit_btn">
+                Save Tag
+            </button>
+
+        </form>
     )
+
 }
