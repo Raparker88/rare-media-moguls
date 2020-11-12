@@ -6,7 +6,6 @@ export const EditTagForm = (props) => {
     const { updateTag, getTags } = useContext(TagContext)
 
     const [tag, setTag] = useState({})
-    console.log(props.tagToBeEdited, "tag to be edited")
 
     const handleControlledInputChange = (e) => {
         const newTag = Object.assign({}, tag)
@@ -48,6 +47,15 @@ export const EditTagForm = (props) => {
                 }}
                 className="btn post_submit_btn">
                 Save Tag
+            </button>
+            <button type="button"
+                className="btn cancel"
+                onClick={e => {
+                    e.preventDefault()
+                    props.setEditMode(false)
+                    props.setTagToBeEdited({})
+                }}>
+                    Cancel
             </button>
 
         </form>
