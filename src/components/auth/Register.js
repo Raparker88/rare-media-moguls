@@ -3,11 +3,13 @@ import { Link } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
-    const firstName = useRef()
-    const lastName = useRef()
+    const first_name = useRef()
+    const last_name = useRef()
     const email = useRef()
-    const displayName = useRef()
+    const username = useRef()
     const password = useRef()
+    const profile_image_url = useRef()
+    const bio = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
 
@@ -16,15 +18,15 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "first_name": firstName.current.value,
-                "last_name": lastName.current.value,
-                "display_name": displayName.current.value,
+                "first_name": first_name.current.value,
+                "last_name": last_name.current.value,
+                "username": username.current.value,
                 "email": email.current.value,
                 "password": password.current.value,
-                "timestamp": Date.now(),
-                "admin": true
+                "profile_image_url": profile_image_url.current.value,
+                "bio": bio.current.value,
             }
-            return fetch("http://127.0.0.1:8000/register", {
+            return fetch("http://localhost:8000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -32,12 +34,13 @@ export const Register = (props) => {
                 },
                 body: JSON.stringify(newUser)
             })
-                .then(res => res.json())
                 .then(res => {
-                    if ("valid" in res && res.valid) {
-                        localStorage.setItem("rare_user_id", res.token)
-                        props.history.push("/login")
-                    }
+                    console.log(res, "RESPONSE")
+                    return res.json()})
+                .then(res => {
+                        localStorage.setItem("rare_user_id", res.user_id)
+                        localStorage.setItem("rare_token", res.token)
+                        props.history.push("/")
                 })
         } else {
             passwordDialog.current.showModal()
@@ -55,16 +58,28 @@ export const Register = (props) => {
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
                 <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
+                    <label htmlFor="first_name"> First Name </label>
+                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="Ryan" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
+                    <label htmlFor="last_name"> Last Name </label>
+                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Mogul" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
+                    <input ref={email} type="email" name="email" className="form-control" placeholder="media@mogul.com" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="username"> Username </label>
+                    <input ref={username} name="username" className="form-control" placeholder="raremogul426" />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="bio"> Bio </label>
+                    <input ref={bio} name="bio" className="form-control" placeholder="A little bit about me..." />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="profile_image_url"> Profile Image </label>
+                    <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="URL" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
@@ -73,10 +88,6 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Choose a Display Name </label>
-                    <input ref={displayName} name="display" className="form-control" placeholder="Create a display name.." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
