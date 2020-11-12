@@ -26,15 +26,6 @@ export const PostProvider = (props) => {
             .then(res => res.json())
     }
 
-    // const getLastPost = () => {
-    //     return fetch(`http://localhost:8000/latest_post`, {
-    //         headers: {
-    //             "Authorization": `Token ${localStorage.getItem("rare_token")}`,
-    //             "Content-Type": "application/json"
-    //         }
-    //     })
-    //         .then(res => res.json())
-    // }
 
     const addPost = post => {
         return fetch("http://localhost:8000/posts", {
