@@ -30,6 +30,10 @@ export const EditTagForm = (props) => {
     return (
 
         <form className="form change_tag_form" id="editTagForm">
+            <div className="toprow">
+                <div className="toprowblank"></div>
+                <span className="x">X</span>
+            </div>
             <h2 className="tagForm_label">Edit this tag</h2>
             <fieldset>
                 <div className="form-div">
