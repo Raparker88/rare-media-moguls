@@ -22,3 +22,12 @@
     margin-left: 7%;
     flex-flow: nowrap;
 }
+
+.comment_subject {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.comment_date {
+    font-style: italic;
+}
