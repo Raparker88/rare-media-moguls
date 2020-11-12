@@ -61,21 +61,14 @@ export const ApplicationViews = (props) => {
                                         <div className="mid-section">
                                             <div className="left-main">
                                                 <PostList {...props}></PostList>
-
                                             </div>
-                                            {/* <div className="divider"></div>
-                                            <div className="right-main">
-                                                <CategoryButtonList
-                                                    {...props} />
-                                            </div> */}
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>
                                 </>
                             )} />
 
-                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
-                                <>
+                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (                              
                                     <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
@@ -83,8 +76,7 @@ export const ApplicationViews = (props) => {
                                             {...props}/>
                                         </div>
                                         <div className="bottom-spacer"></div>
-                                    </div>
-                                </>
+                                    </div>                               
                             )} />
                         </>
                     </PostProvider>

@@ -7,13 +7,18 @@ export const UserProvider = (props) => {
     const [currentUserId, setCurrentUserId] = useState(null)
 
     const getUsers = () => {
-        return fetch("http://localhost:8000/rareusers")
+        return fetch("http://localhost:8000/users", {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            }
+        })
             .then(res => res.json())
             .then(setUsers)
     }
 
     const addUser = user => {
-        return fetch("http://localhost:8000/rareusers", {
+        return fetch("http://localhost:8000/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
