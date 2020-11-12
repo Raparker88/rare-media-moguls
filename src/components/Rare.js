@@ -8,7 +8,7 @@ import "./Rare.css"
 export const Rare = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
 
                 return (
                     <>
@@ -24,7 +24,7 @@ export const Rare = () => (
         }} />
 
         <Route path="/login" render={(props) => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
                 return <Redirect to="/" />
             } else {
                 return <Login {...props} />
@@ -32,7 +32,7 @@ export const Rare = () => (
         }} />
 
         <Route path="/register" render={(props) => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
                 return <Redirect to="/" />
             }
             else {
