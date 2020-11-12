@@ -8,14 +8,13 @@ import "./Post.css";
 export const UserPostList = (props) => {
     const { getPostsByUser, deletePost } = useContext(PostContext)
     const [posts, setPosts] = useState([])
-    const currentUserId = localStorage.getItem("rare_user_id")
 
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
     const [areYouSure, setAreYouSure] = useState(0)
 
     useEffect(()=>{
-        getPostsByUser(currentUserId)
+        getPostsByUser()
             .then(setPosts)
     }, [])
 
@@ -41,7 +40,7 @@ export const UserPostList = (props) => {
                 <div className="my-posts-heading">My Posts</div>
                 <button className="btn newPostbtn"
                 onClick={()=>{
-                    props.history.push(`new_post`)
+                    props.history.push(`/new_post`)
                 }}>
                     Create New Post
                 </button>
@@ -58,7 +57,7 @@ export const UserPostList = (props) => {
                                 deletePost={deletePost}
                                 setAreYouSure={setAreYouSure}
                                 areYouSure={areYouSure}
-                                currentUserId={currentUserId}
+                                // currentUserId={currentUserId}
                                 {...props} />
                         })
                     : null
