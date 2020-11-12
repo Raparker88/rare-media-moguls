@@ -21,10 +21,15 @@ export const CommentForm = (props) => {
                 subject: comment.subject,
                 content: comment.content,
                 post_id,
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
             }
             addComment(newCommentObject)
                 .then(props.getCommentsForPost)
+                .then(()=> {
+                    const newComment = {}
+                    setComment(newComment)
+                    document.getElementById("commentForm").reset()
+                    document.getElementById("content").value=""
+                })
         }else{
             window.alert("please fill in all fields")
         } 
