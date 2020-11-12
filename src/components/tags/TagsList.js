@@ -14,15 +14,21 @@ export const TagsList = (props) => {
 
     return (
         <>
-            <section className="tags">
+        <div className="tagList-containerFlex">
 
+            <section className="tags">
+                <h2>Tags</h2>
                {
                    tags.map(tag => {
                        return <Tag key={tag.id} tag={tag} {...props} />
                     }).reverse()
                 }
-                <TagForm {...props} />
            </section>
+           <section>
+                <TagForm {...props} />
+
+           </section>
+        </div>
         </> 
     )
 }

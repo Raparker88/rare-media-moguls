@@ -21,6 +21,21 @@
 .tag {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     margin-top: 10px;
 }
+
+.tagList-containerFlex{
+    display: flex;
+    justify-content: space-around;
+}
+
+.new_tag_form{
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+}
+
+
+

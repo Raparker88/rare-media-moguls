@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { TagContext } from "./TagProvider"
-
+import "./Tag.css"
 
 export const TagForm = (props) => {
     const { createTag } = useContext(TagContext)
@@ -23,6 +23,7 @@ export const TagForm = (props) => {
             .then(()=> {
                 const newTag = {}
                 setTag(newTag)
+                document.getElementById("tagForm").reset()
             })
                 
         }else{
@@ -37,7 +38,7 @@ export const TagForm = (props) => {
             <h2 className="tagForm_label">Create a New Tag</h2>
             <fieldset>
                 <div className="form-div">
-                    <input type="text" name="label" required className="form-control" id="label"
+                    <input type="text" name="label" required className="form-control tag-input" id="label"
                         proptype="varchar"
                         placeholder="tag"
                         defaultValue={tag.label}

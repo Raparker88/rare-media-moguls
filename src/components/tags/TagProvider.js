@@ -5,9 +5,10 @@ export const TagProvider = (props) => {
     const [tags, setTags] = useState([])
 
     const getTags = () => {
-        return fetch("http://localhost:8000/tags",{
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+        return fetch("http://localhost:8000/tags", {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
             }
         })
             .then(res => res.json())
@@ -15,9 +16,10 @@ export const TagProvider = (props) => {
     }
 
     const getTagById = (tag_id) => {
-        return fetch(`http://localhost:8000/tags/${tag_id}`,{
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+        return fetch(`http://localhost:8000/tags/${tag_id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
             }
         })
             .then(res => res.json())
@@ -27,8 +29,8 @@ export const TagProvider = (props) => {
         return fetch("http://localhost:8000/tags", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(tag)
         })
@@ -42,8 +44,8 @@ export const TagProvider = (props) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(tag)
         })
@@ -53,9 +55,10 @@ export const TagProvider = (props) => {
     const deleteTag = (tag_id) => {
         return fetch(`http://localhost:8000/tags/${tag_id}`, {
             method: "DELETE",
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
-            },
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            }
         })
             .then(getTags)
     }
