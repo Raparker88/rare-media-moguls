@@ -24,6 +24,7 @@ fieldset {
     width: 8rem;
     display: inline-block;
 }
+
 .form-control::placeholder {
     font-style: italic;
 }
