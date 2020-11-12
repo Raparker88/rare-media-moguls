@@ -35,7 +35,6 @@ export const Register = (props) => {
                 body: JSON.stringify(newUser)
             })
                 .then(res => {
-                    console.log(res, "RESPONSE")
                     return res.json()})
                 .then(res => {
                         localStorage.setItem("rare_token", res.token)
@@ -58,23 +57,23 @@ export const Register = (props) => {
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
                 <fieldset>
                     <label htmlFor="first_name"> First Name </label>
-                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="Ryan" required autoFocus />
+                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="Ex: Ryan" required autoFocus />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="last_name"> Last Name </label>
-                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Mogul" required />
+                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Ex: Mogul" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="media@mogul.com" required />
+                    <input ref={email} type="email" name="email" className="form-control" placeholder="Ex: media@mogul.com" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="username"> Username </label>
-                    <input ref={username} name="username" className="form-control" placeholder="raremogul426" />
+                    <input ref={username} name="username" className="form-control" placeholder="Ex: raremogul426" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Bio </label>
-                    <input ref={bio} name="bio" className="form-control" placeholder="A little bit about me..." />
+                    <input ref={bio} name="bio" className="form-control" placeholder="A little bit about yourself..." />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="profile_image_url"> Profile Image </label>
