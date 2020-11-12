@@ -29,9 +29,19 @@ export const CategoryProvider = (props) => {
         .then(getCategories)
     }
 
+    const deleteCategory = categoryId => {
+        return fetch(`http://localhost:8000/categories/${categoryId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+            }
+        })
+            .then(getCategories)
+    }
+
     return (
         <CategoryContext.Provider value={{
-            categories, getCategories, addCategory, category, setCategory
+            categories, getCategories, addCategory, category, setCategory, deleteCategory
         }}>
             {props.children}
         </CategoryContext.Provider>
