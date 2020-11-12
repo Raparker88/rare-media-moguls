@@ -38,7 +38,6 @@ export const Register = (props) => {
                     console.log(res, "RESPONSE")
                     return res.json()})
                 .then(res => {
-                        localStorage.setItem("rare_user_id", res.user_id)
                         localStorage.setItem("rare_token", res.token)
                         props.history.push("/")
                 })
