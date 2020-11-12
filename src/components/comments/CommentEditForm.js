@@ -15,16 +15,15 @@ export const CommentEditForm = (props) => {
     }
 
     const constructNewComment = () => {
-        const post_id = props.postId
         if(editedComment.subject && editedComment.content){
             const newCommentObject = {
                 subject: editedComment.subject,
                 content: editedComment.content,
-                post_id,
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
+                post_id: props.comment.post.id,
+                user_id: props.comment.author.id,
+                created_on: props.comment.created_on,
             }
             updateComment(props.comment.id,  newCommentObject)
-                .then(props.getCommentsForPost)
         }else{
             window.alert("please fill in all fields")
         }

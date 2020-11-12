@@ -48,7 +48,7 @@ export const Comment = (props) => {
         </dialog>
 
         <dialog className="dialog dialog--editPost" ref={editCommentDialog}>
-            <CommentEditForm comment={props.comment} editCommentDialog={editCommentDialog}/>    
+            <CommentEditForm getCommentsForPost={props.getCommentsForPost} comment={props.comment} editCommentDialog={editCommentDialog}/>    
         </dialog>
 
         <section className="comment">
