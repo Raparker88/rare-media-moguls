@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
 
@@ -42,7 +42,7 @@ export const PostForm = (props) => {
                       title: post.title,
                       content: post.content,
                       category_id: parseInt(post.category_id),
-                      user_id: parseInt(localStorage.getItem("rare_user_id")),
+                      rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
                       publication_date: post.publication_date
                   }).then(() => {
                       props.history.push(`/posts/${post.id}`)
@@ -52,7 +52,7 @@ export const PostForm = (props) => {
                 title: post.title,
                 content: post.content,
                 category_id: parseInt(post.category_id),
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
+                rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
                 publication_date: Date.now()
             }
             addPost(newPostObject)
