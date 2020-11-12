@@ -5,7 +5,7 @@ export const EditPostTags = (props) => {
     const { addPostTag, removePostTag, getPostTagsByPost } = useContext(PostTagContext)
     const [checked, setChecked] = useState(false);
     const tagId = props.tag.id
-    const tagName = props.tag.tag
+    const tagName = props.tag.label
     const postTags = props.postTags
     const postTagIds = props.postTagIds
     const postId = props.postId

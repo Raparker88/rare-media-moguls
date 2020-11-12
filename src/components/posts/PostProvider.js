@@ -26,15 +26,6 @@ export const PostProvider = (props) => {
             .then(res => res.json())
     }
 
-    const getLastPost = () => {
-        return fetch(`http://localhost:8000/latest_post`, {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
-                "Content-Type": "application/json"
-            }
-        })
-            .then(res => res.json())
-    }
 
     const addPost = post => {
         return fetch("http://localhost:8000/posts", {
@@ -45,7 +36,10 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post)
         })
-            .then(getPosts)
+            .then(res => res.json())
+            .then((res) => {
+                getPosts()
+                return res.id})
     }
 
     const deletePost = postId => {
@@ -91,7 +85,7 @@ export const PostProvider = (props) => {
 
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, getLastPost, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser
+            posts, addPost, getPostById, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser
         }}>
             {props.children}
         </PostContext.Provider>
