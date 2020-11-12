@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react"
+import React, { useContext, useState } from "react"
 import { CommentContext } from "./CommentProvider"
 import "./Comment.css"
 
@@ -15,17 +15,21 @@ export const CommentForm = (props) => {
     }
 
     const constructNewComment = () => {
-        const post_id = parseInt(props.match.params.postId)
+        const post_id = props.postId
         if(comment.subject && comment.content){
             const newCommentObject = {
                 subject: comment.subject,
                 content: comment.content,
                 post_id,
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
-                timestamp: Date.now()
             }
             addComment(newCommentObject)
-                .then(props.history.push(`/comments/${post_id}`))
+                .then(props.getCommentsForPost)
+                .then(()=> {
+                    const newComment = {}
+                    setComment(newComment)
+                    document.getElementById("commentForm").reset()
+                    document.getElementById("content").value=""
+                })
         }else{
             window.alert("please fill in all fields")
         } 
@@ -34,44 +38,30 @@ export const CommentForm = (props) => {
     return (
 
         <form className="form new_comment_form" id="commentForm">
-            <h2 className="commentForm_title">New Comment</h2>
-            <fieldset>
                 <div className="form-div">
-                    <label htmlFor="subject">Subject: </label>
                     <input type="text" name="subject" required className="form-control" id="subject"
                         proptype="varchar"
-                        placeholder="subject"
+                        placeholder="New comment subject"
                         defaultValue={comment.subject}
                         onChange={handleControlledInputChange}>
                     </input>
                 </div>
-            </fieldset>
-            <fieldset>
                 <div className="form-div">
-                    <label htmlFor="content">Comment: </label>
-                    <textarea type="text" name="content" required className="form-control" id="content"
+                    <textarea type="text" name="content" required className="form-control comment-content-input" id="content"
                         proptype="varchar"
                         placeholder="What are your thoughts?"
                         defaultValue={comment.content}
                         onChange={handleControlledInputChange}>
                     </textarea>
                 </div>
-            </fieldset>
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
+                    setComment({})
                     constructNewComment()
-                        
                 }}
                 className="btn comment_submit_btn">
-                Save 
-            </button>
-            <button 
-                onClick={evt => {
-                    props.history.push(`/posts/${parseInt(props.match.params.postId)}`)
-                }}
-                className="btn cancel_btn">
-                Back To Post 
+                Save Comment
             </button>
 
         </form>
