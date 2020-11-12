@@ -7,7 +7,7 @@ import { TagBoxes } from "../tags/TagCheckbox"
 
 export const PostForm = (props) => {
 
-    const { posts, getPosts, addPost, updatePost, getLastPost } = useContext(PostContext)
+    const { posts, getPosts, addPost, updatePost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
     const { tags, getTags } = useContext(TagContext)
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
@@ -51,7 +51,9 @@ export const PostForm = (props) => {
                       content: post.content,
                       category_id: parseInt(post.category_id),
                       rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
-                      publication_date: post.publication_date
+                      publication_date: post.publication_date,
+                      image_url: "",
+                      selected_tags: selectedTags
                   }).then(() => {
                       props.history.push(`/posts/${post.id}`)
                   })
@@ -61,12 +63,17 @@ export const PostForm = (props) => {
                 content: post.content,
                 category_id: parseInt(post.category_id),
                 rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
-                publication_date: Date.now()
+                publication_date: new Date(Date.now()).toISOString().split('T')[0],
+                image_url: "",
+                selected_tags: selectedTags
+
             }
             addPost(newPostObject)
-                .then(() => getLastPost())
-                .then(lastPost => props.history.push(`/posts/${lastPost.id}`))
-        }}else{
+                .then(resId => {
+                    props.history.push(`/posts/${resId}`)
+                })
+            }
+        }else{
             window.alert("please fill in all fields")
         } 
 
@@ -97,7 +104,7 @@ export const PostForm = (props) => {
                         <option value="0">Select a category</option>
                         {categories.map(c => (
                             <option key={c.id} value={c.id}>
-                                {c.category}
+                                {c.label}
                             </option>
                         ))}
                     </select>
