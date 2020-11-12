@@ -25,6 +25,11 @@ export const CommentForm = (props) => {
             }
             addComment(newCommentObject)
                 .then(props.getCommentsForPost)
+                .then(()=> {
+                    const newComment = {}
+                    setComment(newComment)
+                    document.getElementById("commentForm").reset()
+                })
         }else{
             window.alert("please fill in all fields")
         } 
