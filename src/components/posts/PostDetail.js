@@ -7,7 +7,7 @@ import { PostTags } from "../PostTags/PostTags"
 export const PostDetails = (props) => {
     const { getPostById, deletePost } = useContext(PostContext)
 
-    const [post, setPost] = useState({ user: {} })
+    const [post, setPost] = useState({ rareuser: {} })
 
     const deletePostDialog = useRef(null)
 
@@ -59,7 +59,7 @@ export const PostDetails = (props) => {
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
                     <div className="author_date_container">
-                        <h3 className="authorName">{post.user.display_name}</h3>
+                        <h3 className="authorName">{post.rareuser.username}</h3>
                         <h3>{handleDate(post.publication_date)}</h3>
                     </div>
                     <div className="postContent">
