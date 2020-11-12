@@ -4,7 +4,7 @@ export const UserContext = React.createContext()
 
 export const UserProvider = (props) => {
     const [users, setUsers] = useState([])
-    const [currentUserId, setCurrentUserId] = useState(null)
+    const [currentUser, setCurrentUser] = useState({})
 
     const getUsers = () => {
         return fetch("http://localhost:8000/users", {
@@ -17,16 +17,27 @@ export const UserProvider = (props) => {
             .then(setUsers)
     }
 
-    const addUser = user => {
-        return fetch("http://localhost:8000/users", {
-            method: "POST",
+    const getCurrentUser = () => {
+        return fetch("http://localhost:8000/users/current_user", {
             headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
+            }
         })
-            .then(getUsers)
+            .then(res => res.json())
+            .then(setCurrentUser)
     }
+
+    // const addUser = user => {
+    //     return fetch("http://localhost:8000/users", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //         .then(getUsers)
+    // }
 
     return (
         <UserContext.Provider value={{
