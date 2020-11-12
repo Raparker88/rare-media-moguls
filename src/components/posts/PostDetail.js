@@ -68,15 +68,10 @@ export const PostDetails = (props) => {
                     {editDeleteButtons()}
                     <div className="commentButtonContainer">
                         <button
-                            className="btn postCommentBtn"
-                            onClick={() => {
-                                props.history.push(`/new_comment/${post.id}`)
-                            }}>Add Comment</button>
-                        <button
                             className="btn postEditBtn"
                             onClick={() => {
                                 props.history.push(`/comments/${post.id}`)
-                            }}>View Comments</button>
+                            }}>View and Add Comments</button>
                     </div>
                 </div>
                 <div className="postTagContainer">
