@@ -42,13 +42,13 @@ export const CommentsListByPost = (props) => {
                 }}>Back to Post</button>
 
             <h2>{post.title}</h2>
-            <section className="comments">
+            <div className="comments">
                 {
                     postComments.map(comment => {
                         return <Comment key={comment.id} comment={comment} {...props} />
                     })
                 }
-            </section>
+            </div>
 
         </div>
         </>
