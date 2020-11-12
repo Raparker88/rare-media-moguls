@@ -12,8 +12,8 @@ export const PostForm = (props) => {
     const { tags, getTags } = useContext(TagContext)
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const [ selectedTags, setTags ] = useState([])
-
     const [post, setPost] = useState({})
+
 
     const editMode = props.match.params.hasOwnProperty("postId")
 
@@ -28,7 +28,9 @@ export const PostForm = (props) => {
             const postId = parseInt(props.match.params.postId)
             const selectedPost = posts.find(p => p.id === postId) || {}
             setPost(selectedPost)
-            getPostTagsByPost()
+           if(selectedPost.id > 0) {
+            getPostTagsByPost(selectedPost.id)
+           }
         }
     }
 
@@ -50,10 +52,9 @@ export const PostForm = (props) => {
                       title: post.title,
                       content: post.content,
                       category_id: parseInt(post.category_id),
-                      rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
                       publication_date: post.publication_date,
                       image_url: "",
-                      selected_tags: selectedTags
+                      selected_tags: []
                   }).then(() => {
                       props.history.push(`/posts/${post.id}`)
                   })
@@ -62,7 +63,6 @@ export const PostForm = (props) => {
                 title: post.title,
                 content: post.content,
                 category_id: parseInt(post.category_id),
-                rareuser_id: parseInt(localStorage.getItem("rare_user_id")),
                 publication_date: new Date(Date.now()).toISOString().split('T')[0],
                 image_url: "",
                 selected_tags: selectedTags
@@ -123,7 +123,10 @@ export const PostForm = (props) => {
             </fieldset>
 
             <div className="tag-container">
-                {tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags}/>)}
+            {
+                tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags} post={post} editMode={editMode} {...props} />)
+            }
+                
             </div>
             
             <button type="submit"
