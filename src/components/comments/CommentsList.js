@@ -45,7 +45,7 @@ export const CommentsListByPost = (props) => {
             <div className="comments">
                 {
                     postComments.map(comment => {
-                        return <Comment key={comment.id} comment={comment} {...props} />
+                        return <Comment getCommentsForPost={getCommentsForPost} key={comment.id} comment={comment} {...props} />
                     })
                 }
             </div>

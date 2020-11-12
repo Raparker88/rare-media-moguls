@@ -39,8 +39,9 @@ export const Comment = (props) => {
                 <button className="button--closeDialog btn" onClick={e => deleteCommentDialog.current.close()}>Close</button>
                 <button className="button--deleteDialog btn"
                     onClick={e => {
-                        deleteComment(props.comment.post_id)
-                        props.history.push(`/comments/${props.comment.post_id}`)
+                        deleteComment(props.comment.id)
+                            .then(props.getCommentsForPost)
+                        deleteCommentDialog.current.close()
                     }}>Delete</button>
         </dialog>
         <section className="comment">
