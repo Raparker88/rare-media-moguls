@@ -8,7 +8,7 @@ export const CategoryButton = ( props ) => {
         <span className={`cat-btn ${props.selectedCategoryId === props.category.id ? "selected" : ""}`} onClick={() => {
             props.toggleSelected(props.category)}}>
             <span className="cat-btn-name">
-                {props.category.category}
+                {props.category.label}
             </span>
         </span>
         </>
