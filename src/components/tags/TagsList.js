@@ -8,7 +8,9 @@ import "./Tag.css"
 export const TagsList = (props) => {
     const {tags, getTags} = useContext(TagContext)
     const [editMode, setEditMode] = useState(false)
+    const [deleteMode, setDeleteMode] = useState(false)
     const [tagToBeEdited, setTagToBeEdited] = useState({})
+    const [tagToBeDeleted, setTagToBeDeleted] = useState({})
     useEffect(() => {
         getTags()
     }, [])
@@ -25,6 +27,7 @@ export const TagsList = (props) => {
                                 key={tag.id}
                                 tag={tag}
                                 setEditMode={setEditMode}
+                                setDeleteMode={setDeleteMode}
                                 setTagToBeEdited={setTagToBeEdited}
                                 {...props} />
                     }).reverse()
@@ -37,6 +40,13 @@ export const TagsList = (props) => {
                 setTagToBeEdited={setTagToBeEdited}
                 setEditMode={setEditMode}
                 {...props} />
+                : null
+                }
+                {deleteMode
+                ? <DeleteTagForm
+                tagToBeDeleted={tagToBeDeleted}
+                setTagToBeDeleted={setTagToBeDeleted}
+                {...props}/>
                 : null
                 }
             </section>

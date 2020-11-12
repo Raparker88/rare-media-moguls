@@ -9,7 +9,9 @@ export const Tag = (props) => {
                     props.setEditMode(true)}}>
 
                 </button>
-                <button className="btn-small fa fa-trash">
+                <button className="btn-small fa fa-trash" onClick={() => {
+                    props.setTagToBeDeleted(props.tag)
+                    props.setDeleteMode(true)}}>
 
                 </button>
                 <div className="tag_name">{props.tag.label}</div>
