@@ -47,13 +47,19 @@ export const ApplicationViews = (props) => {
                         <CategoriesList {...props} />}
                     />
                     <PostProvider>
-                        <>
-                            <Route exact path="/new_post" render={
-                                props => <PostForm {...props} />
-                            } />
-                            <Route exact path="/posts/edit/:postId(\d+)" render={
-                                props => <PostForm {...props} />
-                            } />
+                        <>  
+                            <TagProvider>
+                                <PostTagProvider>
+                                    <Route exact path="/new_post" render={
+                                        props => <PostForm {...props} />
+                                    } />
+                                    <Route exact path="/posts/edit/:postId(\d+)" render={
+                                        props => <PostForm {...props} />
+                                    } />
+
+                                </PostTagProvider>
+
+                            </TagProvider>
                             <Route exact path="/" render={(props) => (
                                 <>
                                     <div className="main-wrap">
