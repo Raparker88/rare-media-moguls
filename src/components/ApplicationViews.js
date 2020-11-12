@@ -6,7 +6,6 @@ import { PostProvider } from "./posts/PostProvider";
 import { CategoryProvider } from "./categories/CategoryProvider";
 import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList";
-import { CategoryButtonList } from "./categories/CategoryButtonList";
 import { CategoryForm } from "./categories/CategoryForm";
 import { TagProvider } from "./tags/TagProvider";
 import { CategoriesList } from "./categories/CategoriesList"
@@ -64,11 +63,11 @@ export const ApplicationViews = (props) => {
                                                 <PostList {...props}></PostList>
 
                                             </div>
-                                            <div className="divider"></div>
+                                            {/* <div className="divider"></div>
                                             <div className="right-main">
                                                 <CategoryButtonList
                                                     {...props} />
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>
