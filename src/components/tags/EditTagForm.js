@@ -32,7 +32,10 @@ export const EditTagForm = (props) => {
         <form className="form change_tag_form" id="editTagForm">
             <div className="toprow">
                 <div className="toprowblank"></div>
-                <span className="x">X</span>
+                <span className="x" onClick={()=>{
+                    props.setEditMode(false)
+                    props.setTagToBeEdited({})
+                }}>X</span>
             </div>
             <h2 className="tagForm_label">Edit this tag</h2>
             <fieldset>
