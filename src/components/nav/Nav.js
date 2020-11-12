@@ -20,9 +20,9 @@ export const Nav = (props) => {
     }
 
     useEffect(()=>{
-        if(localStorage.getItem("rare_user_id")!== null){
+        if(localStorage.getItem("rare_token")!== null){
             setLoggedIn(true)
-            setCurrentUserId(localStorage.getItem("rare_user_id"))
+            setCurrentUserId(localStorage.getItem("rare_token"))
         }
         else{
             setLoggedIn(false)
