@@ -49,7 +49,7 @@ export const PostTagProvider = (props) => {
     }
 
     return (
-        <PostTagContext.Provider value={{postTags, addPostTag, removePostTag, getAllPostTags, getPostTagsByPost}}>
+        <PostTagContext.Provider value={{postTags, addPostTag, removePostTag, getAllPostTags, getPostTagsByPost, setPostTags}}>
             {props.children}
         </PostTagContext.Provider>
     )
