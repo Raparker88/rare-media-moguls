@@ -8,19 +8,17 @@ export const Category = ( props ) => {
 
     return (
         <>
-            <div className="category-item">
-                <div className="cat-name">
-                    {props.category.label}
-                </div>
-                <div className="btn-group">
+            <section className="category">
                     <button className="btn-small fa fa-edit" onClick={() => {
                         props.setEditMode(true)
                         props.setCurrentCategory(props.category)}}>
                     </button>
                     <button className="btn-small fa fa-trash" onClick={() => deleteCategory(props.category.id)}>
                     </button>
+                <div className="cat-name">
+                    {props.category.label}
                 </div>
-            </div>
+            </section>
         </>
     )
 }

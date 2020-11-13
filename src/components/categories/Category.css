@@ -15,14 +15,13 @@
 .categories {
     text-align: center;
 }
-/* .category-item {
+
+.category{
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    margin: 0.5rem 0.5rem;
-    padding: 0.35rem 1.5rem;
-    box-shadow: 0.15rem 0.15rem 0.3rem #90969b;
-} */
+    align-items: center;
+    justify-content: left;
+    margin-top: 10px;
+}
 
 .cat-name {
     text-align:center;
