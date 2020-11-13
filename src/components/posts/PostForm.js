@@ -12,7 +12,7 @@ export const PostForm = (props) => {
     const { tags, getTags } = useContext(TagContext)
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const [selectedTags, setTags] = useState([])
-    const [post, setPost] = useState({})
+    const [post, setPost] = useState({rareuser: {}, category: {}})
 
 
     const editMode = props.match.params.hasOwnProperty("postId")
