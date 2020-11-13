@@ -13,13 +13,11 @@ export const Category = ( props ) => {
                     {props.category.label}
                 </div>
                 <div className="btn-group">
-                    <button className=" btn editTagButton" onClick={() => {
+                    <button className="btn-small fa fa-edit" onClick={() => {
                         props.setEditMode(true)
                         props.setCurrentCategory(props.category)}}>
-                        Edit
                     </button>
-                    <button className="btn deleteTagButton" onClick={() => deleteCategory(props.category.id)}>
-                        Delete
+                    <button className="btn-small fa fa-trash" onClick={() => deleteCategory(props.category.id)}>
                     </button>
                 </div>
             </div>

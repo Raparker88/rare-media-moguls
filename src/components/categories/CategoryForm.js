@@ -46,6 +46,6 @@ export const CategoryForm = (props) => {
             <button type="submit" className="btn saveCategoryButton" onClick= {evt => {
                 evt.preventDefault()
                 constructNewCategory()
-            }}>"Save New Category</button>
+            }}>Save New Category</button>
         </form>
     )}
