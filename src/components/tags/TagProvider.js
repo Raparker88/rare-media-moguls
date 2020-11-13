@@ -40,8 +40,8 @@ export const TagProvider = (props) => {
             return newTag.id })
     }
 
-    const updateTag = (tag_id, tag) => {
-        return fetch(`http://localhost:8000/tags/${tag_id}`, {
+    const updateTag = (tag) => {
+        return fetch(`http://localhost:8000/tags/${tag.id}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_token")}`,

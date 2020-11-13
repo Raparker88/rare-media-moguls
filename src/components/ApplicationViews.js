@@ -14,7 +14,6 @@ import { PostDetails } from "./posts/PostDetail"
 import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
-import { CommentForm } from "./comments/CommentForm"
 import { UserPostList } from "./posts/UserPostList"
 
 export const ApplicationViews = (props) => {
@@ -48,19 +47,13 @@ export const ApplicationViews = (props) => {
                     <Route exact path="/categories/edit/:categoryId(\d+)" render={(props) =>
                         <CategoryForm {...props} />}/>
                     <PostProvider>
-                        <>  
-                            <TagProvider>
-                                <PostTagProvider>
-                                    <Route exact path="/new_post" render={
-                                        props => <PostForm {...props} />
-                                    } />
-                                    <Route exact path="/posts/edit/:postId(\d+)" render={
-                                        props => <PostForm {...props} />
-                                    } />
-
-                                </PostTagProvider>
-
-                            </TagProvider>
+                        <>
+                            <Route exact path="/new_post" render={
+                                props => <PostForm {...props} />
+                            } />
+                            <Route exact path="/posts/edit/:postId(\d+)" render={
+                                props => <PostForm {...props} />
+                            } />
                             <Route exact path="/" render={(props) => (
                                 <>
                                     <div className="main-wrap">
@@ -99,8 +92,6 @@ export const ApplicationViews = (props) => {
                         <Route exact path="/comments/:postId(\d+)" render={props =>
                             <CommentsListByPost {...props} />}
                         />
-                    <Route exact path="/new_comment/:postId(\d+)" render={props =>
-                            <CommentForm {...props} />}/>
                     </PostProvider>
                 </CommentProvider>
             </main>
