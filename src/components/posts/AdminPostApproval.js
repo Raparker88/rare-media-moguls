@@ -14,11 +14,8 @@ export const AdminPostApproval = (props) => {
     }, [post])
 
     const checkboxHandler = () => {
-        if (checked) {
-            adminPostApproval(post)
-        }else{
-            adminPostApproval(post)
-        }
+       
+        adminPostApproval(post)
         setChecked(!checked)
     }
 
