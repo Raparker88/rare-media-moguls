@@ -19,15 +19,16 @@ export const UserDropdown = (props) => {
     return (
         <>
             <div className="dropdown-wrapper">
-                <Link
+                <div
                 title="Create A New Post"
                 className="link nav__link dropdown-link"
-                to="/new_post"
                 onClick={() => {
                     props.toggleOpen();
+                    props.history.push("/new_post")
+                    window.location.reload()
                 }}>
                     create post
-                </Link>
+                </div>
                 <Link
                 title="Review Your Posts"
                 className="link nav__link dropdown-link"
