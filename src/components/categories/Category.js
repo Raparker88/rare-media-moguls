@@ -4,7 +4,7 @@ import "./Category.css"
 
 export const Category = ( props ) => {
     
-    const { deleteCategory } = useContext(CategoryContext)
+    const { deleteCategory, updateCategory } = useContext(CategoryContext)
 
     return (
         <>
@@ -13,7 +13,9 @@ export const Category = ( props ) => {
                     {props.category.label}
                 </div>
                 <div className="btn-group">
-                    <button className=" btn editTagButton">
+                    <button className=" btn editTagButton" onClick={() => {
+                        props.setEditMode(true)
+                        props.setCurrentCategory(props.category)}}>
                         Edit
                     </button>
                     <button className="btn deleteTagButton" onClick={() => deleteCategory(props.category.id)}>

@@ -1,13 +1,14 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useState, useEffect} from "react"
 import { CategoryContext } from "./CategoryProvider"
 import "./Category.css"
 
 export const CategoryForm = (props) => {
-    const {addCategory} = useContext(CategoryContext)
+    const {addCategory, getCategories} = useContext(CategoryContext)
 
     const [currentCategory, setCategory] = useState({
         label: ""
     })
+
 
     const handleControlledInputChange = (event) => {
         const newCategory = Object.assign({}, currentCategory)
@@ -15,10 +16,14 @@ export const CategoryForm = (props) => {
         setCategory(newCategory)
     }
 
+
+    useEffect(() => {
+        getCategories()
+    }, [])
+
+
     const constructNewCategory = () => {
-        const category ={
-            label: currentCategory.label
-        }
+        const category = {label: currentCategory.label}
         addCategory(category)
         .then(()=> props.history.push("/categories"))
     }
@@ -41,7 +46,6 @@ export const CategoryForm = (props) => {
             <button type="submit" className="btn saveCategoryButton" onClick= {evt => {
                 evt.preventDefault()
                 constructNewCategory()
-            }}>Save</button>
+            }}>"Save New Category</button>
         </form>
-    )
-}
+    )}
