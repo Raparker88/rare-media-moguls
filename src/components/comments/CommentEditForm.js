@@ -2,47 +2,44 @@ import React, { useContext, useState } from "react"
 import { CommentContext } from "./CommentProvider"
 import "./Comment.css"
 
-export const CommentForm = (props) => {
+export const CommentEditForm = (props) => {
 
-    const { addComment } = useContext(CommentContext)
+    const { updateComment } = useContext(CommentContext)
 
-    const [comment, setComment] = useState({})
+    const [editedComment, setEditedComment] = useState(props.comment)
 
     const handleControlledInputChange = (eve) => {
-        const newComment = Object.assign({}, comment)
+        const newComment = Object.assign({}, editedComment)
         newComment[eve.target.name] = eve.target.value
-        setComment(newComment)
+        setEditedComment(newComment)
     }
 
     const constructNewComment = () => {
-        const post_id = props.postId
-        if(comment.subject && comment.content){
+        if(editedComment.subject && editedComment.content){
             const newCommentObject = {
-                subject: comment.subject,
-                content: comment.content,
-                post_id,
+                subject: editedComment.subject,
+                content: editedComment.content,
+                post_id: props.comment.post.id,
+                user_id: props.comment.author.id,
+                created_on: props.comment.created_on,
             }
-            addComment(newCommentObject)
+            updateComment(props.comment.id,  newCommentObject)
                 .then(props.getCommentsForPost)
-                .then(()=> {
-                    const newComment = {}
-                    setComment(newComment)
-                    document.getElementById("commentForm").reset()
-                    document.getElementById("content").value=""
-                })
         }else{
             window.alert("please fill in all fields")
-        } 
+        }
 
     }
-    return (
 
+    return (
+        <div>
+        <div>Edit Comment</div>
         <form className="form new_comment_form" id="commentForm">
                 <div className="form-div">
                     <input type="text" name="subject" required className="form-control" id="subject"
                         proptype="varchar"
                         placeholder="New comment subject"
-                        defaultValue={comment.subject}
+                        defaultValue={props.comment.subject}
                         onChange={handleControlledInputChange}>
                     </input>
                 </div>
@@ -50,20 +47,17 @@ export const CommentForm = (props) => {
                     <textarea type="text" name="content" required className="form-control comment-content-input" id="content"
                         proptype="varchar"
                         placeholder="What are your thoughts?"
-                        defaultValue={comment.content}
+                        defaultValue={props.comment.content}
                         onChange={handleControlledInputChange}>
                     </textarea>
                 </div>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault()
-                    setComment({})
-                    constructNewComment()
-                }}
-                className="btn comment_submit_btn">
-                Save Comment
-            </button>
-
-        </form>
+            </form>
+                <button className="button--deleteDialog btn"
+                    onClick={e => {
+                        constructNewComment()
+                        props.editCommentDialog.current.close()
+                    }}>Save</button>
+                    <button className="button--closeDialog btn" onClick={e => props.editCommentDialog.current.close()}>Cancel</button>
+                    </div>
     )
 }
