@@ -42,8 +42,6 @@ export const ApplicationViews = (props) => {
                 </TagProvider>
 
                 <CategoryProvider>
-                    <Route exact path="/categories/create" render={(props) =>
-                        <CategoryForm {...props} />} />
                     <Route exact path="/categories" render={(props) =>
                         <CategoriesList {...props} />}
                     />
