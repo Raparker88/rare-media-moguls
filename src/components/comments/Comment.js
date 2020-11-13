@@ -1,12 +1,10 @@
 import React, { useContext, useRef } from "react"
 import { CommentContext } from "./CommentProvider"
 import { CommentEditForm } from "./CommentEditForm"
-import { UserContext} from "../users/UserProvider"
 import "./Comment.css"
 
 export const Comment = (props) => {
     const {deleteComment} = useContext(CommentContext)
-    const {getCurrentUser} = useContext(UserContext)
     const deleteCommentDialog = useRef(null)
     const editCommentDialog = useRef(null)
 
