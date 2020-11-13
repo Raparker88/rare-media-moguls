@@ -3,6 +3,7 @@ import { Tag } from "./Tag"
 import { TagContext } from "./TagProvider"
 import { TagForm } from "./TagForm"
 import { EditTagForm } from "./EditTagForm"
+import { DeleteTagForm } from "./DeleteTagForm"
 import "./Tag.css"
 
 export const TagsList = (props) => {
@@ -29,6 +30,7 @@ export const TagsList = (props) => {
                                 setEditMode={setEditMode}
                                 setDeleteMode={setDeleteMode}
                                 setTagToBeEdited={setTagToBeEdited}
+                                setTagToBeDeleted={setTagToBeDeleted}
                                 {...props} />
                     }).reverse()
                 }
@@ -46,6 +48,7 @@ export const TagsList = (props) => {
                 ? <DeleteTagForm
                 tagToBeDeleted={tagToBeDeleted}
                 setTagToBeDeleted={setTagToBeDeleted}
+                setDeleteMode={setDeleteMode}
                 {...props}/>
                 : null
                 }
