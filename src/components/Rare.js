@@ -4,6 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import "./Rare.css"
+import { UserProvider } from "./users/UserProvider"
 
 export const Rare = () => (
     <>
@@ -12,9 +13,12 @@ export const Rare = () => (
 
                 return (
                     <>
-                    <Route render={props =>
-                        <ApplicationViews
-                        {...props}  />} />
+                    <UserProvider>
+                        <Route render={props =>
+                            <ApplicationViews
+                            {...props}  />} />
+
+                    </UserProvider>
                     </>
                 )
             }
