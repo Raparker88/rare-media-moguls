@@ -105,6 +105,7 @@
     align-self: center;
     justify-self: center;
     margin-right: 2rem;
+    white-space: nowrap;
 }
 
 .user-menu-btn {
@@ -179,3 +180,4 @@
     transform-origin: center;
     animation: pointDown .5s;
 }
+

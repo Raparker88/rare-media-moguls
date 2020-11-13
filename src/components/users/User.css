@@ -1,0 +1,25 @@
+
+
+.userRadio{
+    margin-right: 20px;
+}
+
+.userTableContainer{
+    width: fit-content;
+    margin: auto;
+}
+
+.userInfo {
+    margin-right: 40px;
+}
+
+td {
+    width: 10em;
+    border: 1px solid lightgray;
+    padding-left: 10px;
+}
+
+.userRadioInfo {
+    width: 15em;
+}
+

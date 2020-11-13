@@ -56,6 +56,11 @@ export const Nav = (props) => {
                             to="/">
                                 posts
                             </Link>
+                            <Link
+                            className="link nav__link posts-link"
+                            to="/users">
+                                User Manager
+                            </Link>
                         </div>
                         {loggedIn
                         ?

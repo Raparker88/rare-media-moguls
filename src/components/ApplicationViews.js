@@ -15,15 +15,17 @@ import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { UserPostList } from "./posts/UserPostList"
+import { UsersList }  from "./users/UsersList"
 
 export const ApplicationViews = (props) => {
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
+
             <PostProvider>
                 <Route path="/" render={(props) => (
-
-                <nav className="cont--nav">
+                    
+                    <nav className="cont--nav">
                     <Nav {...props} />
                 </nav>)} />
             </PostProvider>
@@ -68,7 +70,7 @@ export const ApplicationViews = (props) => {
                             )} />
 
                             <Route exact path="/users/posts" render={(props) => (                              
-                                    <div className="main-wrap">
+                                <div className="main-wrap">
                                         <div className="top-spacer"></div>
                                         <div className="mid-section">
                                             <UserPostList
@@ -93,6 +95,8 @@ export const ApplicationViews = (props) => {
                         />
                     </PostProvider>
                 </CommentProvider>
+            <Route exact path="/users" render={(props) =>
+                        <UsersList {...props} />}/>
             </main>
         </>
     )
