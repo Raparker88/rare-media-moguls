@@ -1,10 +1,12 @@
 import React, { useContext, useRef } from "react"
 import { CommentContext } from "./CommentProvider"
+import { CommentEditForm } from "./CommentEditForm"
 import "./Comment.css"
 
 export const Comment = (props) => {
     const {deleteComment} = useContext(CommentContext)
     const deleteCommentDialog = useRef(null)
+    const editCommentDialog = useRef(null)
 
     const handleDate = (date) => {
         if ("created_on" in props.comment) {
@@ -20,7 +22,7 @@ export const Comment = (props) => {
                     <button
                         className="btn-small fa fa-edit"
                         onClick={() => {
-                            props.history.push(`/comments/edit/${props.comment.post_id}`)
+                            editCommentDialog.current.showModal()
                         }}></button>
                     <button
                         className="btn-small fa fa-trash"
@@ -44,6 +46,11 @@ export const Comment = (props) => {
                         deleteCommentDialog.current.close()
                     }}>Delete</button>
         </dialog>
+
+        <dialog className="dialog dialog--editPost" ref={editCommentDialog}>
+            <CommentEditForm getCommentsForPost={props.getCommentsForPost} comment={props.comment} editCommentDialog={editCommentDialog}/>    
+        </dialog>
+
         <section className="comment">
                 <div className="comment_user">{props.comment.author.username}</div>
                 <div className="comment_subject">{props.comment.subject}</div>
