@@ -8,13 +8,14 @@ import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList";
 import { CategoryForm } from "./categories/CategoryForm";
 import { TagProvider } from "./tags/TagProvider";
-import { CategoriesList } from "./categories/CategoriesList"
+import { CategoriesList } from "./categories/CategoryList"
 import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { UserPostList } from "./posts/UserPostList"
+
 
 export const ApplicationViews = (props) => {
     return (
