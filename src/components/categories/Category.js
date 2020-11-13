@@ -14,7 +14,8 @@ export const Category = ( props ) => {
                 </div>
                 <div className="btn-group">
                     <button className=" btn editTagButton" onClick={() => {
-                        props.history.push(`/category/edit/${props.category.id}`)}}>
+                        props.setEditMode(true)
+                        props.setCurrentCategory(props.category)}}>
                         Edit
                     </button>
                     <button className="btn deleteTagButton" onClick={() => deleteCategory(props.category.id)}>

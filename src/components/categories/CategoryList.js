@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Category } from "./Category"
 import { CategoryContext } from "./CategoryProvider"
+import { EditCategoryForm } from "./EditCategoryForm";
 import "./Category.css"
 
 export const CategoriesList = (props) => {
@@ -8,6 +9,9 @@ export const CategoriesList = (props) => {
     useEffect(() => {
         getCategories()
     }, [])
+
+    const [ editMode, setEditMode ] = useState(false)
+    const [currentCategory, setCurrentCategory] = useState({})
 
     return (
         <>
@@ -21,10 +25,22 @@ export const CategoriesList = (props) => {
                         return <Category
                         key={c.id}
                         category={c}
+                        setEditMode={setEditMode}
+                        setCurrentCategory={setCurrentCategory}
                         {...props} />
                         }).reverse()
                     }
                 </div>
+                <div>
+                    {editMode
+                    ?<EditCategoryForm 
+                     setCurrentCategory={setCurrentCategory}
+                     currentCategory={currentCategory}
+                     setEditMode={setEditMode}
+                     {...props} />
+                    :null}
+                </div>
+                
             </section>
         </>
     )

@@ -40,9 +40,10 @@ export const CategoryProvider = (props) => {
     }
 
     const updateCategory = (category) => {
-        return fetch(`http://localhost:8088/projects/${category.id}`, {
+        return fetch(`http://localhost:8000/categories/${category.id}`, {
             method: "PUT",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(category)

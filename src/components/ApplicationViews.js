@@ -8,13 +8,14 @@ import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList";
 import { CategoryForm } from "./categories/CategoryForm";
 import { TagProvider } from "./tags/TagProvider";
-import { CategoriesList } from "./categories/CategoriesList"
+import { CategoriesList } from "./categories/CategoryList"
 import { TagsList } from "./tags/TagsList"
 import { PostDetails } from "./posts/PostDetail"
 import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { UserPostList } from "./posts/UserPostList"
+import { EditTagForm } from "./tags/EditTagForm";
 
 export const ApplicationViews = (props) => {
     return (
@@ -44,8 +45,6 @@ export const ApplicationViews = (props) => {
                         <CategoryForm {...props} />}/>
                     <Route exact path="/categories" render={(props) =>
                         <CategoriesList {...props} />}/>
-                    <Route exact path="/categories/edit/:categoryId(\d+)" render={(props) =>
-                        <CategoryForm {...props} />}/>
                     <PostProvider>
                         <>
                             <Route exact path="/new_post" render={
