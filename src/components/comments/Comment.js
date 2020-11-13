@@ -15,8 +15,7 @@ export const Comment = (props) => {
     }
 
     const editDeleteButtons = () => {
-        const currentId = localStorage.getItem("rare_user_id")
-        if (props.comment.author.id === parseInt(currentId)) {
+        if (props.comment.is_user_author) {
             return (
                 <div className="commentsButtonContainer">
                     <button
