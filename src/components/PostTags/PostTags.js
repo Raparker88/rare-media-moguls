@@ -10,7 +10,9 @@ export const PostTags = ({postId}) => {
     const postTagIds = postTags.map(tag => tag.tag_id)
 
     useEffect(() => {
-        getPostTagsByPost(postId)
+        if (postId > 0){
+            getPostTagsByPost(postId)
+        }
 
     }, [postId, tags]);
 
