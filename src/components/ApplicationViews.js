@@ -20,70 +20,75 @@ export const ApplicationViews = (props) => {
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>
-            <PostProvider>
-                <Route path="/" render={(props) => (
+                <PostProvider>
+                    <Route path="/" render={(props) => (
 
-                <nav className="cont--nav">
-                    <Nav {...props} />
-                </nav>)} />
-            </PostProvider>
+                        <nav className="cont--nav">
+                            <Nav {...props} />
+                        </nav>)} />
+                </PostProvider>
 
 
-            <TagProvider>
-                <PostTagProvider>
-                    <PostProvider>
-                        <Route path="/posts/:postId(\d+)" render={
-                            props => <PostDetails {...props} />
-                        } />
-                    </PostProvider>
-                </PostTagProvider>
-            </TagProvider>
+                <TagProvider>
+                    <PostTagProvider>
+                        <PostProvider>
+                            <Route path="/posts/:postId(\d+)" render={
+                                props => <PostDetails {...props} />
+                            } />
+                        </PostProvider>
+                    </PostTagProvider>
+                </TagProvider>
 
                 <CategoryProvider>
                     <Route exact path="/categories/create" render={(props) =>
-                        <CategoryForm {...props} />}/>
+                        <CategoryForm {...props} />} />
                     <Route exact path="/categories" render={(props) =>
                         <CategoriesList {...props} />}
                     />
-                    <PostProvider>
-                        <>
-                            <Route exact path="/new_post" render={
-                                props => <PostForm {...props} />
-                            } />
-                            <Route exact path="/posts/edit/:postId(\d+)" render={
-                                props => <PostForm {...props} />
-                            } />
-                            <Route exact path="/" render={(props) => (
+                    <PostTagProvider>
+                        <TagProvider>
+                            <PostProvider>
                                 <>
-                                    <div className="main-wrap">
-                                        <div className="top-spacer"></div>
-                                        <div className="mid-section">
-                                            <div className="left-main">
-                                                <PostList {...props}></PostList>
+                                    <Route exact path="/new_post" render={
+                                        props => <PostForm {...props} />
+                                    } />
+                                    <Route exact path="/posts/edit/:postId(\d+)" render={
+                                        props => <PostForm {...props} />
+                                    } />
+                                    <Route exact path="/" render={(props) => (
+                                        <>
+                                            <div className="main-wrap">
+                                                <div className="top-spacer"></div>
+                                                <div className="mid-section">
+                                                    <div className="left-main">
+                                                        <PostList {...props}></PostList>
+                                                    </div>
+                                                </div>
+                                                <div className="bottom-spacer"></div>
                                             </div>
-                                        </div>
-                                        <div className="bottom-spacer"></div>
-                                    </div>
-                                </>
-                            )} />
+                                        </>
+                                    )} />
 
-                            <Route exact path="/posts/user/:userId(\d+)" render={(props) => (                              
-                                    <div className="main-wrap">
-                                        <div className="top-spacer"></div>
-                                        <div className="mid-section">
-                                            <UserPostList
-                                            {...props}/>
+                                    <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
+                                        <div className="main-wrap">
+                                            <div className="top-spacer"></div>
+                                            <div className="mid-section">
+                                                <UserPostList
+                                                    {...props} />
+                                            </div>
+                                            <div className="bottom-spacer"></div>
                                         </div>
-                                        <div className="bottom-spacer"></div>
-                                    </div>                               
-                            )} />
-                        </>
-                    </PostProvider>
+                                    )} />
+                                </>
+
+                            </PostProvider>
+                        </TagProvider>
+                    </PostTagProvider>
                 </CategoryProvider>
 
                 <TagProvider>
                     <Route exact path="/tags" render={props =>
-                        <TagsList {...props} />}/>
+                        <TagsList {...props} />} />
                 </TagProvider>
 
                 <CommentProvider>
