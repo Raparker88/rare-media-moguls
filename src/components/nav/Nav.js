@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link, NavLink } from "react-router-dom"
 import "./Nav.css"
 import Logo from "./rare_logo_diamond_transparent.png"
 import { UserDropdown } from "./UserDropdown"
+import { UserContext } from "../users/UserProvider"
 
 export const Nav = (props) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
     const [currentUserId, setCurrentUserId] = useState(null)
+
+    const {currentUser, getCurrentUser} = useContext(UserContext)
 
     const toggleOpen = () => {
         if (isOpen) {
@@ -27,6 +30,7 @@ export const Nav = (props) => {
         else{
             setLoggedIn(false)
         }
+        getCurrentUser()
     }, [])
 
     return (
@@ -56,11 +60,14 @@ export const Nav = (props) => {
                             to="/">
                                 posts
                             </Link>
+                            {currentUser.is_staff ?
                             <Link
                             className="link nav__link posts-link"
                             to="/users">
                                 User Manager
                             </Link>
+                            : null
+                            }
                         </div>
                         {loggedIn
                         ?

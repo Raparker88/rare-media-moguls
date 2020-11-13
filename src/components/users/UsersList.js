@@ -5,7 +5,7 @@ import "./User.css"
 
 
 export const UsersList = (props) => {
-    const {users, getUsers} = useContext(UserContext)
+    const {users, getUsers, currentUser} = useContext(UserContext)
 
 
     useEffect(() => {
@@ -14,22 +14,25 @@ export const UsersList = (props) => {
 
     return (
         <>
-        <section className="userTableContainer">
-            <h2>Users</h2>
-            <table className="usersTable">
-                <tbody>
-                    {users.map(u => {
-                        return <User
-                        key={u.date_joined}
-                        user={u}
-                        {...props}/>
-                    })}
+        {currentUser.is_staff ?
+            <section className="userTableContainer">
+                <h2>Users</h2>
+                <table className="usersTable">
+                    <tbody>
+                        {users.map(u => {
+                            return <User
+                            key={u.date_joined}
+                            user={u}
+                            {...props}/>
+                        })}
 
-                </tbody>
-                
-            </table>
+                    </tbody>
+                    
+                </table>
 
-        </section>
+            </section>
+        :<div>You are not authorized to view this page</div>
+        }
         </>
     )
 }
