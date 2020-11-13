@@ -31,7 +31,7 @@ export const UserDropdown = (props) => {
                 <Link
                 title="Review Your Posts"
                 className="link nav__link dropdown-link"
-                to={`/posts/user/${currentUserId}`}
+                to={`/users/posts`}
                 onClick={() => {
                     props.toggleOpen()
                 }}>
