@@ -4,7 +4,7 @@ import { CommentEditForm } from "./CommentEditForm"
 import "./Comment.css"
 
 export const Comment = (props) => {
-    const {deleteComment, updateComment} = useContext(CommentContext)
+    const {deleteComment} = useContext(CommentContext)
     const deleteCommentDialog = useRef(null)
     const editCommentDialog = useRef(null)
 
