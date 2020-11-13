@@ -1,10 +1,12 @@
 import React, { useContext, useRef } from "react"
 import { CommentContext } from "./CommentProvider"
 import { CommentEditForm } from "./CommentEditForm"
+import { UserContext} from "../users/UserProvider"
 import "./Comment.css"
 
 export const Comment = (props) => {
     const {deleteComment} = useContext(CommentContext)
+    const {getCurrentUser} = useContext(UserContext)
     const deleteCommentDialog = useRef(null)
     const editCommentDialog = useRef(null)
 
@@ -15,8 +17,7 @@ export const Comment = (props) => {
     }
 
     const editDeleteButtons = () => {
-        const currentId = localStorage.getItem("rare_user_id")
-        if (props.comment.author.id === parseInt(currentId)) {
+        if (props.comment.is_user_author) {
             return (
                 <div className="commentsButtonContainer">
                     <button

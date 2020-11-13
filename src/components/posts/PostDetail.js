@@ -24,8 +24,7 @@ export const PostDetails = (props) => {
     }
 
     const editDeleteButtons = () => {
-        const currentId = localStorage.getItem("rare_user_id")
-        if (post.user_id === parseInt(currentId)) {
+        if (post.is_user_author) {
             return (
                 <div className="postButtonContainer">
                     <button
