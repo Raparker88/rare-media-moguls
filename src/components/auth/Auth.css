@@ -25,6 +25,10 @@ fieldset {
     display: inline-block;
 }
 
+.form-control::placeholder {
+    font-style: italic;
+}
+
 .form-control {
     display: block;
     width: 94%;

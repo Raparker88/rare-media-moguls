@@ -4,17 +4,21 @@ import { ApplicationViews } from "./ApplicationViews"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import "./Rare.css"
+import { UserProvider } from "./users/UserProvider"
 
 export const Rare = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
 
                 return (
                     <>
-                    <Route render={props =>
-                        <ApplicationViews
-                        {...props}  />} />
+                    <UserProvider>
+                        <Route render={props =>
+                            <ApplicationViews
+                            {...props}  />} />
+
+                    </UserProvider>
                     </>
                 )
             }
@@ -24,7 +28,7 @@ export const Rare = () => (
         }} />
 
         <Route path="/login" render={(props) => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
                 return <Redirect to="/" />
             } else {
                 return <Login {...props} />
@@ -32,7 +36,7 @@ export const Rare = () => (
         }} />
 
         <Route path="/register" render={(props) => {
-            if (localStorage.getItem("rare_user_id")) {
+            if (localStorage.getItem("rare_token")) {
                 return <Redirect to="/" />
             }
             else {
