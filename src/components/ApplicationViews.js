@@ -15,7 +15,6 @@ import { CommentProvider } from "./comments/CommentProvider";
 import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { UserPostList } from "./posts/UserPostList"
-import { UsersList }  from "./users/UsersList"
 
 
 export const ApplicationViews = (props) => {
@@ -98,8 +97,6 @@ export const ApplicationViews = (props) => {
                         />
                     </PostProvider>
                 </CommentProvider>
-            <Route exact path="/users" render={(props) =>
-                        <UsersList {...props} />}/>
             </main>
         </>
     )
