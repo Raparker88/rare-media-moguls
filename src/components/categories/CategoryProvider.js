@@ -26,7 +26,11 @@ export const CategoryProvider = (props) => {
             },
             body: JSON.stringify(category)
         })
-        .then(getCategories)
+        .then(res => res.json())
+        .then(newCategory => {
+            getCategories()
+            return newCategory.id
+        })
     }
 
     const deleteCategory = categoryId => {
