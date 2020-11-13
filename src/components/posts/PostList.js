@@ -6,11 +6,11 @@ import {AdminPostApproval} from "./AdminPostApproval"
 import { UserContext } from "../users/UserProvider";
 
 
-
-
 export const PostList = (props) => {
     const {posts, getPosts} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
+
+    const onlyApprovedPosts = posts.filter(p => p.approved === true)
 
     useEffect(() => {
         getPosts()
@@ -27,8 +27,9 @@ export const PostList = (props) => {
                         props.history.push(`/new_post/`)
                     }}>Create New Post</button>
             {
-                posts !== [] ? posts.map(p => {
-                    if(currentUser.is_staff === true) { 
+                posts !== [] ?  
+                    currentUser.is_staff === true ?
+                        posts.map(p => { 
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
@@ -40,7 +41,8 @@ export const PostList = (props) => {
                         <p>Posted in <b>{p.category.label}</b></p>
                         <AdminPostApproval post = {p}/>
                         </div>
-                    } else {
+                        })
+                    : onlyApprovedPosts.map(p=> {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
@@ -51,8 +53,8 @@ export const PostList = (props) => {
                         </Link>
                         <p>Posted in <b>{p.category.label}</b></p>
                         </div>
-                    }
-                }) : null
+                    })
+                : null
             }
         </div>
         </>
