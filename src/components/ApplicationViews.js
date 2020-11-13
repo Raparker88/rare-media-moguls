@@ -94,10 +94,10 @@ export const ApplicationViews = (props) => {
                         <Route exact path="/comments/:postId(\d+)" render={props =>
                             <CommentsListByPost {...props} />}
                         />
+                        <Route exact path="/users" render={(props) =>
+                            <UsersList {...props} />}/>
                     </PostProvider>
                 </CommentProvider>
-            <Route exact path="/users" render={(props) =>
-                        <UsersList {...props} />}/>
             </main>
         </>
     )
