@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useContext } from "react"
-import {removePostTag, addPostTag, PostTagContext} from "../PostTags/PostTagProvider"
+import {PostTagContext} from "../PostTags/PostTagProvider"
 
 export const TagBoxes = (props) => {
     const [checked, setChecked] = useState(false)
-    const { removePostTag, addPostTag } = useContext(PostTagContext)
-    
-    
+    const { removePostTag, addPostTag, postTags, getPostTagsByPost } = useContext(PostTagContext)
+ 
     const tag = props.tag
     const selectedTags = props.selectedTags
-    const postTags = props.postTags
 
     useEffect(() => {
         let postTag = postTags.find(pt => pt.tag_id === tag.id)
         if(postTag){
             setChecked(true)
         }
-    }, [props.postTags])
+    }, [postTags])
+
+    useEffect(() => {
+        getPostTagsByPost(props.post.id)
+    },[props.editMode, props.post.id])
+
 
     const checkboxHandler = () => {
         if (checked) {

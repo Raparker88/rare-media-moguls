@@ -6,14 +6,11 @@ import { TagContext } from "../tags/TagProvider"
 import { TagBoxes } from "../tags/TagCheckbox"
 
 export const PostForm = (props) => {
-
     const { posts, getPosts, addPost, updatePost } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
     const { tags, getTags } = useContext(TagContext)
-    const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const [selectedTags, setTags] = useState([])
     const [post, setPost] = useState({rareuser: {}, category: {}})
-
 
     const editMode = props.match.params.hasOwnProperty("postId")
 
@@ -28,16 +25,13 @@ export const PostForm = (props) => {
             const postId = parseInt(props.match.params.postId)
             const selectedPost = posts.find(p => p.id === postId) || {}
             setPost(selectedPost)
-            if (selectedPost.id > 0) {
-                getPostTagsByPost(selectedPost.id)
-            }
         }
     }
 
     useEffect(() => {
         getPosts()
-        getCategories()
-        getTags()
+        .then(getCategories)
+        .then(getTags)
     }, [])
 
     useEffect(() => {
@@ -123,7 +117,7 @@ export const PostForm = (props) => {
 
             <div className="tag-container">
                 {
-                    tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags} postTags={postTags} post={post} editMode={editMode} {...props} />)
+                    tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags}  post={post} editMode={editMode} {...props} />)
                 }
 
             </div>
