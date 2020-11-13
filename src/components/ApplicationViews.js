@@ -69,8 +69,7 @@ export const ApplicationViews = (props) => {
                                             </div>
                                         </>
                                     )} />
-
-                                    <Route exact path="/posts/user/:userId(\d+)" render={(props) => (
+                                    <Route exact path="/users/posts" render={(props) => (
                                         <div className="main-wrap">
                                             <div className="top-spacer"></div>
                                             <div className="mid-section">
@@ -81,7 +80,6 @@ export const ApplicationViews = (props) => {
                                         </div>
                                     )} />
                                 </>
-
                             </PostProvider>
                         </TagProvider>
                     </PostTagProvider>
