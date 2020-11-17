@@ -5,7 +5,17 @@ import "./User.css"
 
 export const User = (props) => {
 
-    const { changeUserType } = useContext(UserContext)
+    const { changeUserType, changeUserActive } = useContext(UserContext)
+
+    const statusPrompt = (id) => {
+        let prompt = window.confirm("Are you sure you want to change this user's account status?");
+        if( prompt === true ) {
+            changeUserActive(id)
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     return (
         <>
@@ -24,7 +34,7 @@ export const User = (props) => {
                     </Link>
                 </td>
                 <td className="userInfo"><label>
-                        <input type="checkbox" id="userRadio" checked={props.user.is_active} ></input>
+                        <input type="checkbox" id="userRadio" checked={props.user.is_active} onChange={() => statusPrompt(props.user.id)} ></input>
                         Active
                     </label>
                 </td>
