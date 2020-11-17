@@ -7,15 +7,13 @@ import { UserContext } from "../users/UserProvider";
 
 
 export const PostList = (props) => {
-    const {posts, getPosts} = useContext(PostContext)
-    const {currentUser, getCurrentUser} = useContext(UserContext)
-
+    const { posts, getPosts } = useContext(PostContext)
+    const { currentUser } = useContext(UserContext)
     const onlyApprovedPosts = posts.filter(p => p.approved === true)
 
     useEffect(() => {
         getPosts()
-        getCurrentUser()
-    },[])
+    }, [])
 
     return (
         <>
@@ -27,9 +25,9 @@ export const PostList = (props) => {
                         props.history.push(`/new_post/`)
                     }}>Create New Post</button>
             {
-                posts !== [] ?  
+                posts !== [] ?
                     currentUser.is_staff === true ?
-                        posts.map(p => { 
+                        posts.map(p => {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>

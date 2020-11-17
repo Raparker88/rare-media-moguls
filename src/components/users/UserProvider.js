@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export const UserContext = React.createContext()
 
@@ -24,10 +24,13 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                return res.json()})
             .then(setCurrentUser)
     }
 
+    console.log(currentUser)
 
     return (
         <UserContext.Provider value={{
