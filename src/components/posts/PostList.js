@@ -25,6 +25,7 @@ export const PostList = (props) => {
                     className="btn newPostbtn"
                     onClick={() => {
                         props.history.push(`/new_post/`)
+                        window.location.reload()
                     }}>Create New Post</button>
             {
                 posts !== [] ?  
