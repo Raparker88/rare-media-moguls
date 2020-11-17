@@ -163,3 +163,11 @@
     border: none;
     color: white;
 }
+
+.reaction-img:hover{
+    cursor: pointer;
+}
+
+.reaction-img{
+    margin: 5px;
+}

@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { PostContext } from "./PostProvider"
+import { ReactionContext } from "../reactions/ReactionProvider"
 import "./Post.css"
 import { PostTags } from "../PostTags/PostTags"
+import { Link } from "react-router-dom"
 
 
 export const PostDetails = (props) => {
     const { getPostById, deletePost } = useContext(PostContext)
+    const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
 
     const [post, setPost] = useState({ rareuser: {} })
 
@@ -13,6 +16,7 @@ export const PostDetails = (props) => {
 
     useEffect(() => {
         const postId = parseInt(props.match.params.postId)
+        getReactionsByPost(postId)
         getPostById(postId)
             .then(setPost)
     }, [])
@@ -58,8 +62,21 @@ export const PostDetails = (props) => {
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
                     <div className="author_date_container">
-                        <h3 className="authorName">{post.rareuser.username}</h3>
+                        <h3 className="authorName"><Link className="postLink" to={{pathname:``}}>
+                        by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
+                        {reactions.map(r =>
+                            <>
+                            <img className="reaction-img" src={r.image_url} width="30" height="30"
+                            onClick={() => {
+                                const postIdObj = {post_id: post.id}
+                                addReaction(r.id, postIdObj)
+                                .then(()=> {
+                                    getReactionsByPost(post.id)
+                                })
+                            }}></img>
+                            <p>{r.count}</p>
+                            </>)}
                     </div>
                     <div className="postContent">
                         <p>{post.content}</p>

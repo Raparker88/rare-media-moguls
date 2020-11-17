@@ -1,21 +1,11 @@
 import React from "react";
-import { Nav } from "./nav/Nav";
-import { Route } from "react-router-dom";
 import "./Rare.css";
-import { PostProvider } from "./posts/PostProvider";
-import { CategoryProvider } from "./categories/CategoryProvider";
-import { PostForm } from "./posts/PostForm";
-import { PostList } from "./posts/PostList";
-import { CategoryForm } from "./categories/CategoryForm";
-import { TagProvider } from "./tags/TagProvider";
-import { CategoriesList } from "./categories/CategoryList"
-import { TagsList } from "./tags/TagsList"
-import { PostDetails } from "./posts/PostDetail"
-import { CommentProvider } from "./comments/CommentProvider";
-import { CommentsListByPost } from "./comments/CommentsList";
-import { PostTagProvider } from "./PostTags/PostTagProvider"
-import { UserPostList } from "./posts/UserPostList"
-import { UsersList }  from "./users/UsersList"
+import TagRoutes from "./routes/TagRoutes";
+import NavRoutes from "./routes/NavRoutes";
+import CategoryRoutes from "./routes/CategoryRoutes";
+import PostRoutes from "./routes/PostRoutes";
+import CommentRoutes from "./routes/CommentRoutes";
+import UserProfileRoutes from "./routes/UserProfileRoutes";
 
 
 
@@ -106,6 +96,12 @@ export const ApplicationViews = (props) => {
                 </CommentProvider>
             <Route exact path="/users" render={(props) =>
                         <UsersList {...props} />}/>
+                <NavRoutes />
+                <TagRoutes />
+                <CategoryRoutes />
+                <PostRoutes />
+                <CommentRoutes />
+                <UserProfileRoutes />
             </main>
         </>
     )
