@@ -7,6 +7,7 @@ import "./Category.css"
 
 export const CategoriesList = (props) => {
     const { categories, getCategories } = useContext(CategoryContext)
+    
     useEffect(() => {
         getCategories()
     }, [])
