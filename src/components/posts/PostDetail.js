@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react"
 import { PostContext } from "./PostProvider"
 import "./Post.css"
 import { PostTags } from "../PostTags/PostTags"
+import { Link } from "react-router-dom"
 
 
 export const PostDetails = (props) => {
@@ -58,7 +59,8 @@ export const PostDetails = (props) => {
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
                     <div className="author_date_container">
-                        <h3 className="authorName">{post.rareuser.username}</h3>
+                        <h3 className="authorName"><Link className="postLink" to={{pathname:``}}>
+                        by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
                     </div>
                     <div className="postContent">
