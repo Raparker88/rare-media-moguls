@@ -11,9 +11,9 @@ export const PostForm = (props) => {
     const { tags, getTags } = useContext(TagContext)
     const [selectedTags, setTags] = useState([])
     const [post, setPost] = useState({rareuser: {}, category: {}})
-
+    
     const editMode = props.match.params.hasOwnProperty("postId")
-
+    
     const handleControlledInputChange = (eve) => {
         const newPost = Object.assign({}, post)
         newPost[eve.target.name] = eve.target.value

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react"
 import { CategoryContext } from "./CategoryProvider";
 import "./Category.css"
+import { Link } from "react-router-dom";
 
 export const Category = ( props ) => {
     
@@ -10,7 +11,7 @@ export const Category = ( props ) => {
         <>
             <div className="category-item">
                 <div className="cat-name">
-                    {props.category.label}
+                    <Link to={`posts/category/${props.category.id}`}>{props.category.label}</Link>
                 </div>
                 <div className="btn-group">
                     <button className=" btn editTagButton" onClick={() => {
