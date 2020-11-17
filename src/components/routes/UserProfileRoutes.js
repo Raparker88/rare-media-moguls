@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { CommentProvider } from "../comments/CommentProvider";
 import { PostProvider } from "../posts/PostProvider";
 import { UsersList }  from "../users/UsersList"
+import { UserProfile } from "../users/UserProfile"
 
 export default () => {
     return (

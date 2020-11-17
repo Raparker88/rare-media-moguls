@@ -23,3 +23,20 @@ td {
     width: 15em;
 }
 
+.profile__img {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-self: flex-start;
+    justify-self: center;
+    transform: scale(1.5, 1.5);
+    cursor: pointer;
+    z-index: 5;
+    margin: 3rem;
+}
+
+.image{
+    z-index: 5;
+    height: 150px;
+    width: 150px;
+}
