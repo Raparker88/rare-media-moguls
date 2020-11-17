@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { PostContext } from "./PostProvider"
+import { ReactionContext } from "../reactions/ReactionProvider"
 import "./Post.css"
 import { PostTags } from "../PostTags/PostTags"
 import { Link } from "react-router-dom"
@@ -7,6 +8,7 @@ import { Link } from "react-router-dom"
 
 export const PostDetails = (props) => {
     const { getPostById, deletePost } = useContext(PostContext)
+    const { reactions, getReactions } = useContext(ReactionContext)
 
     const [post, setPost] = useState({ rareuser: {} })
 
@@ -14,6 +16,7 @@ export const PostDetails = (props) => {
 
     useEffect(() => {
         const postId = parseInt(props.match.params.postId)
+        getReactions()
         getPostById(postId)
             .then(setPost)
     }, [])
@@ -62,6 +65,8 @@ export const PostDetails = (props) => {
                         <h3 className="authorName"><Link className="postLink" to={{pathname:``}}>
                         by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
+                        {reactions.map(r =>
+                            <img src={r.image_url}></img>)}
                     </div>
                     <div className="postContent">
                         <p>{post.content}</p>

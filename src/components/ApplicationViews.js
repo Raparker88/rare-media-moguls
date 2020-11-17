@@ -16,6 +16,7 @@ import { CommentsListByPost } from "./comments/CommentsList";
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 import { UserPostList } from "./posts/UserPostList"
 import { UsersList }  from "./users/UsersList"
+import { ReactionProvider } from "./reactions/ReactionProvider"
 
 
 export const ApplicationViews = (props) => {
@@ -34,9 +35,11 @@ export const ApplicationViews = (props) => {
                 <TagProvider>
                     <PostTagProvider>
                         <PostProvider>
-                            <Route path="/posts/:postId(\d+)" render={
-                                props => <PostDetails {...props} />
-                            } />
+                            <ReactionProvider>
+                                <Route path="/posts/:postId(\d+)" render={
+                                    props => <PostDetails {...props} />
+                                } />
+                            </ReactionProvider>
                         </PostProvider>
                     </PostTagProvider>
                 </TagProvider>
