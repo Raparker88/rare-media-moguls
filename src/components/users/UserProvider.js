@@ -17,6 +17,7 @@ export const UserProvider = (props) => {
             .then(setUsers)
     }
 
+    // gets current user based on the token in local storage
     const getCurrentUser = () => {
         return fetch("http://localhost:8000/users/current_user", {
             headers: {
@@ -24,13 +25,17 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json())
-            .then((res)=>{
-                console.log(res)
-                if(res.status !== 404){
-                    setCurrentUser(res)
+        //if the response is 'ok', return the json response (rareuser object), otherwise return an empty object
+            .then(res => {
+                if(res.status === 200){
+                    return res.json()
+                }
+                else{
+                    return {}
                 }
             })
+            // set the 'currentUser' variable with the response data
+            .then(setCurrentUser)
     }
 
     return (

@@ -7,13 +7,15 @@ import { UserContext } from "../users/UserProvider";
 
 
 export const PostList = (props) => {
-    const { posts, getPosts } = useContext(PostContext)
-    const { currentUser } = useContext(UserContext)
+    const {posts, getPosts} = useContext(PostContext)
+    const {currentUser, getCurrentUser} = useContext(UserContext)
+
     const onlyApprovedPosts = posts.filter(p => p.approved === true)
 
     useEffect(() => {
         getPosts()
-    }, [])
+        getCurrentUser()
+    },[])
 
     return (
         <>
@@ -23,6 +25,7 @@ export const PostList = (props) => {
                     className="btn newPostbtn"
                     onClick={() => {
                         props.history.push(`/new_post/`)
+                        window.location.reload()
                     }}>Create New Post</button>
             {
                 posts !== [] ?
