@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 export const UserContext = React.createContext()
 
@@ -17,7 +17,6 @@ export const UserProvider = (props) => {
             .then(setUsers)
     }
 
-    // gets current user based on the token in local storage
     const getCurrentUser = () => {
         return fetch("http://localhost:8000/users/current_user", {
             headers: {
@@ -25,7 +24,6 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-        //if the response is 'ok', return the json response (rareuser object), otherwise return an empty object
             .then(res => {
                 if(res.status === 200){
                     return res.json()
@@ -34,13 +32,23 @@ export const UserProvider = (props) => {
                     return {}
                 }
             })
-            // set the 'currentUser' variable with the response data
             .then(setCurrentUser)
+    }
+
+    const changeUserType = (userId) => {
+        return fetch(`http://localhost:8000/users/${userId}/change_type`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            },
+        })
+            .then(getUsers)
     }
 
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser, setCurrentUser
+            users, getUsers, currentUser, getCurrentUser, changeUserType, setCurrentUser
         }}>
             {props.children}
         </UserContext.Provider>

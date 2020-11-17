@@ -8,6 +8,7 @@ import { PostDetails } from "../posts/PostDetail"
 import { PostForm } from "../posts/PostForm";
 import { PostList } from "../posts/PostList";
 import { UserPostList } from "../posts/UserPostList"
+import { ReactionProvider } from "../reactions/ReactionProvider"
 
 export default () => {
     return (
@@ -15,40 +16,42 @@ export default () => {
                 <PostTagProvider>
                     <TagProvider>
                         <PostProvider>
-                            <>
-                                <Route path="/posts/:postId(\d+)" render={
-                                    props => <PostDetails {...props} />
-                                } />
-                                <Route exact path="/new_post" render={
-                                    props => <PostForm {...props} />
-                                } />
-                                <Route exact path="/posts/edit/:postId(\d+)" render={
-                                    props => <PostForm {...props} />
-                                } />
-                                <Route exact path="/" render={(props) => (
-                                    <>
+                            <ReactionProvider>
+                                <>
+                                    <Route path="/posts/:postId(\d+)" render={
+                                        props => <PostDetails {...props} />
+                                    } />
+                                    <Route exact path="/new_post" render={
+                                        props => <PostForm {...props} />
+                                    } />
+                                    <Route exact path="/posts/edit/:postId(\d+)" render={
+                                        props => <PostForm {...props} />
+                                    } />
+                                    <Route exact path="/" render={(props) => (
+                                        <>
+                                            <div className="main-wrap">
+                                                <div className="top-spacer"></div>
+                                                <div className="mid-section">
+                                                    <div className="left-main">
+                                                        <PostList {...props}></PostList>
+                                                    </div>
+                                                </div>
+                                                <div className="bottom-spacer"></div>
+                                            </div>
+                                        </>
+                                    )} />
+                                    <Route exact path="/users/posts" render={(props) => (
                                         <div className="main-wrap">
                                             <div className="top-spacer"></div>
                                             <div className="mid-section">
-                                                <div className="left-main">
-                                                    <PostList {...props}></PostList>
-                                                </div>
+                                                <UserPostList
+                                                    {...props} />
                                             </div>
                                             <div className="bottom-spacer"></div>
                                         </div>
-                                    </>
-                                )} />
-                                <Route exact path="/users/posts" render={(props) => (
-                                    <div className="main-wrap">
-                                        <div className="top-spacer"></div>
-                                        <div className="mid-section">
-                                            <UserPostList
-                                                {...props} />
-                                        </div>
-                                        <div className="bottom-spacer"></div>
-                                    </div>
-                                )} />
-                            </>
+                                    )} />
+                                </>
+                            </ReactionProvider>
                         </PostProvider>
                     </TagProvider>
                 </PostTagProvider>
