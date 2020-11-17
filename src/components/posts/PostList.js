@@ -15,6 +15,7 @@ export const PostList = (props) => {
     useEffect(() => {
         getPosts()
         getCurrentUser()
+
     },[])
 
     return (

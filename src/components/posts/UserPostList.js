@@ -6,16 +6,23 @@ import "./Post.css";
 
 
 export const UserPostList = (props) => {
-    const { getPostsByUser, deletePost } = useContext(PostContext)
+    const { getPostsByUser, deletePost, getPostsByAuthor} = useContext(PostContext)
     const [posts, setPosts] = useState([])
 
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
     const [areYouSure, setAreYouSure] = useState(0)
 
+    const seeAllPostsByAuthor = props.match.params.hasOwnProperty("rareuser_id")
+
     useEffect(()=>{
-        getPostsByUser()
-            .then(setPosts)
+        if(seeAllPostsByAuthor){
+            getPostsByAuthor()
+                .then(setPosts)
+        } else{
+            getPostsByUser()
+                .then(setPosts)
+        }
     }, [])
 
     const toggleSelected = (e)=>{

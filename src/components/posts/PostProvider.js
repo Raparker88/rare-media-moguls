@@ -94,9 +94,18 @@ export const PostProvider = (props) => {
             .then(getPosts)
     }
 
+    const getPostsByAuthor = (userId) => {
+        return fetch(`http://localhost:8000/posts?rareuser_id=${userId}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+            }
+        })
+            .then(res => res.json())
+    }
+    
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser, adminPostApproval
+            posts, addPost, getPostById, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser, adminPostApproval, getPostsByAuthor
         }}>
             {props.children}
         </PostContext.Provider>
