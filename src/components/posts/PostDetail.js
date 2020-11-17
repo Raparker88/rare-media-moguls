@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 
 export const PostDetails = (props) => {
     const { getPostById, deletePost } = useContext(PostContext)
-    const { reactions, getReactions } = useContext(ReactionContext)
+    const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
 
     const [post, setPost] = useState({ rareuser: {} })
 
@@ -16,7 +16,7 @@ export const PostDetails = (props) => {
 
     useEffect(() => {
         const postId = parseInt(props.match.params.postId)
-        getReactions()
+        getReactionsByPost(postId)
         getPostById(postId)
             .then(setPost)
     }, [])
@@ -66,7 +66,17 @@ export const PostDetails = (props) => {
                         by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
                         {reactions.map(r =>
-                            <img src={r.image_url}></img>)}
+                            <>
+                            <img src={r.image_url} width="30" height="30"
+                            onClick={() => {
+                                const postIdObj = {post_id: post.id}
+                                addReaction(r.id, postIdObj)
+                                .then(()=> {
+                                    getReactionsByPost(post.id)
+                                })
+                            }}></img>
+                            <p>{r.count}</p>
+                            </>)}
                     </div>
                     <div className="postContent">
                         <p>{post.content}</p>
