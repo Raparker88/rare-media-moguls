@@ -4,12 +4,7 @@ import { PostContext } from "../posts/PostProvider"
 import "./Nav.css";
 
 export const UserDropdown = (props) => {
-    const handleLogout = () => {
-        localStorage.clear();
-    };
-    const { getPostsByUser } = useContext(PostContext)
 
-    const [currentUserId, setCurrentUserId] = useState(0)
 
     useEffect(()=>{
         const currentUserId = localStorage.getItem('rare_token')
@@ -29,15 +24,7 @@ export const UserDropdown = (props) => {
                 }}>
                     create post
                 </div>
-                <Link
-                title="Review Your Posts"
-                className="link nav__link dropdown-link"
-                to={`/users/posts`}
-                onClick={() => {
-                    props.toggleOpen()
-                }}>
-                    my posts
-                </Link>
+
                 <Link
                 title="Manage Categories"
                 className="link nav__link dropdown-link"
@@ -56,15 +43,7 @@ export const UserDropdown = (props) => {
                 }}>
                     tag management
                 </Link>
-                <Link
-                title="Logout"
-                className="link nav__link logout dropdown-link"
-                to="/"
-                onClick={() => {
-                    handleLogout();
-                }}>
-                    logout
-                </Link>
+
             </div>
         </>
     );

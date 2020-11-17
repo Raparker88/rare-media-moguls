@@ -24,17 +24,18 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => {
+            .then(res => res.json())
+            .then((res)=>{
                 console.log(res)
-                return res.json()})
-            .then(setCurrentUser)
+                if(res.status !== 404){
+                    setCurrentUser(res)
+                }
+            })
     }
-
-    console.log(currentUser)
 
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser
+            users, getUsers, currentUser, getCurrentUser, setCurrentUser
         }}>
             {props.children}
         </UserContext.Provider>
