@@ -81,6 +81,14 @@
     right: 0;
 }
 
+.nav__link-wrapper{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-items: space-evenly;
+    align-items: center;
+}
+
 .nav__link {
     text-decoration: none;
     font-weight: 200;
@@ -89,7 +97,7 @@
     color: rgba(0, 0, 0, 0.781) !important;
   }
 
-.post-wrapper {
+/* .post-wrapper {
     display:flex;
     width: auto;
     height: 100%;
@@ -97,7 +105,7 @@
     align-content: center;
     justify-items: space-evenly;
     align-items: center;
-}
+} */
 
 .posts-link,
 .user-menu-btn {
