@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Link } from "react-router-dom"
 import "./Nav.css"
 import Logo from "./rare_logo_diamond_transparent.png"
 import { UserContext } from "../users/UserProvider"
@@ -36,8 +35,8 @@ export const Nav = (props) => {
         <>
         <div className="nav">
             <div className="nav__inner">
-                <div className="spacer__nav--left"></div> {/*Creates space between left window edge and logo*/}
-                <div className="link nav__link logo-wrapper left"> {/*Contains logo and logo spacers*/}
+                <div className="spacer__nav--left"></div>
+                <div className="link logo-wrapper left">
                     <div className="top-space"></div>
                     <div className="middle-wrap">
                         <img className="nav__logo"
@@ -49,65 +48,65 @@ export const Nav = (props) => {
                     </div>
                     <div className="bottom-space"></div>
                 </div>
-                <div className="link nav__link user-nav-wrapper right">
+                <div className="link user-nav-wrapper right">
                     <div className="top-space"></div>
-                    <div className="link nav__link wrapper__nav--right">
-                        <div className="nav__link-wrapper post-wrapper">
-                            <Link
+                    <div className="link wrapper__nav--right">
+                        <div className={`${admin ? "admin-nav-link-wrap": "nav__link-wrapper"}`}>
+                            <button
                             title="View All Posts"
-                            className="link nav__link posts-link"
-                            to={`${loggedIn ? '/' : '/login'}`}>
+                            className="btn nav__btn"
+                            onClick={()=>props.history.push(`${loggedIn ? '/' : '/login'}`)}>
                                 All Posts
-                            </Link>
+                            </button>
 
                             {loggedIn
                             ?<>
-                                <Link
+                                <button
                                 title="Review My Posts"
-                                className="link nav__link"
-                                to={`/users/posts`}>
+                                className="btn nav__btn"
+                                onClick={()=>props.history.push(`/users/posts`)}>
                                     My Posts
-                                </Link>
+                                </button>
 
-                                <Link
+                                <button
                                 title={`${admin ? "Manage Categories" : "View Categories"}`}
-                                className="link nav__link"
-                                to="/categories">
+                                className={`btn nav__btn ${admin ? "admin-categories" : "categories"}`}
+                                onClick={()=>props.history.push("/categories")}>
                                     {admin ? "Category Manager" : "Categories"}
-                                </Link>
+                                </button>
 
-                                <Link
+                                <button
                                 title={`${admin ? "Manage Tags" : "View Tags"}`}
-                                className="link nav__link"
-                                to="/tags">
+                                className={`btn nav__btn ${admin ? "admin-tags" : "tags"}`}
+                                onClick={()=>props.history.push("/tags")}>
                                     {admin ? "Tag Manager" : "Tags"}
-                                </Link>
+                                </button>
 
                                 {admin ?<>
-                                <Link
-                                className="link nav__link posts-link"
-                                to="/users">
+                                <button
+                                className="btn nav__btn user-manager"
+                                onClick={()=>props.history.push(`/users`)}>
                                     User Manager
-                                </Link> </>
+                                </button> </>
                                 : null
                                 }
                             </>
                             : null
                             }
-                            <Link
+                            <button
                             title={`${loggedIn ? "Logout" : "Login"}`}
-                            className={`link nav__link ${loggedIn ? "logout" :"get-started"}`}
+                            className={`btn nav__btn ${loggedIn ? "logout" :"get-started"}`}
                             onClick={() => {
                                 if(loggedIn){
                                     handleLogout()
+                                    props.history.push("/")
                                 }
                                 else{
-                                    return
+                                    props.history.push("/login")
                                 }
-                            }}
-                            to={`${loggedIn ? "/" : "/login"}`}>
+                            }}>
                                 {loggedIn ? "Logout" : "Get Sarted"}
-                            </Link>
+                            </button>
 
                         </div>
                     </div>
