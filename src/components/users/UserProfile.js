@@ -23,6 +23,7 @@ export const UserProfile = (props) => {
         .then(setProfile)
         .then(getPosts)
     }, [])
+    console.log(profile.is_current_user)
 
     useEffect(()=>{
         if(profile !== {} && posts !== []){
@@ -66,12 +67,16 @@ export const UserProfile = (props) => {
     }, [profile])
 
     return (
+        <div className="profile-container">
+        <div className="left-spacer"></div>
         <article className="profile">
-            <SubscribeButton {...props} />
+
+            <SubscribeButton profile={profile} {...props} />
+
             <div className="top">
                 <section className="profile__info-left">
                     <div className="profile__img">
-                        <img className="image" src={image} />
+                        <img className="image" alt="" src={image} />
                     </div>
                     <div className="profile__name">
                         {profile.full_name}
@@ -99,7 +104,7 @@ export const UserProfile = (props) => {
                     }
                     </div>
                     <Link
-                    title={`Post Count: ${postCount}`}
+                    title={`Click to view posts by ${profile.username}`}
                     className="profile__articles"
                     to={`/users/posts`} >
                         {postCount} {plural}
@@ -110,5 +115,7 @@ export const UserProfile = (props) => {
                 {profile.bio}
             </div>
         </article>
+        <div className="right-spacer"></div>
+        </div>
     )
 }
