@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { CategoryContext } from "./CategoryProvider";
 import "./Category.css"
+import { Link } from "react-router-dom";
 import { UserContext } from "../users/UserProvider";
 
 export const Category = (props) => {
@@ -25,7 +26,7 @@ export const Category = (props) => {
                         <button className="btn-small fa fa-trash" onClick={() => deleteCategory(props.category.id)}>
                         </button>
                         <div className="cat-name">
-                            {props.category.label}
+                        <Link to={`posts/category/${props.category.id}`}>{props.category.label}</Link>
                         </div>
                     </>)
                     : (

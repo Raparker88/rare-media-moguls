@@ -49,7 +49,7 @@ export const Login = (props) => {
                             type="text"
                             id="username"
                             className="form-control"
-                            defaultValue=""
+                            defaultValue="marymogul"
                             placeholder="Username"
                             required
                             autoFocus />
