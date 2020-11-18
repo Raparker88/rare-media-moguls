@@ -10,7 +10,7 @@ export const PostList = (props) => {
     const {posts, getPosts} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
 
-    const onlyApprovedPosts = posts.filter(p => p.approved === true)
+    const approvedAndUserCreatedPosts = posts.filter(p => p.approved === true || p.is_user_author ===true)
 
     useEffect(() => {
         getPosts()
@@ -43,7 +43,7 @@ export const PostList = (props) => {
                         <AdminPostApproval post = {p}/>
                         </div>
                         })
-                    : onlyApprovedPosts.map(p=> {
+                    : approvedAndUserCreatedPosts.map(p=> {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
