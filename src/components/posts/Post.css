@@ -22,8 +22,14 @@
     font-weight: bold;
 }
 
+.post-title {
+    width: 60%;
+    margin-right: 0;
+}
+
 .publication-date {
     left: 0;
+    float: right;
 }
 
 .postLink:hover {

@@ -10,10 +10,9 @@ export const PostList = (props) => {
     const {posts, getPosts, getPostsByCategoryId} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
     const [isCategory, setIsCategory] = useState(false)
-    const onlyApprovedPosts = posts.filter(p => p.approved === true)
 
-
-
+    const approvedAndUserCreatedPosts = posts.filter(p => p.publication_date != null && p.approved || p.is_user_author )
+    const postsForAdmins = posts.filter(p => p.publication_date != null || p.is_user_author)
 
     useEffect(() => {
         if(props.match.params.categoryId) {
@@ -40,17 +39,15 @@ export const PostList = (props) => {
             {
                 posts !== [] ?
                     currentUser.is_staff === true ?
-                        posts.map(p => {
+                        postsForAdmins.map(p => { 
                         return <div className="post-list-single" key={p.id}>
-                        <div className="post-author">
-                            <p>{p.rareuser.full_name}</p>
-                            <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
+                        <div className="post-list-top">
+                            <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
+                                <p className="post-title">{p.title}</p>
+                            </Link>
+                            <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date {new Date(p.publication_date).toDateString()}</p>
                         </div>
-                        <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
-                            <p>{p.title}</p>
-                        </Link>
-                        <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date {new Date(p.publication_date).toDateString()}</p>
-                        <img className="post-img" src="https://via.placeholder.com/300x150.png"></img>
+                        <img className="post-img" src="https://via.placeholder.com/500x200.png"></img>
                         <div className="post-author">
                             <p>Author: {p.rareuser.full_name}</p>
                         </div>
@@ -58,7 +55,7 @@ export const PostList = (props) => {
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
                         </div>
                         })
-                    : onlyApprovedPosts.map(p=> {
+                    : approvedAndUserCreatedPosts.map(p=> {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
