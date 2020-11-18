@@ -10,7 +10,8 @@ export const PostList = (props) => {
     const {posts, getPosts} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
 
-    const approvedAndUserCreatedPosts = posts.filter(p => p.approved === true || p.is_user_author ===true)
+    const approvedAndUserCreatedPosts = posts.filter(p => p.publication_date != null && p.approved || p.is_user_author )
+    const postsForAdmins = posts.filter(p => p.publication_date != null || p.is_user_author)
 
     useEffect(() => {
         getPosts()
@@ -30,7 +31,7 @@ export const PostList = (props) => {
             {
                 posts !== [] ?  
                     currentUser.is_staff === true ?
-                        posts.map(p => { 
+                        postsForAdmins.map(p => { 
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
