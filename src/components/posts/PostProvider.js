@@ -94,9 +94,21 @@ export const PostProvider = (props) => {
             .then(getPosts)
     }
 
+    const publishPost = (postId) => {
+        return fetch(`http://localhost:8000/posts/${ postId }/publish`, {
+            method: "PATCH",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            }
+        })
+            .then(getPosts)
+    }
+
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser, adminPostApproval
+            posts, addPost, getPostById, deletePost, updatePost, getPosts, 
+            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost
         }}>
             {props.children}
         </PostContext.Provider>

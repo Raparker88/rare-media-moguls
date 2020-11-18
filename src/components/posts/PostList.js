@@ -35,7 +35,8 @@ export const PostList = (props) => {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
-                            <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
+                            <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? 
+                            new Date(p.publication_date.concat("T00:00:00")).toDateString() : "unpublished"}</p>
                         </div>
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>

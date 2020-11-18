@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 
 
 export const PostDetails = (props) => {
-    const { getPostById, deletePost } = useContext(PostContext)
+    const { getPostById, deletePost, publishPost } = useContext(PostContext)
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
 
     const [post, setPost] = useState({ rareuser: {} })
@@ -23,7 +23,11 @@ export const PostDetails = (props) => {
 
     const handleDate = (date) => {
         if ("publication_date" in post) {
-            return new Date(date).toDateString()
+            if (post.publication_date != null){
+                return new Date(date.concat("T00:00:00")).toDateString()
+            }else{
+                return "currently unpublished"
+            }
         }
     }
 
@@ -41,6 +45,13 @@ export const PostDetails = (props) => {
                         onClick={() => {
                             deletePostDialog.current.showModal()
                         }}></button>
+                    <button
+                        className="btn-small publishBtn"
+                        onClick={() => {
+                            publishPost(post.id)
+                            .then(window.location.reload())
+                        }}>{post.publication_date == null ? "Publish" : "Unpublish" }</button>
+                    
                 </div>
             )
         }
