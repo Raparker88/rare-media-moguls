@@ -4,11 +4,13 @@ import { ReactionContext } from "../reactions/ReactionProvider"
 import "./Post.css"
 import { PostTags } from "../PostTags/PostTags"
 import { Link } from "react-router-dom"
+import { UserContext } from "../users/UserProvider"
 
 
 export const PostDetails = (props) => {
     const { getPostById, deletePost } = useContext(PostContext)
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
+    const {currentUser, getCurrentUser} = useContext(UserContext)
 
     const [post, setPost] = useState({ rareuser: {} })
 
@@ -19,6 +21,10 @@ export const PostDetails = (props) => {
         getReactionsByPost(postId)
         getPostById(postId)
             .then(setPost)
+    }, [])
+
+    useEffect(() => {
+        getCurrentUser()
     }, [])
 
     const handleDate = (date) => {
@@ -43,7 +49,15 @@ export const PostDetails = (props) => {
                         }}></button>
                 </div>
             )
-        }
+        } else if (currentUser.is_staff === true) {
+           return ( <div className="postButtonContainer">
+                <button
+                    className="btn-small fa fa-trash"
+                    onClick={() => {
+                        deletePostDialog.current.showModal()
+                    }}></button>
+            </div>
+            )}
     }
 
     return (
@@ -62,20 +76,20 @@ export const PostDetails = (props) => {
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
                     <div className="author_date_container">
-                        <h3 className="authorName"><Link className="postLink" to={{pathname:``}}>
-                        by {post.rareuser.username} </Link></h3>
+                        <h3 className="authorName"><Link className="postLink" to={{ pathname: `` }}>
+                            by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
                         {reactions.map(r =>
                             <>
-                            <img className="reaction-img" src={r.image_url} width="30" height="30"
-                            onClick={() => {
-                                const postIdObj = {post_id: post.id}
-                                addReaction(r.id, postIdObj)
-                                .then(()=> {
-                                    getReactionsByPost(post.id)
-                                })
-                            }}></img>
-                            <p>{r.count}</p>
+                                <img className="reaction-img" src={r.image_url} width="30" height="30"
+                                    onClick={() => {
+                                        const postIdObj = { post_id: post.id }
+                                        addReaction(r.id, postIdObj)
+                                            .then(() => {
+                                                getReactionsByPost(post.id)
+                                            })
+                                    }}></img>
+                                <p>{r.count}</p>
                             </>)}
                     </div>
                     <div className="postContent">

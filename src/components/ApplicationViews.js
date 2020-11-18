@@ -8,6 +8,8 @@ import CommentRoutes from "./routes/CommentRoutes";
 import UserProfileRoutes from "./routes/UserProfileRoutes";
 import { UserContext } from "./users/UserProvider"
 
+
+
 export const ApplicationViews = (props) => {
     const { getCurrentUser, currentUser, getUserProfile } = useContext(UserContext)
 
