@@ -53,36 +53,37 @@ export const Register = (props) => {
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
 
-            <form className="form--login" onSubmit={handleRegister}>
+            <form className="form--login form--register" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Rare</h1>
-                <fieldset>
+                <img className="register-img" src="https://via.placeholder.com/200x125.png"></img>
+                <fieldset className="register-input">
                     <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="First Name" required autoFocus />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last Name" required />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email" required />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={username} name="username" className="form-control" placeholder="Username" />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="Profile Pic URL" />
                 </fieldset>
-                <fieldset>
+                <fieldset className="register-input">
                     <input ref={bio} name="bio" className="form-control" placeholder="Bio" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
+                    <button className="btn login-button" type="submit">Register</button>
                 </fieldset>
             </form>
             <section className="link--register">
