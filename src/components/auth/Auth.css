@@ -74,6 +74,10 @@ fieldset {
     color: purple;
 }
 
+.login-button:hover {
+    background-color: purple;
+}
+
 .link--register {
     width: 102%;
     text-align: center;
