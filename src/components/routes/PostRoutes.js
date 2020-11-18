@@ -27,6 +27,10 @@ export default () => {
                                     <Route exact path="/posts/edit/:postId(\d+)" render={
                                         props => <PostForm {...props} />
                                     } />
+
+                                    <Route exact path="/posts/category/:categoryId(\d+)" render={
+                                        props => <PostList {...props} />
+                                    } />
                                     <Route exact path="/" render={(props) => (
                                         <>
                                             <div className="main-wrap">
