@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import "./Post.css";
@@ -12,16 +12,30 @@ export const PostList = (props) => {
 
     const onlyApprovedPosts = posts.filter(p => p.approved === true)
 
+    const [filteredPosts, setFilteredPosts] = useState([]) 
+
+    useEffect(() => {
+        getCurrentUser()
+        .then(getPosts())
+    }, [])
 
     useEffect(() => {
         if(props.match.params.categoryId) {
             const categoryId = parseInt(props.match.params.categoryId)
-            getPostsByCategoryId(categoryId)
-        }else {
-            getPosts()
-            getCurrentUser()
+            const filtered = posts.filter(p => {
+                if( currentUser.is_staff) {
+                    return (p.category_id === categoryId)
+                } else {
+                    if (p.approved){
+                        return p 
+                    }
+                }
+            })
+            setFilteredPosts(filtered) 
+        } else {
+            setFilteredPosts(posts)
         }
-    },[])
+    }, [posts])
 
 
     return (
@@ -35,9 +49,9 @@ export const PostList = (props) => {
                         window.location.reload()
                     }}>Create New Post</button>
             {
-                posts !== [] ?  
-                    currentUser.is_staff === true ?
-                        posts.map(p => { 
+                filteredPosts !== [] ?  
+                    filteredPosts.map(p => { 
+                        if (p.approved)
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
@@ -47,21 +61,13 @@ export const PostList = (props) => {
                         <p>{p.title}</p>
                         </Link>
                         <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
+                        {currentUser.is_staff
+                        ?
                         <AdminPostApproval post = {p}/>
+                        : null
+                        }
                         </div>
                         })
-                    : onlyApprovedPosts.map(p=> {
-                        return <div key={p.id}>
-                        <div className="post-author">
-                            <p>{p.rareuser.full_name}</p>
-                            <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
-                        </div>
-                        <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
-                        <p>{p.title}</p>
-                        </Link>
-                        <p>Posted in <b>{p.category.label}</b></p>
-                        </div>
-                    })
                 : null
             }
         </div>
