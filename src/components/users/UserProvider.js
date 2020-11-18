@@ -39,7 +39,7 @@ export const UserProvider = (props) => {
             }
         })
             .then(res => res.json())
-            .then(setCurrentUserProfile)
+
     }
 
     const changeUserType = (userId) => {

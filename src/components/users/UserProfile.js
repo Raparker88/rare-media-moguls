@@ -23,7 +23,6 @@ export const UserProfile = (props) => {
         .then(setProfile)
         .then(getPosts)
     }, [])
-    console.log(profile.is_current_user)
 
     useEffect(()=>{
         if(profile !== {} && posts !== []){
@@ -42,7 +41,7 @@ export const UserProfile = (props) => {
         if(postCount > 1){
             setPlural("posts")
         }
-    })
+    }, [postCount])
 
     useEffect(()=> {
         if(profile !== {} && profile.date_joined !== undefined){

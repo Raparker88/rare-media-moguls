@@ -50,6 +50,18 @@ td {
     flex-flow: row nowrap;
     justify-content: space-evenly;
 }
+.profile__articles{
+    color: rgb(1, 36, 1);
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: .35s;
+}
+
+.profile__articles:hover{
+    color: rgb(160, 158, 158);
+    transform-origin: center;
+    transform: scale(1.02, 1.02);
+}
 
 .left-spacer,
 .right-spacer {

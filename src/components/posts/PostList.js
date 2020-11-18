@@ -42,13 +42,18 @@ export const PostList = (props) => {
                         posts.map(p => {
                         return <div key={p.id}>
                         <div className="post-author">
-                            <p>{p.rareuser.full_name}</p>
+                            <p className="author-name"
+                            onClick={()=>{
+                                props.history.push(`/users/${p.rareuser.id}`)
+                            }}>
+                                {p.rareuser.full_name}
+                                </p>
                             <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
                         </div>
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
+                        <p>Posted in <Link className="cat-link" to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
                         </div>
                         })
@@ -61,7 +66,7 @@ export const PostList = (props) => {
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <b>{p.category.label}</b></p>
+                        <p>Posted in <Link className="cat-link" to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         </div>
                     })
                 : null
