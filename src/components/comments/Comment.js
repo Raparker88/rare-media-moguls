@@ -1,12 +1,18 @@
-import React, { useContext, useRef } from "react"
+import React, { useContext, useEffect, useRef } from "react"
 import { CommentContext } from "./CommentProvider"
 import { CommentEditForm } from "./CommentEditForm"
 import "./Comment.css"
+import { UserContext } from "../users/UserProvider"
 
 export const Comment = (props) => {
     const {deleteComment} = useContext(CommentContext)
+    const {currentUser, getCurrentUser} = useContext(UserContext)
     const deleteCommentDialog = useRef(null)
     const editCommentDialog = useRef(null)
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
 
     const handleDate = (date) => {
         if ("created_on" in props.comment) {
@@ -23,6 +29,16 @@ export const Comment = (props) => {
                         onClick={() => {
                             editCommentDialog.current.showModal()
                         }}></button>
+                    <button
+                        className="btn-small fa fa-trash"
+                        onClick={() => {
+                            deleteCommentDialog.current.showModal()
+                        }}></button>
+                </div>
+            )
+        } else if (currentUser.is_staff === true){
+            return (
+                <div className="commentsButtonContainer">
                     <button
                         className="btn-small fa fa-trash"
                         onClick={() => {
