@@ -7,6 +7,7 @@ export const UserProvider = (props) => {
     const [users, setUsers] = useState([])
     const [currentUser, setCurrentUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
+    const [currentUserProfile, setCurrentUserProfile] = useState({})
 
     const getUsers = () => {
         return fetch("http://localhost:8000/users", {
@@ -26,14 +27,7 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => {
-                if(res.status === 200){
-                    return res.json()
-                }
-                else{
-                    return {}
-                }
-            })
+            .then(res => res.json())
             .then(setCurrentUser)
     }
 
@@ -45,6 +39,7 @@ export const UserProvider = (props) => {
             }
         })
             .then(res => res.json())
+            .then(setCurrentUserProfile)
     }
 
     const changeUserType = (userId) => {
@@ -71,8 +66,7 @@ export const UserProvider = (props) => {
 
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, getUserProfile,
-            loggedIn, setLoggedIn, setCurrentUser
+            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, getUserProfile, loggedIn, setLoggedIn, setCurrentUser, currentUserProfile, setCurrentUserProfile
         }}>
             {props.children}
         </UserContext.Provider>

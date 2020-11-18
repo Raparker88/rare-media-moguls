@@ -8,7 +8,7 @@ export const Login = (props) => {
     const password = useRef(null)
     const invalidDialog = useRef(null)
 
-    const {setLoggedIn, getCurrentUser, loggedIn } = useContext(UserContext)
+    const {setLoggedIn, getCurrentUser, currentUser } = useContext(UserContext)
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -30,18 +30,14 @@ export const Login = (props) => {
                     setLoggedIn(true)
                     localStorage.setItem("rare_token", res.token)
                     props.history.push("/");
-            }
-            else {
-                invalidDialog.current.showModal();
-            }
-            });
-        };
-
-    useEffect(()=>{
-        if(loggedIn === true){
-            getCurrentUser()
+                }
+                else {
+                    invalidDialog.current.showModal();
+                }
+            })
         }
-    },[loggedIn])
+
+    
 
     return (
         <main className="container--login">
