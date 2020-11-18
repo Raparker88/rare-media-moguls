@@ -31,7 +31,8 @@ export const Post = (props) => {
                         <div className="cat-on-post">{props.post.category.label}</div>
                     </div>
                     <div className="dot-div"></div>
-                    <div>{new Date(props.post.publication_date).toDateString({})}</div>
+                    <div>{props.post.publication_date != null ? 
+                    new Date(props.post.publication_date.concat("T00:00:00")).toDateString({}): "unpublished"}</div>
                 </div>
                 <div className="lowerhalf-right">
                     {props.open
