@@ -7,16 +7,23 @@ import { UserContext } from "../users/UserProvider";
 
 
 export const PostList = (props) => {
-    const {posts, getPosts} = useContext(PostContext)
+    const {posts, getPosts, getPostsByCategoryId} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
 
     const approvedAndUserCreatedPosts = posts.filter(p => p.publication_date != null && p.approved || p.is_user_author )
     const postsForAdmins = posts.filter(p => p.publication_date != null || p.is_user_author)
 
+
     useEffect(() => {
-        getPosts()
-        getCurrentUser()
+        if(props.match.params.categoryId) {
+            const categoryId = parseInt(props.match.params.categoryId)
+            getPostsByCategoryId(categoryId)
+        }else {
+            getPosts()
+            getCurrentUser()
+        }
     },[])
+
 
     return (
         <>
@@ -41,7 +48,7 @@ export const PostList = (props) => {
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <b>{p.category.label}</b></p>
+                        <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p}/>
                         </div>
                         })
