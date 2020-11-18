@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import { request } from '../utils/request';
+
 export const UserContext = React.createContext()
 
 export const UserProvider = (props) => {
@@ -49,6 +51,14 @@ export const UserProvider = (props) => {
         })
             .then(getUsers)
     }
+
+    const addImage = async (imageBase64) => {
+        const requestData = {
+            image: imageBase64,
+        };
+
+        return await request('http://localhost:8000/images', 'POST', requestData);
+    };
 
 
     return (

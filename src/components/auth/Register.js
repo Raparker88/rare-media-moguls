@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
+import { UserImageForm } from "../users/UserImageForm";
 
 export const Register = (props) => {
     const first_name = useRef()
@@ -8,7 +9,7 @@ export const Register = (props) => {
     const email = useRef()
     const username = useRef()
     const password = useRef()
-    const profile_image_url = useRef()
+    const profile_image_url = useRef(UserImageForm)
     const bio = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
