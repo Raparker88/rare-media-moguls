@@ -26,7 +26,14 @@ export const UserProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if(res.status === 200){
+                    return res.json()
+                }
+                else{
+                    return {}
+                }
+            })
             .then(setCurrentUser)
     }
 
@@ -51,7 +58,6 @@ export const UserProvider = (props) => {
             .then(getUsers)
     }
 
-
     return (
         <UserContext.Provider value={{
             users,
@@ -61,7 +67,8 @@ export const UserProvider = (props) => {
             changeUserType,
             getUserProfile,
             loggedIn,
-            setLoggedIn
+            setLoggedIn,
+            setCurrentUser
         }}>
             {props.children}
         </UserContext.Provider>

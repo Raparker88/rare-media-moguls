@@ -27,9 +27,9 @@ export const PostList = (props) => {
                         props.history.push(`/new_post/`)
                     }}>Create New Post</button>
             {
-                posts !== [] ?  
+                posts !== [] ?
                     currentUser.is_staff === true ?
-                        posts.map(p => { 
+                        posts.map(p => {
                         return <div key={p.id}>
                         <div className="post-author">
                             <p>{p.rareuser.full_name}</p>
