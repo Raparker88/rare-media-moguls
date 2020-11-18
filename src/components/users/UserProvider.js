@@ -59,7 +59,6 @@ export const UserProvider = (props) => {
             .then(getUsers)
     }
 
-<<<<<<< HEAD
     const addImage = async (imageBase64) => {
         const requestData = {
             profile_image_url: imageBase64,
@@ -68,8 +67,6 @@ export const UserProvider = (props) => {
         return await request('http://localhost:8000/images', 'POST', requestData);
     };
 
-=======
->>>>>>> adb0501310dee73d652d06de7e3ffe6ad32e9509
     return (
         <UserContext.Provider value={{
             users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, addImage
