@@ -39,4 +39,68 @@ td {
     z-index: 5;
     height: 150px;
     width: 150px;
+    border: solid 1px black;
+    margin: -.25rem;
+}
+
+.profile {
+    margin-left: 15rem;
+    margin-right: 15rem;
+    display: flex;
+    flex-flow: column nowrap;
+
+}
+
+.profile__info-right {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.profile__info-left {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 1rem;
+}
+
+.top{
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.bottom{
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 1rem;
+}
+.mem-since,
+.email,
+.profile_type {
+    margin: -.15rem 0;
+}
+
+.profile__username,
+.profile__name {
+    font-size: larger;
+    font-weight: 1000;
+}
+
+.profile__articles {
+    text-decoration: none;
+    color: black;
+    font-size: smaller;
+    margin: -.15rem 0;
+}
+
+.subscribe {
+    position: absolute;
+    transform: translateX(600%);
+    max-width: 100px;
+    border-radius: .35rem;
+    background-color: rgb(228, 228, 228);
+    color: black;
+    border: 1px solid black !important;
 }
