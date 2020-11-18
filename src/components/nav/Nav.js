@@ -28,8 +28,8 @@ export const Nav = (props) => {
     }, [currentUser])
 
     const handleLogout = () => {
-        localStorage.clear();
-    };
+        localStorage.clear()
+    }
 
     return (
         <>
