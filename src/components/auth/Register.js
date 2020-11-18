@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
-import { UserImageForm } from "../users/UserImageForm";
 
 export const Register = (props) => {
 
