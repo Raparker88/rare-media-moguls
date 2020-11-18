@@ -95,6 +95,7 @@ export const PostProvider = (props) => {
             body: JSON.stringify(post)
         })
             .then(getPosts)
+            
     }
 
     const publishPost = (postId) => {

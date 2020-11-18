@@ -12,7 +12,6 @@ export const PostDetails = (props) => {
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
 
-    // const [post, setPost] = useState({ rareuser: {} })
 
     const deletePostDialog = useRef(null)
 
@@ -20,7 +19,6 @@ export const PostDetails = (props) => {
         const postId = parseInt(props.match.params.postId)
         getReactionsByPost(postId)
         getPostById(postId)
-            // .then(setPost)
     }, [])
 
     useEffect(() => {
