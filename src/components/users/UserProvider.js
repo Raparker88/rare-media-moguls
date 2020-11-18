@@ -64,7 +64,7 @@ export const UserProvider = (props) => {
             profile_image_url: imageBase64,
         };
 
-        return await request('http://localhost:8000/images', 'POST', requestData);
+        return await request('http://localhost:8000/media/images', 'POST', requestData);
     };
 
     return (
