@@ -28,7 +28,7 @@ export const PostTags = ({postId}) => {
     return (
         <div className="post-tags-container">
             <h3 className="post-tags-header">TAGGED AS</h3>
-            <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button>
+            <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button> 
             {isEditing ?
                     (
                     tags.map(tag => {
