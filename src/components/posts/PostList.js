@@ -36,7 +36,7 @@ export const PostList = (props) => {
                         window.location.reload()
                     }}>Create New Post</button>
             {
-                posts !== [] ?  
+                posts !== [] ?
                     currentUser.is_staff === true ?
                         postsForAdmins.map(p => { 
                         return <div key={p.id}>

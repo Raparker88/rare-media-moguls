@@ -8,11 +8,11 @@ import { UserContext } from "../users/UserProvider"
 
 
 export const PostDetails = (props) => {
-    const { getPostById, deletePost, publishPost } = useContext(PostContext)
+    const { getPostById, deletePost, publishPost, post } = useContext(PostContext)
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
 
-    const [post, setPost] = useState({ rareuser: {} })
+    // const [post, setPost] = useState({ rareuser: {} })
 
     const deletePostDialog = useRef(null)
 
@@ -20,7 +20,7 @@ export const PostDetails = (props) => {
         const postId = parseInt(props.match.params.postId)
         getReactionsByPost(postId)
         getPostById(postId)
-            .then(setPost)
+            // .then(setPost)
     }, [])
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const PostDetails = (props) => {
                         className="btn-small publishBtn"
                         onClick={() => {
                             publishPost(post.id)
-                            .then(window.location.reload())
+                            .then(() => getPostById(post.id))
                         }}>{post.publication_date == null ? "Publish" : "Unpublish" }</button>
                     
                 </div>
