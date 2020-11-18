@@ -54,16 +54,15 @@ export const UserProvider = (props) => {
 
     const addImage = async (imageBase64) => {
         const requestData = {
-            image: imageBase64,
+            profile_image_url: imageBase64,
         };
 
         return await request('http://localhost:8000/images', 'POST', requestData);
     };
 
-
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive
+            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, addImage
         }}>
             {props.children}
         </UserContext.Provider>

@@ -9,7 +9,7 @@ export const Register = (props) => {
     const email = useRef()
     const username = useRef()
     const password = useRef()
-    const profile_image_url = useRef(UserImageForm)
+    const profile_image_url = useRef()
     const bio = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
@@ -78,7 +78,7 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="profile_image_url"> Profile Image </label>
-                    <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="URL" />
+                    <UserImageForm ref={profile_image_url} name="profile_image_url" className="form-control" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
