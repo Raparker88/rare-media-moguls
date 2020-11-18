@@ -8,7 +8,7 @@ export const Login = (props) => {
     const password = useRef(null)
     const invalidDialog = useRef(null)
 
-    const {setLoggedIn, getCurrentUser, loggedIn, currentUser } = useContext(UserContext)
+    const {setLoggedIn, getCurrentUser, loggedIn } = useContext(UserContext)
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -42,12 +42,6 @@ export const Login = (props) => {
             getCurrentUser()
         }
     },[loggedIn])
-
-    useEffect(()=>{
-        if(currentUser !== {}){
-            localStorage.setItem("currentUser", JSON.stringify(currentUser))
-        }
-    }, [currentUser])
 
     return (
         <main className="container--login">
