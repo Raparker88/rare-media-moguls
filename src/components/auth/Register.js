@@ -1,18 +1,34 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
 import { UserImageForm } from "../users/UserImageForm";
 
 export const Register = (props) => {
+
+    const [profileImg, setProfileImg] = useState('')
+
     const first_name = useRef()
     const last_name = useRef()
     const email = useRef()
     const username = useRef()
     const password = useRef()
-    const profile_image_url = useRef()
     const bio = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+
+    const createProfileImageJSON = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+            console.log("Base64 of file is", base64ImageString);
+            setProfileImg(base64ImageString)
+            // Update a component state variable to the value of base64ImageString
+        });
+    }
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -22,9 +38,9 @@ export const Register = (props) => {
                 "first_name": first_name.current.value,
                 "last_name": last_name.current.value,
                 "username": username.current.value,
+                "profile_image": profileImg,
                 "email": email.current.value,
                 "password": password.current.value,
-                "profile_image_url": profile_image_url.current.value,
                 "bio": bio.current.value,
             }
             return fetch("http://localhost:8000/register", {
@@ -78,7 +94,7 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="profile_image_url"> Profile Image </label>
-                    <UserImageForm ref={profile_image_url} name="profile_image_url" className="form-control" />
+                    <input className="profile_image_url" type="file" id="profile_image" onChange={(evt) => {createProfileImageJSON(evt)}}/>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
