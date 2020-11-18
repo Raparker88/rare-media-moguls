@@ -54,38 +54,30 @@ export const Register = (props) => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Rare</h1>
                 <fieldset>
-                    <label htmlFor="first_name"> First Name </label>
-                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="Ex: Ryan" required autoFocus />
+                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="First Name" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="last_name"> Last Name </label>
-                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Ex: Mogul" required />
+                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last Name" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Ex: media@mogul.com" required />
+                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input ref={username} name="username" className="form-control" placeholder="Ex: raremogul426" />
+                    <input ref={username} name="username" className="form-control" placeholder="Username" />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="bio"> Bio </label>
-                    <input ref={bio} name="bio" className="form-control" placeholder="A little bit about yourself..." />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="profile_image_url"> Profile Image </label>
-                    <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="URL" />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="Profile Pic URL" />
+                </fieldset>
+                <fieldset>
+                    <input ref={bio} name="bio" className="form-control" placeholder="Bio" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
