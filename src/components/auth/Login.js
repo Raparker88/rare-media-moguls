@@ -1,11 +1,14 @@
-import React, { useRef } from "react"
+import React, { useRef, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { UserContext } from '../users/UserProvider'
 import "./Auth.css"
 
 export const Login = (props) => {
     const username = useRef(null)
     const password = useRef(null)
     const invalidDialog = useRef(null)
+
+    const {setLoggedIn, getCurrentUser, loggedIn, currentUser } = useContext(UserContext)
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -24,6 +27,7 @@ export const Login = (props) => {
             .then(res => res.json())
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
+                    setLoggedIn(true)
                     localStorage.setItem("rare_token", res.token)
                     props.history.push("/");
             }
@@ -32,6 +36,18 @@ export const Login = (props) => {
             }
             });
         };
+
+    useEffect(()=>{
+        if(loggedIn === true){
+            getCurrentUser()
+        }
+    },[loggedIn])
+
+    useEffect(()=>{
+        if(currentUser !== {}){
+            localStorage.setItem("currentUser", currentUser)
+        }
+    }, [currentUser])
 
     return (
         <main className="container--login">

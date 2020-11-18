@@ -4,9 +4,9 @@ export const UserContext = React.createContext()
 
 export const UserProvider = (props) => {
 
-    const existentialCrisis = "USER DOES NOT EXIST"
     const [users, setUsers] = useState([])
     const [currentUser, setCurrentUser] = useState({})
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const getUsers = () => {
         return fetch("http://localhost:8000/users", {
@@ -30,30 +30,38 @@ export const UserProvider = (props) => {
             .then(setCurrentUser)
     }
 
-    const getUserProfile = (user_id) => {
-        return fetch(`http://localhost:8000/users/${user_id}`, {
+    const getUserProfile = (userId) => {
+        return fetch(`http://localhost:8000/users/${userId}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_token")}`,
                 "Content-Type": "application/json"
             }
         })
-            .then(res => {
-                if(res.status === 400){
-                    console.log(res, "res")
-                    res.existentialCrisis = existentialCrisis
-                    return res.json()
-                }
-                else{
-                    console.log(res)
-                    return res.json()
-                }
-            })
+            .then(res => res.json())
+    }
+
+    const changeUserType = (userId) => {
+        return fetch(`http://localhost:8000/users/${userId}/change_type`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            },
+        })
+            .then(getUsers)
     }
 
 
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser, getUserProfile
+            users,
+            getUsers,
+            currentUser,
+            getCurrentUser,
+            changeUserType,
+            getUserProfile,
+            loggedIn,
+            setLoggedIn
         }}>
             {props.children}
         </UserContext.Provider>
