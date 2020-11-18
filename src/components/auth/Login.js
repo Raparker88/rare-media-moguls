@@ -45,7 +45,7 @@ export const Login = (props) => {
 
     useEffect(()=>{
         if(currentUser !== {}){
-            localStorage.setItem("currentUser", currentUser)
+            localStorage.setItem("currentUser", JSON.stringify(currentUser))
         }
     }, [currentUser])
 
