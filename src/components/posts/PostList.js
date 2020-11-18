@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import "./Post.css";
@@ -9,12 +9,15 @@ import { UserContext } from "../users/UserProvider";
 export const PostList = (props) => {
     const {posts, getPosts, getPostsByCategoryId} = useContext(PostContext)
     const {currentUser, getCurrentUser} = useContext(UserContext)
-
+    const [isCategory, setIsCategory] = useState(false)
     const onlyApprovedPosts = posts.filter(p => p.approved === true)
+
+
 
 
     useEffect(() => {
         if(props.match.params.categoryId) {
+            setIsCategory(true)
             const categoryId = parseInt(props.match.params.categoryId)
             getPostsByCategoryId(categoryId)
         }else {
@@ -47,7 +50,7 @@ export const PostList = (props) => {
                         <p>{p.title}</p>
                         </Link>
                         <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
-                        <AdminPostApproval post = {p}/>
+                        <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
                         </div>
                         })
                     : onlyApprovedPosts.map(p=> {

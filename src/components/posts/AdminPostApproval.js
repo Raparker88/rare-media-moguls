@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { PostContext } from "./PostProvider"
 
 export const AdminPostApproval = (props) => {
-    const {adminPostApproval} = useContext(PostContext)
+    const {adminPostApproval, getPostsByCategoryId} = useContext(PostContext)
     const [checked, setChecked] = useState(false)
     const post = props.post
 
@@ -16,6 +16,11 @@ export const AdminPostApproval = (props) => {
     const checkboxHandler = () => {
        
         adminPostApproval(post)
+        .then(() => {
+            if(props.isCategory) {
+                const categoryId = parseInt(props.categoryId)
+                getPostsByCategoryId(categoryId)
+        }})
         setChecked(!checked)
     }
 
