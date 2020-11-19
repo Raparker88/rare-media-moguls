@@ -85,9 +85,12 @@ export const PostDetails = (props) => {
                 <div className="flexLeftSpace"></div>
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
-                    <div className="img-div">
-                        <img className="post-img" src={post.image_url}></img>
-                    </div>
+                    {post.image_url ? 
+                        <div className="img-div">
+                            <img className="post-img" src={post.image_url}></img>
+                        </div>
+                        :null
+                    }
                     <div className="author_date_container">
                         <h3 className="authorName"><Link className="postLink" to={{ pathname: `` }}>
                             by {post.rareuser.username} </Link></h3>

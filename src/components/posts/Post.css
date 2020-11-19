@@ -247,6 +247,26 @@
     min-width: 100%;
 
 }
+.divImg-postList {
+    width: 600px;
+    height: 300px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+
+.img-postList {
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }

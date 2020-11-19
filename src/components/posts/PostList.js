@@ -47,7 +47,12 @@ export const PostList = (props) => {
                             </Link>
                             <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date {new Date(p.publication_date).toDateString()}</p>
                         </div>
-                        <img className="post-img" src="https://via.placeholder.com/500x200.png"></img>
+                        {p.image_url ? 
+                            <div className="divImg-postList">
+                                <img className="img-postList" src={p.image_url}></img>
+                            </div>    
+                            :null
+                        }
                         <div className="post-author">
                             <p className="author-name"
                             onClick={()=>{
