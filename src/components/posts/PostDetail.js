@@ -97,7 +97,7 @@ export const PostDetails = (props) => {
                         <h3>{handleDate(post.publication_date)}</h3>
                         {reactions.map(r =>
                             <>
-                                <img className="reaction-img" src={r.image_url} width="30" height="30"
+                                <img id={r.id} className="reaction-img" src={r.image_url} width="30" height="30"
                                     onClick={() => {
                                         const postIdObj = { post_id: post.id }
                                         addReaction(r.id, postIdObj)

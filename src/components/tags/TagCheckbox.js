@@ -51,7 +51,7 @@ export const TagBoxes = (props) => {
     }
 
     return (
-        <div className="tag-container">
+        <div className="tag-container" id={tag.id}>
             <label>
                 <input type="checkbox" id="tag" checked={checked} onChange={checkboxHandler}></input>
                 {tag.label}
