@@ -16,8 +16,14 @@ export const TagBoxes = (props) => {
     }, [postTags])
 
     useEffect(() => {
-        getPostTagsByPost(props.post.id)
-    },[props.editMode, props.post.id])
+        if(props.editMode && props.post.id){
+
+            getPostTagsByPost(props.post.id)
+        }
+        else{
+            setChecked(false)
+        }
+    },[props.post.id])
 
 
     const checkboxHandler = () => {
