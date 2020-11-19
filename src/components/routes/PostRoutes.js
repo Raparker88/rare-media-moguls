@@ -9,6 +9,7 @@ import { PostForm } from "../posts/PostForm";
 import { PostList } from "../posts/PostList";
 import { UserPostList } from "../posts/UserPostList"
 import { ReactionProvider } from "../reactions/ReactionProvider"
+import { SubscribedPostList } from "../posts/SubscribedPostList"
 
 export default () => {
     return (
@@ -29,7 +30,7 @@ export default () => {
                                 } />
 
                                 <Route exact path="/posts/category/:categoryId(\d+)" render={
-                                    props => <PostList {...props} />
+                                    props => <PostList byCategory {...props} />
                                 } />
                                 <Route exact path="/posts" render={(props) => (
                                     <>
@@ -37,7 +38,7 @@ export default () => {
                                             <div className="top-spacer"></div>
                                             <div className="mid-section">
                                                 <div className="left-main">
-                                                    <PostList {...props}></PostList>
+                                                    <PostList allPosts {...props}></PostList>
                                                 </div>
                                             </div>
                                             <div className="bottom-spacer"></div>
@@ -50,6 +51,17 @@ export default () => {
                                         <div className="mid-section">
                                             <UserPostList
                                                 {...props} />
+                                        </div>
+                                        <div className="bottom-spacer"></div>
+                                    </div>
+                                )} />
+                                <Route exact path="/rare" render={(props) => (
+                                    <div className="main-wrap">
+                                        <div className="top-spacer"></div>
+                                        <div className="mid-section">
+                                            <div className="left-main">
+                                                <SubscribedPostList subscribedPostList {...props} />
+                                            </div>
                                         </div>
                                         <div className="bottom-spacer"></div>
                                     </div>

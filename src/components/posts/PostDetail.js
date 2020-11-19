@@ -92,7 +92,7 @@ export const PostDetails = (props) => {
                         :null
                     }
                     <div className="author_date_container">
-                        <h3 className="authorName"><Link className="postLink" to={{ pathname: `` }}>
+                        <h3 className="authorName"><Link className="postLink" to={{ pathname: `/users/${post.rareuser.id}` }}>
                             by {post.rareuser.username} </Link></h3>
                         <h3>{handleDate(post.publication_date)}</h3>
                         {reactions.map(r =>
