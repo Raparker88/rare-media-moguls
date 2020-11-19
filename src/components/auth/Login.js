@@ -47,10 +47,9 @@ export const Login = (props) => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Media Moguls</h1>
-                    <h2>Please sign in</h2>
+                    <h1>Rare</h1>
+                    <img className="login-img" src="https://via.placeholder.com/300x150.png"></img>
                     <fieldset>
-                        <label htmlFor="username"> Username </label>
                         <input
                             ref={username}
                             type="text"
@@ -62,7 +61,6 @@ export const Login = (props) => {
                             autoFocus />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
                         <input ref={password}
                             type="password"
                             id="password"
@@ -74,7 +72,7 @@ export const Login = (props) => {
                     <fieldset style={{
                         textAlign:"center"
                     }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Login</button>
+                        <button className="btn login-button" type="submit">Login</button>
                     </fieldset>
                 </form>
             </section>

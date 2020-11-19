@@ -24,8 +24,8 @@
 .left-main {
     display: flex;
     flex-direction: column;
-    flex-basis: 60%;
-    max-width: 60%;
+    flex-basis: 70%;
+    max-width: 70%;
     height: 100%;
     overflow: auto;
 
@@ -43,7 +43,7 @@
 .right-main {
     display: flex;
     flex-flow: column nowrap;
-    max-width: 40%;
+    max-width: 20%;
     height: 100%;
     align-self: center;
     justify-self: center;
@@ -58,16 +58,17 @@
     align-items: flex-start;
     height: 85%;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .top-spacer {
     width: 100%;
-    height: 15%;
+    height: 5%;
 }
 
 .bottom-spacer {
     width: 100%;
-    height: 20%;
+    height: 10%;
 }
 
 .btn{
