@@ -20,7 +20,7 @@ export const User = (props) => {
     return (
         <>
 
-            <tr key={props.user.date_joined}>
+            <tr key={props.user.id}>
                 <td className="userInfo">
                     <div
                         className="link user-link">

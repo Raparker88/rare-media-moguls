@@ -10,7 +10,7 @@ import { UserContext } from "../users/UserProvider"
 export const PostDetails = (props) => {
     const { getPostById, deletePost, publishPost, post } = useContext(PostContext)
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
-    const {currentUser, getCurrentUser} = useContext(UserContext)
+    const { currentUser, getCurrentUser } = useContext(UserContext)
 
 
     const deletePostDialog = useRef(null)
@@ -27,9 +27,9 @@ export const PostDetails = (props) => {
 
     const handleDate = (date) => {
         if ("publication_date" in post) {
-            if (post.publication_date != null){
+            if (post.publication_date != null) {
                 return new Date(date.concat("T00:00:00")).toDateString()
-            }else{
+            } else {
                 return "currently unpublished"
             }
         }
@@ -53,20 +53,21 @@ export const PostDetails = (props) => {
                         className="btn-small publishBtn"
                         onClick={() => {
                             publishPost(post.id)
-                            .then(() => getPostById(post.id))
-                        }}>{post.publication_date == null ? "Publish" : "Unpublish" }</button>
-                    
+                                .then(() => getPostById(post.id))
+                        }}>{post.publication_date == null ? "Publish" : "Unpublish"}</button>
+
                 </div>
             )
         } else if (currentUser.is_staff === true) {
-           return ( <div className="postButtonContainer">
+            return (<div className="postButtonContainer">
                 <button
                     className="btn-small fa fa-trash"
                     onClick={() => {
                         deletePostDialog.current.showModal()
                     }}></button>
             </div>
-            )}
+            )
+        }
     }
 
     return (
@@ -84,6 +85,12 @@ export const PostDetails = (props) => {
                 <div className="flexLeftSpace"></div>
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
+                    {post.image_url ? 
+                        <div className="img-div">
+                            <img className="post-img" src={post.image_url}></img>
+                        </div>
+                        :null
+                    }
                     <div className="author_date_container">
                         <h3 className="authorName"><Link className="postLink" to={{ pathname: `` }}>
                             by {post.rareuser.username} </Link></h3>
