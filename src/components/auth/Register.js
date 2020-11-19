@@ -97,9 +97,6 @@ export const Register = (props) => {
                 <fieldset className="register-input">
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
-                <fieldset className="register-input">
-                    <input ref={bio} name="bio" className="form-control" placeholder="Bio" />
-                </fieldset>
                 <fieldset style={{
                     textAlign: "center"
                 }}>

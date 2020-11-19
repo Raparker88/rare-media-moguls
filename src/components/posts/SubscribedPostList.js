@@ -57,7 +57,7 @@ export const SubscribedPostList = (props) => {
 //return
     return (
         <>
-        <h2 className="posts-site-title">Rare</h2>
+        <h2 className="posts-site-title"></h2>
                     <button
                     className="btn newPostbtn"
                     onClick={() => {

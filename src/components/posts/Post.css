@@ -56,6 +56,7 @@
     transition: .35s;
 }
 
+
 .postLink:hover {
     color: rgb(160, 158, 158);
     transform-origin: center;
@@ -104,6 +105,14 @@
     border-radius: 25rem;
     background-color: white;
 }
+.upperhalf{
+    display: flex;
+    justify-content: space-between;
+}
+.middle{
+    display: flex;
+    justify-content: center;
+}
 .lowerhalf-right {
     width: 30%;
     display: flex;
@@ -116,6 +125,10 @@
     display: flex;
     align-self: center;
 }
+
+.reactions{
+    display: flex;
+}
 .post-buttons{
     display: flex;
     flex-flow: row nowrap
@@ -124,6 +137,7 @@
 .lowerhalf {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     margin-top: .25rem;
 
 }
