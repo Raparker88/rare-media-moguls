@@ -1,16 +1,26 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import { ReactionContext } from '../reactions/ReactionProvider';
+import { UserContext } from '../users/UserProvider';
 import "./Post.css";
 import { PostContext } from './PostProvider';
 
 
 export const Post = (props) => {
-    const {deletePost} = useContext(PostContext)
+    const {deletePost, getPostsByUser} = useContext(PostContext)
+    const{getCurrentUser, currentUser} = useContext(UserContext)
     const { reactions } = useContext(ReactionContext)
     const deletePostDialog = useRef(null)
 
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
+    useEffect(() => {
+        getPostsByUser()
+    })
+
     const editDeleteButtons = () => {
-        if (props.post.is_user_author) {
+        if (currentUser.id === props.post.rareuser.id) {
             return (
                 <div className="postButtonContainer">
                     <button
@@ -38,7 +48,8 @@ export const Post = (props) => {
                         <button className="button--deleteDialog btn"
                             onClick={e => {
                                 deletePost(props.post.id)
-                                props.history.push("/users/posts")
+                                .then(deletePostDialog.current.close())
+                                .then(window.location.reload(false))
                             }}>Delete Post</button>
                     </dialog>
                     <div className="post-title-cont">
