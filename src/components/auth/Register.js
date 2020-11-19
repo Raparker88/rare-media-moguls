@@ -1,17 +1,31 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
+
+    const [profileImg, setProfileImg] = useState('')
+
     const first_name = useRef()
     const last_name = useRef()
     const email = useRef()
     const username = useRef()
     const password = useRef()
-    const profile_image_url = useRef()
     const bio = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+
+    const createProfileImageJSON = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+            setProfileImg(base64ImageString)
+        });
+    }
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -21,9 +35,9 @@ export const Register = (props) => {
                 "first_name": first_name.current.value,
                 "last_name": last_name.current.value,
                 "username": username.current.value,
+                "profile_image_url": profileImg,
                 "email": email.current.value,
                 "password": password.current.value,
-                "profile_image_url": profile_image_url.current.value,
                 "bio": bio.current.value,
             }
             return fetch("http://localhost:8000/register", {
@@ -68,14 +82,20 @@ export const Register = (props) => {
                 <fieldset className="register-input">
                     <input ref={username} name="username" className="form-control" placeholder="Username" />
                 </fieldset>
-                <fieldset className="register-input">
+                <fieldset>
+                    <label htmlFor="bio"> Bio </label>
+                    <input ref={bio} name="bio" className="form-control" placeholder="A little bit about yourself..." />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="profile_image_url"> Profile Image </label>
+                    <input className="register-input" type="file" id="profile_image" onChange={(evt) => {createProfileImageJSON(evt)}}/>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="inputPassword"> Password </label>
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
                 <fieldset className="register-input">
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
-                </fieldset>
-                <fieldset className="register-input">
-                    <input ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="Profile Pic URL" />
                 </fieldset>
                 <fieldset className="register-input">
                     <input ref={bio} name="bio" className="form-control" placeholder="Bio" />

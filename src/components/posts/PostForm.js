@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
-import { PostTagContext } from "../PostTags/PostTagProvider"
 import { TagContext } from "../tags/TagProvider"
 import { TagBoxes } from "../tags/TagCheckbox"
+import "./Post.css"
 
 export const PostForm = (props) => {
     const { posts, getPosts, addPost, updatePost } = useContext(PostContext)
@@ -11,6 +11,7 @@ export const PostForm = (props) => {
     const { tags, getTags } = useContext(TagContext)
     const [selectedTags, setTags] = useState([])
     const [post, setPost] = useState({rareuser: {}, category: {}})
+    const [base64, setBase64] = useState(null)
     
     const editMode = props.match.params.hasOwnProperty("postId")
     
@@ -38,6 +39,19 @@ export const PostForm = (props) => {
         getPostInEditMode()
     }, [posts])
 
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+    
+    const createPostImageJSON = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+            console.log("Base64 of file is", base64ImageString);
+            setBase64(base64ImageString)
+        });
+    }
+
     const constructNewPost = () => {
         if (post.title && post.category_id && post.content) {
             if (editMode) {
@@ -47,8 +61,7 @@ export const PostForm = (props) => {
                     content: post.content,
                     category_id: parseInt(post.category_id),
                     publication_date: post.publication_date,
-                    image_url: "",
-                    selected_tags: []
+                    post_img: base64
                 }).then(() => {
                     props.history.push(`/posts/${post.id}`)
                 })
@@ -58,7 +71,7 @@ export const PostForm = (props) => {
                     content: post.content,
                     category_id: parseInt(post.category_id),
                     publication_date: new Date(Date.now()).toISOString().split('T')[0],
-                    image_url: "",
+                    post_img: base64,
                     selected_tags: selectedTags
 
                 }
@@ -85,6 +98,16 @@ export const PostForm = (props) => {
                         defaultValue={post.title}
                         onChange={handleControlledInputChange}>
                     </input>
+                </div>
+            </fieldset>
+            <fieldset>
+                {editMode && post.image_url != null ? <img className="formImage" src={post.image_url}></img> : null}
+                <div className="header-image-div">
+                    <label htmlFor="profile_img">Select a header image for this post</label>
+                    <input type="file" id="profle_image" name="profile_img"
+                        onChange={(evt) => {
+                            createPostImageJSON(evt)
+                    }} />
                 </div>
             </fieldset>
             <fieldset>

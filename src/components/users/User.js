@@ -20,7 +20,7 @@ export const User = (props) => {
     return (
         <>
 
-            <tr key={props.user.date_joined}>
+            <tr key={props.user.id}>
                 <td className="userInfo">
                     <div
                         className="link user-link">
@@ -29,7 +29,7 @@ export const User = (props) => {
                 </td>
                 <td className="userInfo"><Link
                         className="link user-link"
-                        to="/userdetail">
+                        to={{pathname:`/users/${props.user.id}`}}>
                         {props.user.username}
                     </Link>
                 </td>

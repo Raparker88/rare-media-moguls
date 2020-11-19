@@ -10,7 +10,7 @@ import { UserContext } from "../users/UserProvider"
 export const PostDetails = (props) => {
     const { getPostById, deletePost, publishPost, post } = useContext(PostContext)
     const { reactions, getReactionsByPost, addReaction } = useContext(ReactionContext)
-    const {currentUser, getCurrentUser} = useContext(UserContext)
+    const { currentUser, getCurrentUser } = useContext(UserContext)
 
 
     const deletePostDialog = useRef(null)
@@ -25,15 +25,6 @@ export const PostDetails = (props) => {
         getCurrentUser()
     }, [])
 
-    const handleDate = (date) => {
-        if ("publication_date" in post) {
-            if (post.publication_date != null){
-                return new Date(date.concat("T00:00:00")).toDateString()
-            }else{
-                return "currently unpublished"
-            }
-        }
-    }
 
     const editDeleteButtons = () => {
         if (post.is_user_author) {
@@ -53,20 +44,21 @@ export const PostDetails = (props) => {
                         className="btn-small publishBtn"
                         onClick={() => {
                             publishPost(post.id)
-                            .then(() => getPostById(post.id))
-                        }}>{post.publication_date == null ? "Publish" : "Unpublish" }</button>
-                    
+                                .then(() => getPostById(post.id))
+                        }}>{post.publication_date == null ? "Publish" : "Unpublish"}</button>
+
                 </div>
             )
         } else if (currentUser.is_staff === true) {
-           return ( <div className="postButtonContainer">
+            return (<div className="postButtonContainer">
                 <button
                     className="btn-small fa fa-trash"
                     onClick={() => {
                         deletePostDialog.current.showModal()
                     }}></button>
             </div>
-            )}
+            )
+        }
     }
 
     return (
@@ -83,38 +75,50 @@ export const PostDetails = (props) => {
             <div className="postFlex">
                 <div className="flexLeftSpace"></div>
                 <div className="postDetailContainer">
-                    <h2 className="postTitle">{post.title}</h2>
+                    <div className="postTitleContainer">
+                        {editDeleteButtons()}
+                        <h2 className="postTitle">{post.title}</h2>
+                        <p>{post.category.label}</p>
+
+                    </div>
+                    {post.image_url ? 
+                        <div className="img-div">
+                            <img className="post-img" src={post.image_url}></img>
+                        </div>
+                        :null
+                    }
                     <div className="author_date_container">
-                        <h3 className="authorName"><Link className="postLink" to={{ pathname: `` }}>
+                        <h3 className="authorName"><Link className="postLink" to={ `/users/${post.rareuser.id}` }>
                             by {post.rareuser.username} </Link></h3>
-                        <h3>{handleDate(post.publication_date)}</h3>
-                        {reactions.map(r =>
-                            <>
-                                <img className="reaction-img" src={r.image_url} width="30" height="30"
-                                    onClick={() => {
-                                        const postIdObj = { post_id: post.id }
-                                        addReaction(r.id, postIdObj)
-                                            .then(() => {
-                                                getReactionsByPost(post.id)
-                                            })
-                                    }}></img>
-                                <p>{r.count}</p>
-                            </>)}
+                        {/* <div className="commentButtonContainer"> */}
+                            <button
+                                className="btn postEditBtn"
+                                onClick={() => {
+                                    props.history.push(`/comments/${post.id}`)
+                                }}>View Comments</button>
+                        
+                        <div className='reactionContainer'>
+                            {reactions.map(r =>
+                                <>
+                                    <img className="reaction-img" src={r.image_url} width="30" height="30"
+                                        onClick={() => {
+                                            const postIdObj = { post_id: post.id }
+                                            addReaction(r.id, postIdObj)
+                                                .then(() => {
+                                                    getReactionsByPost(post.id)
+                                                })
+                                        }}></img>
+                                    <p>{r.count}</p>
+                                </>)}
+
+                        </div>
                     </div>
                     <div className="postContent">
                         <p>{post.content}</p>
                     </div>
-                    {editDeleteButtons()}
-                    <div className="commentButtonContainer">
-                        <button
-                            className="btn postEditBtn"
-                            onClick={() => {
-                                props.history.push(`/comments/${post.id}`)
-                            }}>View and Add Comments</button>
-                    </div>
                 </div>
                 <div className="postTagContainer">
-                    <PostTags postId={post.id} />
+                    <PostTags postId={post.id} isUserAuthor={post.is_user_author} />
                 </div>
 
             </div>

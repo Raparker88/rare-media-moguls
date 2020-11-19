@@ -75,7 +75,7 @@ export const UserProfile = (props) => {
             <div className="top">
                 <section className="profile__info-left">
                     <div className="profile__img">
-                        <img className="image" alt="" src={image} />
+                        <img className="image" alt="" src={profile.profile_image_url} />
                     </div>
                     <div className="profile__name">
                         {profile.full_name}
@@ -105,7 +105,9 @@ export const UserProfile = (props) => {
                     <Link
                     title={`Click to view posts by ${profile.username}`}
                     className="profile__articles"
-                    to={`/users/posts`} >
+                    to={{ pathname: `/posts/user/${profile.id}`,
+                    state: {userId: `${profile.id}`,
+                    name:`${profile.username}`}}} >
                         {postCount} {plural}
                     </Link>
                 </section>

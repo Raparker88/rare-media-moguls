@@ -16,8 +16,14 @@ export const TagBoxes = (props) => {
     }, [postTags])
 
     useEffect(() => {
-        getPostTagsByPost(props.post.id)
-    },[props.editMode, props.post.id])
+        if(props.editMode && props.post.id){
+
+            getPostTagsByPost(props.post.id)
+        }
+        else{
+            setChecked(false)
+        }
+    },[props.post.id])
 
 
     const checkboxHandler = () => {
@@ -45,7 +51,7 @@ export const TagBoxes = (props) => {
     }
 
     return (
-        <div className="tag-container">
+        <div className="tag-container" id={tag.id}>
             <label>
                 <input type="checkbox" id="tag" checked={checked} onChange={checkboxHandler}></input>
                 {tag.label}
