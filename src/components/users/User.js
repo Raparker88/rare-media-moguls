@@ -5,7 +5,7 @@ import "./User.css"
 
 export const User = (props) => {
 
-    const { changeUserType, changeUserActive } = useContext(UserContext)
+    const { currentUser, changeUserType, changeUserActive } = useContext(UserContext)
 
     const users = props.users
     const admins = users.filter(u => u.is_staff)
@@ -13,16 +13,21 @@ export const User = (props) => {
     const activeAdmins = users.filter(u => u.is_active && u.is_staff)
 
     const statusPrompt = (id) => {
-        if(activeAdmins.length === 1 && props.user.is_staff){
-            window.alert('please assign another active admin')
+        if(currentUser.id === props.user.id){
+            window.alert("you may not deactivate yourself")
         }else{
 
-            let prompt = window.confirm("Are you sure you want to change this user's account status?");
-            if( prompt === true ) {
-                changeUserActive(id)
-                return true;
-            } else {
-                return false;
+            if(activeAdmins.length === 1 && props.user.is_active){
+                window.alert('please assign another active admin')
+            }else{
+    
+                let prompt = window.confirm("Are you sure you want to change this user's account status?");
+                if( prompt === true ) {
+                    changeUserActive(id)
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }
