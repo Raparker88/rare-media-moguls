@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { ReactionContext } from '../reactions/ReactionProvider';
 import { UserContext } from '../users/UserProvider';
 import "./Post.css";
@@ -8,16 +8,16 @@ import { PostContext } from './PostProvider';
 export const Post = (props) => {
     const {deletePost} = useContext(PostContext)
     const{getCurrentUser, currentUser} = useContext(UserContext)
-    const { reactions, getReactionsByPost  } = useContext(ReactionContext)
+    // const { reactions, getReactionsByPost  } = useContext(ReactionContext)
     const deletePostDialog = useRef(null)
 
     useEffect(() => {
         getCurrentUser()
     }, [])
 
-    useEffect(() => {
-        getReactionsByPost(props.post.id)
-    },[])
+    // useEffect(() => {
+    //     getReactionsByPost(props.post.id)
+    // },[])
 
     const editDeleteButtons = () => {
         if (currentUser.id === props.post.rareuser.id) {
