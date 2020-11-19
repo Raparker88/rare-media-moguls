@@ -7,6 +7,9 @@ export const User = (props) => {
 
     const { changeUserType, changeUserActive } = useContext(UserContext)
 
+    const users = props.users
+    const admins = users.filter(u => u.is_staff)
+
     const statusPrompt = (id) => {
         let prompt = window.confirm("Are you sure you want to change this user's account status?");
         if( prompt === true ) {
@@ -15,6 +18,17 @@ export const User = (props) => {
         } else {
             return false;
         }
+    }
+
+    const handleUserChange = (typeOfChange) => {
+        if(admins.length === 1 && typeOfChange === "author"){
+            window.alert("please assign another admin first")
+        }
+        else{
+
+            changeUserType(props.user.id)
+        }
+        
     }
 
     return (
@@ -41,11 +55,11 @@ export const User = (props) => {
                 <td className="userRadioInfo">
                     <div className="radio-container">
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => changeUserType(props.user.id)}></input>
+                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => handleUserChange("author")}></input>
                         Author
                     </label>
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => changeUserType(props.user.id)}></input>
+                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => handleUserChange("admin")}></input>
                         Admin
                     </label>
                 </div>
