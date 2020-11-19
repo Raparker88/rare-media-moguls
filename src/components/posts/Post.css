@@ -147,6 +147,7 @@
 
 .author_date_container {
     display: flex;
+    justify-content: space-between;
 }
 
 .authorName {
@@ -230,8 +231,8 @@
 }
 
 .img-div {
-    width: 700px;
-    height: 400px;
+    width: auto;
+    height: 300px;
     overflow: hidden;
     margin: 10px;
     position: relative;
@@ -281,4 +282,28 @@
     background:white;
     border-radius: 10px;
     border: solid black 1px;
+}
+
+.postTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+.reactionContainer {
+    display: flex;
+    margin-right: 10px;
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 10px;
+    padding-bottom: 0;
+}
+
+.formImage{
+    height: 300px;
+}
+
+.header-image-div {
+    display: flex;
+    flex-direction: column;
 }
