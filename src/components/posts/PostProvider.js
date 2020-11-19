@@ -4,6 +4,7 @@ export const PostContext = React.createContext()
 
 export const PostProvider = (props) => {
     const [posts, setPosts] = useState([])
+    const [post, setCurrentPost] = useState({rareuser:{}, category:{}})
 
     const getPosts = () => {
         return fetch("http://localhost:8000/posts", {
@@ -24,6 +25,7 @@ export const PostProvider = (props) => {
             }
         })
             .then(res => res.json())
+            .then(setCurrentPost)
     }
 
 
@@ -53,7 +55,8 @@ export const PostProvider = (props) => {
     const getPostsByCategoryId = category_id => {
         return fetch(`http://localhost:8000/posts?category_id=${category_id}`, {
             headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
             }
         })
             .then(res => res.json())
@@ -92,6 +95,18 @@ export const PostProvider = (props) => {
             body: JSON.stringify(post)
         })
             .then(getPosts)
+            
+    }
+
+    const publishPost = (postId) => {
+        return fetch(`http://localhost:8000/posts/${ postId }/publish`, {
+            method: "PATCH",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            }
+        })
+            .then(getPosts)
     }
 
     const getPostsByAuthor = (userId) => {
@@ -105,7 +120,8 @@ export const PostProvider = (props) => {
     
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, deletePost, updatePost, getPosts, getPostsByCategoryId, getPostsByUser, adminPostApproval, getPostsByAuthor
+            posts, addPost, getPostById, deletePost, updatePost, getPosts, 
+            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost, post
         }}>
             {props.children}
         </PostContext.Provider>

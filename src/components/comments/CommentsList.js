@@ -8,10 +8,9 @@ import "./Comment.css"
 
 export const CommentsListByPost = (props) => {
     const { getCommentsByPostId } = useContext(CommentContext)
-    const { getPostById } = useContext(PostContext)
+    const { getPostById, post } = useContext(PostContext)
 
     const [postComments, setComments] = useState([])
-    const [post, setPost] = useState({})
 
     const postId = parseInt(props.match.params.postId)
 
@@ -22,7 +21,6 @@ export const CommentsListByPost = (props) => {
 
     const getPostTitle = () => {
         getPostById(postId)
-            .then(setPost)
     }
 
     useEffect(() => {
