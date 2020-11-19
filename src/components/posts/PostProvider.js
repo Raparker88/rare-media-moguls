@@ -95,7 +95,7 @@ export const PostProvider = (props) => {
             body: JSON.stringify(post)
         })
             .then(getPosts)
-            
+
     }
 
     const publishPost = (postId) => {
@@ -117,11 +117,11 @@ export const PostProvider = (props) => {
         })
             .then(res => res.json())
     }
-    
+
     return (
         <PostContext.Provider value={{
-            posts, addPost, getPostById, deletePost, updatePost, getPosts, 
-            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost, post, getPostsByAuthor
+            posts, addPost, getPostById, deletePost, updatePost, getPosts,
+            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost, post, getPostsByAuthor, setPosts
         }}>
             {props.children}
         </PostContext.Provider>

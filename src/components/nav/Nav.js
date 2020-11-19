@@ -40,9 +40,9 @@ export const Nav = (props) => {
                     <div className="top-space"></div>
                     <div className="middle-wrap">
                         <img className="nav__logo"
-                        to="/"
+                        to="/rare"
                         onClick={()=>{
-                        props.history.push("/")}}
+                        props.history.push("/rare")}}
                         src={Logo} />
                         <div className="right-middle"></div>
                     </div>
@@ -55,7 +55,7 @@ export const Nav = (props) => {
                             <button
                             title="View All Posts"
                             className="btn nav__btn"
-                            onClick={()=>props.history.push(`${loggedIn ? '/' : '/login'}`)}>
+                            onClick={()=>props.history.push(`${loggedIn ? '/posts' : '/login'}`)}>
                                 All Posts
                             </button>
 
@@ -99,7 +99,7 @@ export const Nav = (props) => {
                             onClick={() => {
                                 if(loggedIn){
                                     handleLogout()
-                                    props.history.push("/")
+                                    props.history.push("/rare")
                                 }
                                 else{
                                     props.history.push("/login")

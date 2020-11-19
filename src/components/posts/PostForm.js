@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
-import { PostTagContext } from "../PostTags/PostTagProvider"
 import { TagContext } from "../tags/TagProvider"
 import { TagBoxes } from "../tags/TagCheckbox"
+import "./Post.css"
 
 export const PostForm = (props) => {
     const { posts, getPosts, addPost, updatePost } = useContext(PostContext)
@@ -101,8 +101,8 @@ export const PostForm = (props) => {
                 </div>
             </fieldset>
             <fieldset>
+                {editMode && post.image_url != null ? <img className="formImage" src={post.image_url}></img> : null}
                 <div className="header-image-div">
-                    {editMode && post.image_url != null ? <img src={post.image_url}></img> : null}
                     <label htmlFor="profile_img">Select a header image for this post</label>
                     <input type="file" id="profle_image" name="profile_img"
                         onChange={(evt) => {
