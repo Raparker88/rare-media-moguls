@@ -34,35 +34,43 @@ export const PostList = (props) => {
                     className="btn newPostbtn"
                     onClick={() => {
                         props.history.push(`/new_post/`)
-                        window.location.reload()
                     }}>Create New Post</button>
             {
                 posts !== [] ?
                     currentUser.is_staff === true ?
-                        postsForAdmins.map(p => { 
+                        postsForAdmins.map(p => {
                         return <div key={p.id}>
                         <div className="post-author">
-                            <p>{p.rareuser.full_name}</p>
-                            <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? 
-                            new Date(p.publication_date.concat("T00:00:00")).toDateString() : "unpublished"}</p>
+                            <p className="author-name"
+                            onClick={()=>{
+                                props.history.push(`/users/${p.rareuser.id}`)
+                            }}>
+                                {p.rareuser.full_name}
+                                </p>
+                            <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p>
                         </div>
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
+                        <p>Posted in <Link className="cat-link" to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
                         </div>
                         })
                     : approvedAndUserCreatedPosts.map(p=> {
                         return <div key={p.id}>
                         <div className="post-author">
-                            <p>{p.rareuser.full_name}</p>
-                            <p style={{ marginLeft: '.5rem' }} >• {new Date(p.publication_date).toDateString()}</p>
+                            <p className="author-name"
+                                onClick={()=>{
+                                    props.history.push(`/users/${p.rareuser.id}`)
+                                }}>
+                                    {p.rareuser.full_name}
+                            </p>
+                            <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p>
                         </div>
                         <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                         <p>{p.title}</p>
                         </Link>
-                        <p>Posted in <b>{p.category.label}</b></p>
+                        <p>Posted in <Link className="cat-link" to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         </div>
                     })
                 : null
