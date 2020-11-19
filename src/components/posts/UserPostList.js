@@ -5,12 +5,11 @@ import "./Post.css";
 
 
 export const UserPostList = (props) => {
-    const { getPostsByUser, deletePost, getPostsByAuthor} = useContext(PostContext)
+    const { getPostsByUser, getPostsByAuthor} = useContext(PostContext)
     const [posts, setPosts] = useState([])
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
-    const [areYouSure, setAreYouSure] = useState(0)
-
+    
     const seeAllPostsByAuthor = props.match.params.hasOwnProperty("userId")
 
     useEffect(()=>{
@@ -59,9 +58,6 @@ export const UserPostList = (props) => {
                                 selectedPostId={selectedPostId}
                                 setSelectedPostId={setSelectedPostId}
                                 toggleSelected={toggleSelected}
-                                deletePost={deletePost}
-                                setAreYouSure={setAreYouSure}
-                                areYouSure={areYouSure}
                                 {...props} />
                         })
                     : null

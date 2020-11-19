@@ -1,101 +1,79 @@
-import React, {useContext, useEffect, useRef} from 'react'
-import { UserContext } from '../users/UserProvider';
+import React, { useContext, useEffect, useRef } from 'react'
+import { ReactionContext } from '../reactions/ReactionProvider';
 import "./Post.css";
+import { PostContext } from './PostProvider';
 
 
 export const Post = (props) => {
-    const {getCurrentUser, currentUser} = useContext(UserContext)
-    const dotdotdot = useRef(null)
+    const {deletePost} = useContext(PostContext)
+    const { reactions } = useContext(ReactionContext)
+    const deletePostDialog = useRef(null)
 
-    useEffect(() => {
-        getCurrentUser()
-    },[])
+    const editDeleteButtons = () => {
+        if (props.post.is_user_author) {
+            return (
+                <div className="postButtonContainer">
+                    <button
+                        className="btn-small fa fa-edit"
+                        onClick={() => {
+                            props.history.push(`/posts/edit/${props.post.id}`)
+                        }}></button>
+                    <button
+                        className="btn-small fa fa-trash"
+                        onClick={() => {
+                            deletePostDialog.current.showModal()
+                        }}></button>
+                </div>
+            )
+        }
+    }
 
     return (
         <>
-        <div className="post-item">
-            <div className="upperhalf">
-                <div className="post-title-cont">
-                    {props.areYouSure
-                    ?
-                    <div className="are-u-sure">
-                    Are You Sure You Want To Delete This Post?
+            <div className="post-item">
+                <div className="upperhalf">
+                    <dialog className="dialog dialog--deletePost" ref={deletePostDialog}>
+                        <div>Are you sure you want to delete this post?</div>
+                        <button className="button--closeDialog btn" onClick={e => deletePostDialog.current.close()}>Close</button>
+                        <button className="button--deleteDialog btn"
+                            onClick={e => {
+                                deletePost(props.post.id)
+                                props.history.push("/users/posts")
+                            }}>Delete Post</button>
+                    </dialog>
+                    <div className="post-title-cont">
+                        <span className="post-title" onClick={() => {
+                            props.history.push(`/posts/${props.post.id}`)
+                        }}>
+                            {props.post.title}
+                        </span>
                     </div>
-                    :
-                    <span className="post-title" onClick={()=>{
-                        props.history.push(`/posts/${props.post.id}`)}}>
-                        {props.post.title}
-                    </span>
-                    }
+                    <div className="postDate">
+                        {props.post.publication_date != null ?
+                            new Date(props.post.publication_date.concat("T00:00:00")).toDateString({}) : "unpublished"}
+                    </div>
+                </div>
+                <div className="middle">
+                {props.post.image_url ? 
+                            <div className="divImg-postList">
+                                <img className="img-postList" src={props.post.image_url}></img>
+                            </div>    
+                            :null
+                 }
+                 </div>
+                <div className="lowerhalf">
+                     <div>Author: {props.post.rareuser.username}</div>
+                     {/* <div className="reactions">
+                     {reactions.map(r =>
+                            <>
+                                <img className="reaction" src={r.image_url} width="30" height="30"></img>
+
+                                <p>{r.count}</p>
+                            </>)}
+                     </div> */}
+                {editDeleteButtons()}
                 </div>
             </div>
-            <div className="lowerhalf">
-                <div className="lowerhalf-left">
-                    <div>{props.post.rareuser.username}</div>
-                    <div className="posted-in">
-                    <div>Posted in </div>
-                        <div className="cat-on-post">{props.post.category.label}</div>
-                    </div>
-                    <div className="dot-div"></div>
-                    <div>{props.post.publication_date != null ? 
-                    new Date(props.post.publication_date.concat("T00:00:00")).toDateString({}): "unpublished"}</div>
-                </div>
-                {props.post.rareuser.id === currentUser.id ? 
-                <div className="lowerhalf-right">
-                        {props.open
-                            ?<>
-                            <div className="post-buttons">
-                                <div className="close-btn btn"
-                                onClick={()=>{
-                                    props.setAreYouSure(false)
-                                    props.toggleOpen()
-                                    props.toggleSelected(props.post)}}>
-                                    <div className="dot-w"></div>
-                                    <div className="dot-w"></div>
-                                    <div className="dot-w"></div>
-                                </div>
-                                {props.areYouSure
-                                ? <>
-                                <button className="btn nvm" onClick={()=>{
-                                    props.setAreYouSure(false)}}>
-                                    nvm
-                                </button>
-                                <button className="btn del-sure"
-                                // onClick={()=>
-                                //     {props.deletePost(props.selectedPostId).then(()=>{props.history.push(`/posts/user/${props.currentUserId}`)})}}
-                                    >
-                                    yes
-                                    </button>
-                                </>
-                                : <>
-                                <button className="btn edit-my-post" onClick={()=>{
-                                    props.history.push(`/posts/edit/${props.selectedPostId}`)}}>
-                                    edit
-                                </button>
-                                <button className="btn del-my-post" onClick={()=>{props.setAreYouSure(true)}}>
-                                    delete
-                                </button>
-                                </>
-                                }
-                            </div>
-                            </>
-                            :<>
-                                <div className="dot-dot-dot" onClick={()=>{
-                                    props.setAreYouSure(false)
-                                    props.toggleOpen()
-                                    props.toggleSelected(props.post)}}>
-                                    <div className="dot"></div>
-                                    <div className="dot"></div>
-                                    <div className="dot"></div>
-                                </div>
-                            </>
-                            }
-                </div>
-                : 
-                <div></div>
-            }
-            </div>
-        </div>
         </>
-        )
+    )
 }
