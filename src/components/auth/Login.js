@@ -29,7 +29,7 @@ export const Login = (props) => {
                 if ("valid" in res && res.valid && "token" in res) {
                     setLoggedIn(true)
                     localStorage.setItem("rare_token", res.token)
-                    props.history.push("/");
+                    props.history.push("/rare");
                 }
                 else {
                     invalidDialog.current.showModal();
@@ -37,7 +37,7 @@ export const Login = (props) => {
             })
         }
 
-    
+
 
     return (
         <main className="container--login">

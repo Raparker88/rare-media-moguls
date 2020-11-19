@@ -31,7 +31,7 @@ export default () => {
                                 <Route exact path="/posts/category/:categoryId(\d+)" render={
                                     props => <PostList {...props} />
                                 } />
-                                <Route exact path="/" render={(props) => (
+                                <Route exact path="/posts" render={(props) => (
                                     <>
                                         <div className="main-wrap">
                                             <div className="top-spacer"></div>

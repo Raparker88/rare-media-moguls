@@ -78,14 +78,14 @@ export const PostDetails = (props) => {
                 <button className="button--deleteDialog btn"
                     onClick={e => {
                         deletePost(post.id)
-                        props.history.push("/")
+                        props.history.push("/rare")
                     }}>Delete Post</button>
             </dialog>
             <div className="postFlex">
                 <div className="flexLeftSpace"></div>
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
-                    {post.image_url ? 
+                    {post.image_url ?
                         <div className="img-div">
                             <img className="post-img" src={post.image_url}></img>
                         </div>
