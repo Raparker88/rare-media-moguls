@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import { Post } from "./Post"
 import "./Post.css";
@@ -8,16 +7,15 @@ import "./Post.css";
 export const UserPostList = (props) => {
     const { getPostsByUser, deletePost, getPostsByAuthor} = useContext(PostContext)
     const [posts, setPosts] = useState([])
-
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
     const [areYouSure, setAreYouSure] = useState(0)
 
-    const seeAllPostsByAuthor = props.match.params.hasOwnProperty("rareuser_id")
+    const seeAllPostsByAuthor = props.match.params.hasOwnProperty("userId")
 
     useEffect(()=>{
         if(seeAllPostsByAuthor){
-            getPostsByAuthor()
+            getPostsByAuthor(parseInt(props.location.state.name))
                 .then(setPosts)
         } else{
             getPostsByUser()

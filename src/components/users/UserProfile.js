@@ -105,7 +105,8 @@ export const UserProfile = (props) => {
                     <Link
                     title={`Click to view posts by ${profile.username}`}
                     className="profile__articles"
-                    to={`/users/posts`} >
+                    to={{ pathname: `/posts/user/${profile.id}`,
+                    state: {name: `${profile.id}`}}} >
                         {postCount} {plural}
                     </Link>
                 </section>
