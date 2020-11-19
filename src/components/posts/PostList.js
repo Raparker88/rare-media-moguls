@@ -45,7 +45,8 @@ export const PostList = (props) => {
                             <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
                                 <p className="post-title">{p.title}</p>
                             </Link>
-                            <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date {new Date(p.publication_date).toDateString()}</p>
+                            <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date 
+                             {p.publication_date ? new Date(p.publication_date).toDateString() : " unpublished"}</p>
                         </div>
                         {p.image_url ? 
                             <div className="divImg-postList">
@@ -60,7 +61,7 @@ export const PostList = (props) => {
                             }}>
                                 {p.rareuser.full_name}
                                 </p>
-                            <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p>
+                            {/* <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p> */}
                         </div>
                         <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
