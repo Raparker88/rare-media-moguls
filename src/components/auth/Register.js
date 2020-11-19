@@ -23,9 +23,7 @@ export const Register = (props) => {
 
     const createProfileImageJSON = (event) => {
         getBase64(event.target.files[0], (base64ImageString) => {
-            console.log("Base64 of file is", base64ImageString);
             setProfileImg(base64ImageString)
-            // Update a component state variable to the value of base64ImageString
         });
     }
 

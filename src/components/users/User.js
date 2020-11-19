@@ -29,7 +29,7 @@ export const User = (props) => {
                 </td>
                 <td className="userInfo"><Link
                         className="link user-link"
-                        to="/userdetail">
+                        to={{pathname:`/users/${props.user.id}`}}>
                         {props.user.username}
                     </Link>
                 </td>
