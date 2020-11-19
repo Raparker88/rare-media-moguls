@@ -8,16 +8,12 @@ import { PostContext } from './PostProvider';
 export const Post = (props) => {
     const {deletePost} = useContext(PostContext)
     const{getCurrentUser, currentUser} = useContext(UserContext)
-    // const { reactions, getReactionsByPost  } = useContext(ReactionContext)
     const deletePostDialog = useRef(null)
 
     useEffect(() => {
         getCurrentUser()
     }, [])
 
-    // useEffect(() => {
-    //     getReactionsByPost(props.post.id)
-    // },[])
 
     const editDeleteButtons = () => {
         if (currentUser.id === props.post.rareuser.id) {
@@ -74,14 +70,6 @@ export const Post = (props) => {
                  </div>
                 <div className="lowerhalf">
                      <div>Author: {props.post.rareuser.username}</div>
-                     {/* <div className="reactions">
-                     {reactions.map(r =>
-                            <>
-                                <img className="reaction" src={r.image_url} width="30" height="30"></img>
-
-                                <p>{r.count}</p>
-                            </>)}
-                     </div> */}
                 {editDeleteButtons()}
                 </div>
             </div>
