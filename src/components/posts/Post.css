@@ -15,7 +15,29 @@
     justify-content: flex-start;
     align-content: center;
 }
-
+.author-name{
+    cursor:pointer;
+    color: rgb(1, 36, 1);
+    text-decoration: none;
+    font-weight: 900;
+    transition: .35s;
+}
+.author-name:hover{
+    color: rgb(160, 158, 158);
+    transform-origin: center;
+    transform: scale(1.02, 1.02);
+}
+.cat-link {
+    color: rgb(1, 36, 1);
+    text-decoration: none;
+    font-weight: 900;
+    transition: .35s;
+}
+.cat-link:hover {
+    color: rgb(160, 158, 158);
+    transform-origin: center;
+    transform: scale(1.02, 1.02);
+}
 .postLink {
     color: rgb(1, 36, 1);
     font-size: 1.25rem;
@@ -30,16 +52,24 @@
 .publication-date {
     left: 0;
     float: right;
+    text-decoration: none;
+    transition: .35s;
 }
 
 .postLink:hover {
     color: rgb(160, 158, 158);
+    transform-origin: center;
+    transform: scale(1.02, 1.02);
 }
 
 .new_post_form {
     width: 45em;
     margin: auto;
 }
+.check-approve{
+    cursor: pointer;
+}
+
 .post-title,
 .are-u-sure {
     cursor: pointer;

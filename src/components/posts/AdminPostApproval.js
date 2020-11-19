@@ -14,7 +14,7 @@ export const AdminPostApproval = (props) => {
     }, [post])
 
     const checkboxHandler = () => {
-       
+
         adminPostApproval(post)
         .then(() => {
             if(props.isCategory) {
@@ -28,7 +28,7 @@ export const AdminPostApproval = (props) => {
         <div className="checkbox-container">
             <label>
                 <div>Approved ?</div>
-                <input type="checkbox" id="tag" checked={checked} onChange={checkboxHandler} ></input>
+                <input className="check-approve" type="checkbox" id="tag" checked={checked} onChange={checkboxHandler} ></input>
             </label>
         </div>
     )
