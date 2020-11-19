@@ -118,20 +118,10 @@ export const PostProvider = (props) => {
             .then(res => res.json())
     }
 
-    const getUserSubscriptions = () => {
-        return fetch(`http://localhost:8000/subscriptions`, {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`
-            }
-        })
-            .then(res => res.json())
-            .then(setPosts)
-    }
-
     return (
         <PostContext.Provider value={{
             posts, addPost, getPostById, deletePost, updatePost, getPosts,
-            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost, post, getPostsByAuthor, getUserSubscriptions
+            getPostsByCategoryId, getPostsByUser, adminPostApproval, publishPost, post, getPostsByAuthor
         }}>
             {props.children}
         </PostContext.Provider>

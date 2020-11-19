@@ -11,17 +11,12 @@ import { UserContext } from "./users/UserProvider"
 
 
 export const ApplicationViews = (props) => {
-    const { getCurrentUser, currentUser, getUserProfile, setCurrentUserProfile } = useContext(UserContext)
+    const { getCurrentUser, getCurrentUserSubscriptions } = useContext(UserContext)
 
     useEffect(()=>{
         getCurrentUser()
+        getCurrentUserSubscriptions()
     }, [])
-
-    useEffect(()=>{
-        const id = currentUser.id
-        getUserProfile(id)
-        .then(setCurrentUserProfile)
-    }, [currentUser])
 
     return (
         <>

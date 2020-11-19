@@ -8,6 +8,9 @@ export const UserProvider = (props) => {
     const [currentUser, setCurrentUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
     const [currentUserProfile, setCurrentUserProfile] = useState({})
+    const [currentUserSubscriptions, setCurrentUserSubscriptions] = useState([])
+    const [activeSubscriptions, setActiveSubscriptions] = useState([])
+    const [followedAuthors, setFollowedAuthors] = useState([])
 
     const getUsers = () => {
         return fetch("http://localhost:8000/users", {
@@ -64,9 +67,25 @@ export const UserProvider = (props) => {
             .then(getUsers)
     }
 
+    const getCurrentUserSubscriptions = () => {
+        return fetch(`http://localhost:8000/subscriptions`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(res => {
+                setCurrentUserSubscriptions(res)
+                const active = res.filter(r=>r.ended_on !== null)
+                setActiveSubscriptions(active)
+                const authors = active.map(r=>r.author)
+                setFollowedAuthors(authors)
+            })
+    }
+
     return (
         <UserContext.Provider value={{
-            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, getUserProfile, loggedIn, setLoggedIn, setCurrentUser, currentUserProfile, setCurrentUserProfile
+            users, getUsers, currentUser, getCurrentUser, changeUserType, changeUserActive, getUserProfile, loggedIn, setLoggedIn, setCurrentUser, currentUserProfile, setCurrentUserProfile, getCurrentUserSubscriptions, currentUserSubscriptions, setCurrentUserSubscriptions, setActiveSubscriptions, setFollowedAuthors, followedAuthors, activeSubscriptions
         }}>
             {props.children}
         </UserContext.Provider>
