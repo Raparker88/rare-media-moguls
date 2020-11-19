@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import "./Rare.css";
 import TagRoutes from "./routes/TagRoutes";
 import NavRoutes from "./routes/NavRoutes";
@@ -6,11 +6,23 @@ import CategoryRoutes from "./routes/CategoryRoutes";
 import PostRoutes from "./routes/PostRoutes";
 import CommentRoutes from "./routes/CommentRoutes";
 import UserProfileRoutes from "./routes/UserProfileRoutes";
-
+import { UserContext } from "./users/UserProvider"
 
 
 
 export const ApplicationViews = (props) => {
+    const { getCurrentUser, currentUser, getUserProfile, setCurrentUserProfile } = useContext(UserContext)
+
+    useEffect(()=>{
+        getCurrentUser()
+    }, [])
+
+    useEffect(()=>{
+        const id = currentUser.id
+        getUserProfile(id)
+        .then(setCurrentUserProfile)
+    }, [currentUser])
+
     return (
         <>
             <main className="main-container" style={{ margin: "0 0", lineHeight: "1.75rem", }}>

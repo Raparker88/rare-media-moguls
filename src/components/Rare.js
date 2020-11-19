@@ -31,7 +31,13 @@ export const Rare = () => (
             if (localStorage.getItem("rare_token")) {
                 return <Redirect to="/" />
             } else {
-                return <Login {...props} />
+                return (
+                <>
+                <UserProvider>
+                    <Login {...props} />
+                </UserProvider>
+                </>
+                )
             }
         }} />
 
