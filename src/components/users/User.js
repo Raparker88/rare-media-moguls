@@ -16,7 +16,10 @@ export const User = (props) => {
         if(currentUser.id === props.user.id){
             window.alert("you may not deactivate yourself")
         }else{
-
+            if(activeAdmins.length ===1 && !props.user.is_staff){
+                changeUserActive(id)
+                return true;
+            }
             if(activeAdmins.length === 1 && props.user.is_active){
                 window.alert('please assign another active admin')
             }else{
@@ -33,7 +36,7 @@ export const User = (props) => {
     }
 
     const handleUserChange = () => {
-        if(activeAdmins.length === 1 && props.user.is_staff){
+        if(activeAdmins.length === 1 && admins.length === 1){
             window.alert("please assign another active admin first")
         }
         else{
