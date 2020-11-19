@@ -61,7 +61,6 @@ export const PostList = (props) => {
                             }}>
                                 {p.rareuser.full_name}
                                 </p>
-                            {/* <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p> */}
                         </div>
                         <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
