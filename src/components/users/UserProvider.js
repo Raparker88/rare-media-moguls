@@ -76,7 +76,7 @@ export const UserProvider = (props) => {
             .then(res => res.json())
             .then(res => {
                 setCurrentUserSubscriptions(res)
-                const active = res.filter(r=>r.ended_on !== null)
+                const active = res.filter(r=>r.ended_on === null)
                 setActiveSubscriptions(active)
                 const authors = active.map(r=>r.author)
                 setFollowedAuthors(authors)
