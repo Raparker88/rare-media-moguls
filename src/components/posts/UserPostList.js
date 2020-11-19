@@ -15,7 +15,7 @@ export const UserPostList = (props) => {
 
     useEffect(()=>{
         if(seeAllPostsByAuthor){
-            getPostsByAuthor(parseInt(props.location.state.name))
+            getPostsByAuthor(parseInt(props.location.state.userId))
                 .then(setPosts)
         } else{
             getPostsByUser()
@@ -42,7 +42,7 @@ export const UserPostList = (props) => {
     return (
         <>
             <div className="mainPostContainer">
-                <div className="my-posts-heading">My Posts</div>
+                <div className="my-posts-heading">{seeAllPostsByAuthor? `${props.location.state.name}'s Posts` : "My Posts" }</div>
                 <button className="btn newPostbtn"
                 onClick={()=>{
                     props.history.push(`/new_post`)
