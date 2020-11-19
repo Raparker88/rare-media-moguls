@@ -9,20 +9,27 @@ export const User = (props) => {
 
     const users = props.users
     const admins = users.filter(u => u.is_staff)
+    const active = users.filter(u => u.is_active)
+    const activeAdmins = users.filter(u => u.is_active && u.is_staff)
 
     const statusPrompt = (id) => {
-        let prompt = window.confirm("Are you sure you want to change this user's account status?");
-        if( prompt === true ) {
-            changeUserActive(id)
-            return true;
-        } else {
-            return false;
+        if(activeAdmins.length === 1 && props.user.is_staff){
+            window.alert('please assign another active admin')
+        }else{
+
+            let prompt = window.confirm("Are you sure you want to change this user's account status?");
+            if( prompt === true ) {
+                changeUserActive(id)
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    const handleUserChange = (typeOfChange) => {
-        if(admins.length === 1 && typeOfChange === "author"){
-            window.alert("please assign another admin first")
+    const handleUserChange = () => {
+        if(activeAdmins.length === 1 && props.user.is_staff){
+            window.alert("please assign another active admin first")
         }
         else{
 
@@ -55,11 +62,11 @@ export const User = (props) => {
                 <td className="userRadioInfo">
                     <div className="radio-container">
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => handleUserChange("author")}></input>
+                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => handleUserChange()}></input>
                         Author
                     </label>
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => handleUserChange("admin")}></input>
+                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => handleUserChange()}></input>
                         Admin
                     </label>
                 </div>
