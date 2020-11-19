@@ -14,19 +14,23 @@
 
 .categories {
     text-align: center;
+    width: 50%;
 }
 
 .category{
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-top: 10px;
+    text-align: left;
 }
 
 .cat-name {
-    text-align:center;
+    text-align:left;
     font-weight: 500 !important;
     font-size: 18px;
+    border: solid black 1px;
+    padding: 9px;
+    width: 100%;
 }
 
 .cat-list-cont {

@@ -67,23 +67,20 @@ export const Register = (props) => {
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
 
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
-                <fieldset>
-                    <label htmlFor="first_name"> First Name </label>
-                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="Ex: Ryan" required autoFocus />
+            <form className="form--login form--register" onSubmit={handleRegister}>
+                <h1 className="h3 mb-3 font-weight-normal">Rare</h1>
+                <img className="register-img" src="https://via.placeholder.com/200x125.png"></img>
+                <fieldset className="register-input">
+                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="First Name" required autoFocus />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="last_name"> Last Name </label>
-                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Ex: Mogul" required />
+                <fieldset className="register-input">
+                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last Name" required />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Ex: media@mogul.com" required />
+                <fieldset className="register-input">
+                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email" required />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input ref={username} name="username" className="form-control" placeholder="Ex: raremogul426" />
+                <fieldset className="register-input">
+                    <input ref={username} name="username" className="form-control" placeholder="Username" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Bio </label>
@@ -91,20 +88,22 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="profile_image_url"> Profile Image </label>
-                    <input className="profile_image_url" type="file" id="profile_image" onChange={(evt) => {createProfileImageJSON(evt)}}/>
+                    <input className="register-input" type="file" id="profile_image" onChange={(evt) => {createProfileImageJSON(evt)}}/>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                <fieldset className="register-input">
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset className="register-input">
+                    <input ref={bio} name="bio" className="form-control" placeholder="Bio" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
+                    <button className="btn login-button" type="submit">Register</button>
                 </fieldset>
             </form>
             <section className="link--register">
