@@ -5,16 +5,50 @@ import "./User.css"
 
 export const User = (props) => {
 
-    const { changeUserType, changeUserActive } = useContext(UserContext)
+    const { currentUser, changeUserType, changeUserActive } = useContext(UserContext)
+
+    const users = props.users
+    const admins = users.filter(u => u.is_staff)
+    const active = users.filter(u => u.is_active)
+    const activeAdmins = users.filter(u => u.is_active && u.is_staff)
 
     const statusPrompt = (id) => {
-        let prompt = window.confirm("Are you sure you want to change this user's account status?");
-        if( prompt === true ) {
-            changeUserActive(id)
-            return true;
-        } else {
-            return false;
+        if(currentUser.id === props.user.id){
+            window.alert("you may not deactivate yourself")
+        }else{
+            if(activeAdmins.length ===1 && !props.user.is_staff){
+                let prompt = window.confirm("Are you sure you want to change this user's account status?");
+                if( prompt === true ) {
+                    changeUserActive(id)
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            if(activeAdmins.length === 1 && props.user.is_active){
+                window.alert('please assign another active admin')
+            }else{
+    
+                let prompt = window.confirm("Are you sure you want to change this user's account status?");
+                if( prompt === true ) {
+                    changeUserActive(id)
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
+    }
+
+    const handleUserChange = () => {
+        if(activeAdmins.length === 1 && admins.length === 1 && props.user.is_staff ){
+            window.alert("please assign another active admin first")
+        }
+        else{
+
+            changeUserType(props.user.id)
+        }
+        
     }
 
     return (
@@ -41,11 +75,11 @@ export const User = (props) => {
                 <td className="userRadioInfo">
                     <div className="radio-container">
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => changeUserType(props.user.id)}></input>
+                        <input type="radio" id="userRadio" checked={!props.user.is_staff} onChange={() => handleUserChange()}></input>
                         Author
                     </label>
                     <label className="userRadio">
-                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => changeUserType(props.user.id)}></input>
+                        <input type="radio" id="userRadio" checked={props.user.is_staff} onChange={() => handleUserChange()}></input>
                         Admin
                     </label>
                 </div>

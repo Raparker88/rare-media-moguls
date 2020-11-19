@@ -23,6 +23,7 @@ export const UsersList = (props) => {
                             return <User
                             key={u.date_joined}
                             user={u}
+                            users={users}
                             {...props}/>
                         })}
 
