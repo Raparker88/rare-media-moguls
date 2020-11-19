@@ -3,6 +3,7 @@ export const SubscriptionContext = React.createContext()
 
 export const SubscriptionProvider = (props) => {
     const [subscriptions, setSubscriptions] = useState([])
+    const [singleSubscription, setSingleSubscription] = useState({})
 
     const getAllSubscriptionsByUser = () => {
         return fetch("http://localhost:8000/subscriptions", {
@@ -15,9 +16,8 @@ export const SubscriptionProvider = (props) => {
             .then(setSubscriptions)
     }
 
-    const getAuthorSubscriptionByUser = author => {
-        return fetch("http://localhost:8000/subscriptions/get_single_current_subscription",
-        { params: {author_id: author}},
+    const getAuthorSubscriptionByUser = (author) => {
+        return fetch(`http://localhost:8000/subscriptions/${author}/get_single_current_subscription`,
         {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_token")}`,
@@ -25,7 +25,7 @@ export const SubscriptionProvider = (props) => {
             }
         })
             .then(res => res.json())
-            .then(setSubscriptions)
+            .then(setSingleSubscription)
     }
 
     const createSubscription = subscription => {
@@ -39,8 +39,20 @@ export const SubscriptionProvider = (props) => {
         })
         .then(res => res.json())
         .then(newsubscription => {
-            getAllSubscriptionsByUser()
+            getAuthorSubscriptionByUser(newsubscription.author.id)
+                .then(console.warn(subscriptions))
             return newsubscription.id })
+    }
+
+    const unsubscribe = (subscriptionId) => {
+        return fetch(`http://localhost:8000/subscriptions/${ subscriptionId }/unsubscribe`, {
+            method: "PATCH",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Content-Type": "application/json"
+            }
+        })
+            .then(() => {setSingleSubscription({})})
     }
 
 useEffect(()=>{
@@ -53,6 +65,8 @@ useEffect(()=>{
             createSubscription,
             getAllSubscriptionsByUser,
             getAuthorSubscriptionByUser,
+            unsubscribe,
+            singleSubscription
         }}>
             {props.children}
         </SubscriptionContext.Provider>

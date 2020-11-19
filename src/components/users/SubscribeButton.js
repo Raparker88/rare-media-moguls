@@ -4,27 +4,34 @@ import "./User.css"
 import { SubscriptionContext } from './SubscriptionProvider'
 
 export const SubscribeButton = (props) => {
-    const { subscriptions, createSubscription, getAuthorSubscriptionByUser } = useContext(SubscriptionContext)
-    const [activeSubscription, setIsActive] = useState({})
+    const { subscriptions, singleSubscription, createSubscription, getAuthorSubscriptionByUser, unsubscribe } = useContext(SubscriptionContext)
 
     useEffect(() => {
         const authorId = props.profile.id
-        getAuthorSubscriptionByUser(authorId)
-        .then(setIsActive)
-        .then(console.warn(activeSubscription))
-    }, [])
+        if(props.profile.id) {
+            getAuthorSubscriptionByUser(authorId)
+        }
+    }, [props.profile.id])
 
     const CurrentUserCheck = () => {
         if(!props.profile.is_current_user){
             return (
                 <button className="subscribe btn" onClick={()=>{
                     const authorId = props.profile.id
-                    console.warn(authorId)
-                    getAuthorSubscriptionByUser(authorId)
-                    return
+                    if(singleSubscription.hasOwnProperty('message')) {
+                        createSubscription({"author_id": authorId})
+                            .then(() => 
+                            getAuthorSubscriptionByUser(props.profile.id))
+                    } else {
+                        unsubscribe(singleSubscription.id)
+                            .then(() => 
+                            getAuthorSubscriptionByUser(props.profile.id))
+                    }
                 }}>
-                    {/* turnery statement for subscribe and unsubscribe */}
-                    Subscribe
+                    {singleSubscription.hasOwnProperty('message') ?
+                    "Subscribe"
+                    :
+                    "Unsubscribe"}
                 </button>
             )
         }
