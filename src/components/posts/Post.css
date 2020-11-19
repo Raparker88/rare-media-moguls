@@ -201,3 +201,21 @@
 .reaction-img{
     margin: 5px;
 }
+
+.img-div {
+    width: 700px;
+    height: 400px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+.post-img {
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+}

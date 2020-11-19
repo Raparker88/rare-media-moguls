@@ -85,7 +85,7 @@ export const PostDetails = (props) => {
                 <div className="flexLeftSpace"></div>
                 <div className="postDetailContainer">
                     <h2 className="postTitle">{post.title}</h2>
-                    <div>
+                    <div className="img-div">
                         <img className="post-img" src={post.image_url}></img>
                     </div>
                     <div className="author_date_container">
