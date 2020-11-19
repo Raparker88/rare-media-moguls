@@ -1,21 +1,26 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import { Post } from "./Post"
 import "./Post.css";
 
 
 export const UserPostList = (props) => {
-    const { getPostsByUser, deletePost } = useContext(PostContext)
+    const { getPostsByUser, deletePost, getPostsByAuthor} = useContext(PostContext)
     const [posts, setPosts] = useState([])
-
     const [selectedPostId, setSelectedPostId] = useState(0)
     const [open, setOpen] = useState(false)
     const [areYouSure, setAreYouSure] = useState(0)
 
+    const seeAllPostsByAuthor = props.match.params.hasOwnProperty("userId")
+
     useEffect(()=>{
-        getPostsByUser()
-            .then(setPosts)
+        if(seeAllPostsByAuthor){
+            getPostsByAuthor(parseInt(props.location.state.userId))
+                .then(setPosts)
+        } else{
+            getPostsByUser()
+                .then(setPosts)
+        }
     }, [])
 
     const toggleSelected = (e)=>{
@@ -37,7 +42,7 @@ export const UserPostList = (props) => {
     return (
         <>
             <div className="mainPostContainer">
-                <div className="my-posts-heading">My Posts</div>
+                <div className="my-posts-heading">{seeAllPostsByAuthor? `${props.location.state.name}'s Posts` : "My Posts" }</div>
                 <button className="btn newPostbtn"
                 onClick={()=>{
                     props.history.push(`/new_post`)
