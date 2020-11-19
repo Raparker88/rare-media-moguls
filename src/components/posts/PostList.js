@@ -28,18 +28,26 @@ export const PostList = (props) => {
 
     return (
         <>
-        <div className="mainPostContainer">
-            <h2>Posts</h2>
-            <button
+        <h2 className="posts-site-title">Rare</h2>
+                    <button
                     className="btn newPostbtn"
                     onClick={() => {
                         props.history.push(`/new_post/`)
-                    }}>Create New Post</button>
+                        window.location.reload()
+                    }}>Add Post +</button>
+        <div className="mainPostContainer">
             {
                 posts !== [] ?
                     currentUser.is_staff === true ?
-                        postsForAdmins.map(p => {
-                        return <div key={p.id}>
+                        postsForAdmins.map(p => { 
+                        return <div className="post-list-single" key={p.id}>
+                        <div className="post-list-top">
+                            <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
+                                <p className="post-title">{p.title}</p>
+                            </Link>
+                            <p style={{ marginLeft: '.5rem' }} className="publication-date">Publication Date {new Date(p.publication_date).toDateString()}</p>
+                        </div>
+                        <img className="post-img" src="https://via.placeholder.com/500x200.png"></img>
                         <div className="post-author">
                             <p className="author-name"
                             onClick={()=>{
@@ -49,10 +57,7 @@ export const PostList = (props) => {
                                 </p>
                             <p style={{ marginLeft: '.5rem' }} >• {p.publication_date ? new Date(p.publication_date).toDateString() : "unpublished"}</p>
                         </div>
-                        <Link className="postLink" to={{pathname:`/posts/${p.id}`}}>
-                        <p>{p.title}</p>
-                        </Link>
-                        <p>Posted in <Link className="cat-link" to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
+                        <p>Posted in <Link to={{pathname:`/posts/category/${p.category.id}`}}><b>{p.category.label}</b></Link></p>
                         <AdminPostApproval post = {p} isCategory = {isCategory} categoryId = {p.category.id}/>
                         </div>
                         })

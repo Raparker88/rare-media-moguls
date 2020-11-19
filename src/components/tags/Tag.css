@@ -16,13 +16,14 @@
 
 .tags {
     text-align: center;
+    width: 50%;
 }
 
 .tag {
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-top: 10px;
+    text-align: left;
 }
 
 .tagList-containerFlex{
@@ -65,6 +66,12 @@
 }
 .toprowblank{
     width: 90%;
+}
+
+.tag_name {
+    border: solid black 1px;
+    padding: 9px;
+    width: 100%;
 }
 
 
