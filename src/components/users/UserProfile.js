@@ -75,7 +75,7 @@ export const UserProfile = (props) => {
             <div className="top">
                 <section className="profile__info-left">
                     <div className="profile__img">
-                        <img className="image" alt="" src={image} />
+                        <img className="image" alt="" src={profile.profile_image_url} />
                     </div>
                     <div className="profile__name">
                         {profile.full_name}
