@@ -29,7 +29,7 @@ export const Rare = () => (
 
         <Route path="/login" render={(props) => {
             if (localStorage.getItem("rare_token")) {
-                return <Redirect to="/" />
+                return <Redirect to="/rare" />
             } else {
                 return (
                 <>
@@ -44,7 +44,7 @@ export const Rare = () => (
         <UserProvider>
             <Route path="/register" render={(props) => {
                 if (localStorage.getItem("rare_token")) {
-                    return <Redirect to="/" />
+                    return <Redirect to="/rare" />
                 }
                 else {
                     return <Register {...props}/>

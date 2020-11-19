@@ -69,7 +69,7 @@ export const PostDetails = (props) => {
                 <button className="button--deleteDialog btn"
                     onClick={e => {
                         deletePost(post.id)
-                        props.history.push("/")
+                        props.history.push("/rare")
                     }}>Delete Post</button>
             </dialog>
             <div className="postFlex">
@@ -81,22 +81,20 @@ export const PostDetails = (props) => {
                         <p>{post.category.label}</p>
 
                     </div>
-                    {post.image_url ? 
+                    {post.image_url ?
                         <div className="img-div">
                             <img className="post-img" src={post.image_url}></img>
                         </div>
                         :null
                     }
                     <div className="author_date_container">
-                        <h3 className="authorName"><Link className="postLink" to={ `/users/${post.rareuser.id}` }>
-                            by {post.rareuser.username} </Link></h3>
-                        {/* <div className="commentButtonContainer"> */}
-                            <button
-                                className="btn postEditBtn"
-                                onClick={() => {
-                                    props.history.push(`/comments/${post.id}`)
-                                }}>View Comments</button>
-                        
+                        <h3 className="authorName"><Link className="postLink" to={ `/users/${post.rareuser.id}` }>by {post.rareuser.username} </Link></h3>
+                        <button
+                            className="btn postEditBtn"
+                            onClick={() => {
+                                props.history.push(`/comments/${post.id}`)
+                            }}>View Comments</button>
+
                         <div className='reactionContainer'>
                             {reactions.map(r =>
                                 <>
