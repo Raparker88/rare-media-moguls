@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Installation
 • From Github clone the ssh key using git clone
 
-• The server side repo can be found [here](https://https://github.com/Raparker88/rare-API-media-moguls) with intstructions to install and run
+• The server side repo can be found [here](https:github.com/Raparker88/rare-API-media-moguls) with intstructions to install and run
 
 ## Utilities
 
